@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: oklch(0.67 0.21 255);
+    --color-primary-hover: oklch(0.55 0.21 255);
+    --color-secondary-hover: oklch(0.60 0.13 278);
+    --color-secondary: oklch(0.65 0.13 278);
+    --color-danger: oklch(172 5 16);
+    --color-danger-hover: #bd000c;
+    --color-background: oklch(0.91 0.03 17);
+    --color-background-hover: rgb(245 245 245);
+
+    --animate-slide-right: "fadeRightIn 0.3s ease-in-out"
+    --animate-fade-in: "fadeIn 0.3s ease-out"
+}
+
+@keyframes fadeRightIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
