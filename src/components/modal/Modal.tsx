@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { uiCloseModal } from "../../redux/slices/uiSlice";
 import { ModalHeader } from "./ModalHeader";
-import { UserModal } from "../../views/modules/Users/UserModal";
 
 
 export const Modal = () => {
@@ -34,10 +33,7 @@ export const Modal = () => {
                 <ModalHeader close={() => dispatch(uiCloseModal())} />
                 <div className="p-4">
                     {
-                        modalFor === 'new_user' && <UserModal />
-                    }
-                    {
-                        modalFor === 'edit_user' && <UserModal />
+                        modalFor === 'new_user' && <h3>Modal</h3>
                     }
                 </div>
             </div>
