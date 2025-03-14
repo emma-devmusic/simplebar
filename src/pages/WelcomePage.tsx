@@ -7,7 +7,7 @@ export const WelcomePage = () => {
                 <div className="mx-auto max-w-[400px] sm:max-w-xl text-center flex flex-col justify-center items-center">
                     <img src={logo} alt="Logo Ding" className='mb-16 w-40'/>
                     <h1 className="text-3xl font-semibold sm:text-5xl text-gray-800">
-                        Bienvenido a <span className="text-primary-hover font-extrabold">DingBar</span>
+                        Bienvenido a <span className="text-primary-hover font-extrabold">SimpleBar</span>
                         <hr  className="my-4 sm:mb-0 border-gray-400"/>
                         <strong className="font-extrabold text-primary-hover sm:flex items-center justify-center w-full mt-4">
                             {' '}
@@ -16,7 +16,7 @@ export const WelcomePage = () => {
                     </h1>
 
                     <p className="mt-4 sm:text-xl/relaxed">
-                        Menú online para tu bar ;)
+                        Una <strong>Carta Online</strong> para tu local gastronómico
                     </p>
 
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
