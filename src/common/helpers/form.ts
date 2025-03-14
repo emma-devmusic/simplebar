@@ -1,13 +1,13 @@
-import { FormNewPassword, FormsInputs, ObjectErrorsMessages, ObjectPasswordChecks } from "../../types/form";
+import { FiledsForm, FormNewPassword, FormsInputs, ObjectErrorsMessages, ObjectPasswordChecks } from "../../types/form";
 
-export const OBJECT_LABELS_FIELDS = {
+export const OBJECT_LABELS_FIELDS:Record<FiledsForm, string> = {
     name: 'Nombre',
-    lastname: 'Apellido',
+    last_name: 'Apellido',
     email: 'Correo Electrónico',
     password: 'Contraseña',
     password2: 'Confirmar Contraseña',
     dni: 'DNI',
-    phone: 'Teléfono',
+    cell_phone: 'Teléfono',
     address: 'Dirección',
     age: 'Edad',
     gender_type: 'Género',
@@ -15,18 +15,20 @@ export const OBJECT_LABELS_FIELDS = {
     cuil: 'CUIL',
     cuit: 'CUIT',
     name_bussines: 'Nombre de la Empresa',
-    phone_bussines: 'Teléfono de la Empresa',
-    address_bussines: 'Dirección de la Empresa'
+    cell_phone_bussines: 'Teléfono de la Empresa',
+    address_bussines: 'Dirección de la Empresa',
+    cell_phone_secondary: 'Teléfono Secundario',
+    role_id: 'Tipo de Usuario'
 };
 
-export const OBJECT_PLACEHOLDERS_FIELDS = {
+export const OBJECT_PLACEHOLDERS_FIELDS:Record<FiledsForm, string> = {
     name: 'Ingresa tu nombre',
-    lastname: 'Ingresa tu apellido',
+    last_name: 'Ingresa tu apellido',
     email: 'Ingresa tu correo electrónico',
     password: 'Ingresa tu contraseña',
     password2: 'Confirma tu contraseña',
     dni: 'Ingresa tu DNI',
-    phone: 'Ingresa tu número de teléfono',
+    cell_phone: 'Ingresa tu número de teléfono',
     address: 'Ingresa tu dirección',
     age: 'Ingresa tu edad',
     gender_type: 'Selecciona tu género',
@@ -34,8 +36,10 @@ export const OBJECT_PLACEHOLDERS_FIELDS = {
     cuil: 'Ingresa tu CUIL',
     cuit: 'Ingresa tu CUIT',
     name_bussines: 'Ingresa el nombre de tu empresa',
-    phone_bussines: 'Ingresa el teléfono de la empresa',
+    cell_phone_bussines: 'Ingresa el teléfono de la empresa',
     address_bussines: 'Ingresa la dirección de la empresa',
+    cell_phone_secondary: 'Ingresa un teléfono secundario',
+    role_id: 'Selecciona un tipo de usuario'
 };
 
 
@@ -75,12 +79,12 @@ export const formValidate = (
 
     const errors: ObjectErrorsMessages = {
         name: '',
-        lastname: '',
+        last_name: '',
         email: '',
         password: '',
         password2: '',
         dni: '',
-        phone: '',
+        cell_phone: '',
         address: '',
         age: '',
         gender_type: '',
@@ -88,7 +92,7 @@ export const formValidate = (
         cuil: '',
         cuit: '',
         name_bussines: '',
-        phone_bussines: '',
+        cell_phone_bussines: '',
         address_bussines: '',
     };
 
@@ -99,10 +103,10 @@ export const formValidate = (
         errors.name = 'Nombre Inválido';
     }
 
-    if (requiredFields.includes('lastname') && !formData.lastname) {
-        errors.lastname = 'El apellido es obligatorio';
-    } else if (formData.lastname && !lastNameRegex.test(formData.lastname)) {
-        errors.lastname = 'Apellido Inválido';
+    if (requiredFields.includes('last_name') && !formData.last_name) {
+        errors.last_name = 'El apellido es obligatorio';
+    } else if (formData.last_name && !lastNameRegex.test(formData.last_name)) {
+        errors.last_name = 'Apellido Inválido';
     }
 
     if (requiredFields.includes('email') && !formData.email) {
@@ -129,10 +133,10 @@ export const formValidate = (
         errors.dni = 'DNI Inválido';
     }
 
-    if (requiredFields.includes('phone') && !formData.phone) {
-        errors.phone = 'El teléfono es obligatorio';
-    } else if (formData.phone && !phoneRegex.test(formData.phone)) {
-        errors.phone = 'Número Inválido';
+    if (requiredFields.includes('phone') && !formData.cell_phone) {
+        errors.cell_phone = 'El teléfono es obligatorio';
+    } else if (formData.cell_phone && !phoneRegex.test(formData.cell_phone)) {
+        errors.cell_phone = 'Número Inválido';
     }
 
     if (requiredFields.includes('address') && !formData.address) {
@@ -173,10 +177,10 @@ export const formValidate = (
         errors.name_bussines = 'Nombre de empresa inválido';
     }
 
-    if (requiredFields.includes('phone_bussines') && !formData.phone_bussines) {
-        errors.phone_bussines = 'El teléfono de la empresa es obligatorio';
-    } else if (formData.phone_bussines && !phoneRegex.test(formData.phone_bussines)) {
-        errors.phone_bussines = 'Número de empresa inválido';
+    if (requiredFields.includes('cell_phone_bussines') && !formData.cell_phone_bussines) {
+        errors.cell_phone_bussines = 'El teléfono de la empresa es obligatorio';
+    } else if (formData.cell_phone_bussines && !phoneRegex.test(formData.cell_phone_bussines)) {
+        errors.cell_phone_bussines = 'Número de empresa inválido';
     }
 
     if (requiredFields.includes('address_bussines') && !formData.address_bussines) {

@@ -16,11 +16,29 @@ export interface FormsInputs {
     cuil?: string;
     cuit?: string;
     name_bussines?: string;
-    phone_bussines?: string;
+    cell_phone_bussines?: string;
     address_bussines?: string;
 }
 
-export interface ObjectErrorsMessages extends FormsInputs {
+export interface ObjectErrorsMessages {
+    name?: string,
+    last_name?: string,
+    email?: string,
+    password?: string,
+    password2?: string,
+    dni?: string,
+    cell_phone?: string,
+    cell_phone_secondary?: string,
+    address?: string,
+    age?: string,
+    gender_type?: string,
+    two_factor_enabled?: string,
+    role_id?: string,
+    cuil?: string;
+    cuit?: string;
+    name_bussines?: string;
+    cell_phone_bussines?: string;
+    address_bussines?: string;
     hasErrors?: boolean;
 }
 
@@ -41,7 +59,7 @@ export type FiledsForm =
     | 'cuil'
     | 'cuit'
     | 'name_bussines'
-    | 'phone_bussines'
+    | 'cell_phone_bussines'
     | 'address_bussines'
 
 export interface FormNewPassword {
