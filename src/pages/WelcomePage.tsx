@@ -5,13 +5,13 @@ export const WelcomePage = () => {
         <section className="[background-image:url(/assets/img/bg-welcome.jpg)] h-screen">
             <div className="mx-auto max-w-screen px-4 py-32 lg:flex lg:h-screen lg:items-center backdrop-blur-sm">
                 <div className="mx-auto max-w-[400px] sm:max-w-xl text-center flex flex-col justify-center items-center">
-                    <img src={logo} alt="Logo Ding" className='mb-16'/>
+                    <img src={logo} alt="Logo Ding" className='mb-16 w-40'/>
                     <h1 className="text-3xl font-semibold sm:text-5xl text-gray-800">
-                        Bienvenido a <span className="text-primary-hover font-extrabold">DingBar</span>
+                        Bienvenido a <span className="text-primary-hover font-extrabold">SimpleBar</span>
                         <hr  className="my-4 sm:mb-0 border-gray-400"/>
                         <strong className="font-extrabold text-primary-hover sm:flex items-center justify-center w-full mt-4">
                             {' '}
-                            <span>Carta Online</span>{' '}
+                            <span><span className='text-gray-800'>Menú</span> Online</span>{' '}
                         </strong>
                     </h1>
 
