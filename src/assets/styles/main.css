@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
     --color-primary: oklch(0.67 0.21 255);
@@ -10,8 +10,8 @@
     --color-background: oklch(0.91 0.03 17);
     --color-background-hover: rgb(245 245 245);
 
-    --animate-slide-right: "fadeRightIn 0.3s ease-in-out"
-    --animate-fade-in: "fadeIn 0.3s ease-out"
+    --animate-slide-right: 'fadeRightIn 0.3s ease-in-out'
+    --animate-fade-in: 'fadeIn 0.3s ease-out'
 }
 
 @keyframes fadeRightIn {
@@ -34,4 +34,14 @@
         opacity: 1;
         transform: scale(1);
     }
+}
+
+input[type='number'] {
+    appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
 }

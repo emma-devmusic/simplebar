@@ -1,28 +1,57 @@
-import { Avatar } from "../../shared/Avatar";
-import logo from '../../../assets/img/isologo-ding-degraded.png'
-import { Button } from "../../buttons/Button";
+import { Avatar } from '../../shared/Avatar';
+import logo from '../../../assets/img/isologo-ding-degraded.png';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { uiModal } from '../../../redux/slices/uiSlice';
+
 export const Navbar = () => {
+    const { products } = useAppSelector((state) => state.cart);
+    const dispatch = useAppDispatch();
+
     return (
-        <header className="bg-white border-[1px] border-gray-200">
-            <div className="h-20 flex items-center mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center gap-4 justify-between w-full">
+        <header className='border-[1px] border-gray-200 bg-white'>
+            <div className='mx-auto flex h-20 items-center px-4 sm:px-6 lg:px-8'>
+                <div className='flex w-full items-center justify-between gap-4'>
                     <div>
                         <Avatar
                             img={logo}
-                            title="Ding"
-                            subTitle="food"
-                            className="text-gray-700"
-                            titleClass="relative text-2xl top-1"
-                            subTitleClass="relative -top-1 left-[3px]"
+                            title='Ding'
+                            subTitle='food'
+                            className='text-gray-700'
+                            titleClass='relative text-2xl top-1'
+                            subTitleClass='relative -top-1 left-[3px]'
                         />
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        <Button
-                            label="Nueva Venta"
-                            action={() => console.log('Nueva Venta')}
-                        />
-                    </div>
+                    {products.length > 0 && (
+                        <div
+                            className='relative flex items-center gap-4 rounded-full border border-gray-300 p-2 lg:hidden'
+                            onClick={() => {
+                                dispatch(
+                                    uiModal({
+                                        modalFor: 'cart',
+                                        modalOpen: true,
+                                        modalTitle: 'Mi Pedido',
+                                    })
+                                );
+                            }}
+                        >
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width={20}
+                                height={20}
+                                viewBox='0 0 20 20'
+                            >
+                                <path
+                                    className='text-gray-400'
+                                    fill='currentColor'
+                                    d='M6 13h9c.55 0 1 .45 1 1s-.45 1-1 1H5c-.55 0-1-.45-1-1V4H2c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1v2h13l-4 7H6zm-.5 3c.83 0 1.5.67 1.5 1.5S6.33 19 5.5 19S4 18.33 4 17.5S4.67 16 5.5 16m9 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5'
+                                ></path>
+                            </svg>
+                            <span className='absolute -top-2 -right-2 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-danger text-xs font-bold text-white'>
+                                {products.length}
+                            </span>
+                        </div>
+                    )}
                 </div>
             </div>
         </header>

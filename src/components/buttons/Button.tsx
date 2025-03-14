@@ -25,7 +25,7 @@ export const Button = ({ label, action, className, type, variant = 'primary', di
 
     const buttonVariants: ButtonVariants = {
         primary: 'border-primary bg-primary text-white hover:bg-primary-hover active:text-primary active:!text-gray-100',
-        secondary: 'bg-white text-primary',
+        secondary: 'bg-gray-400 text-white border-gray-400',
         danger: 'bg-red-500 text-white',
         plain: 'bg-transparent border-transparent hover:bg-gray-100 !p-1 focus:!ring-0 focus:outline-none',
         ['plain-primary']: '!text-primary bg-transparent border-transparent hover:!text-primary-hover !p-1 focus:!ring-0 focus:outline-none',
@@ -46,7 +46,7 @@ export const Button = ({ label, action, className, type, variant = 'primary', di
                 <div className={`${!label && 'ml-1'}`}>
                     {icon && icon}
                 </div>
-                <span className="flex items-center">
+                <span className='flex items-center'>
                     {label}
                 </span>
             </div>
