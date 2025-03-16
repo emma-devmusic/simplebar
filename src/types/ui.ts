@@ -27,7 +27,9 @@ export interface Modal {
     | 'new_offer'
     | 'edit_auction'
     | 'new_user'
-    | 'edit_user';
+    | 'edit_user'
+    | 'add_product'
+    | 'cart';
     modalOpen: boolean;
     modalTitle?: string;
     typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';

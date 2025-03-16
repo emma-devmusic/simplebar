@@ -1,13 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
-import { ErrorPage, WelcomePage } from "./pages";
+import { createBrowserRouter } from 'react-router-dom';
+import { Dash, ErrorPage, WelcomePage, MenuWelcome } from './pages';
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/',
         element: <WelcomePage />,
     },
     {
-        path: "*",
+        path: ':tenant_path',
+        element: <MenuWelcome />,
+        children: [
+            {
+                path: ':branch_path',
+                element: <Dash />,
+            },
+        ],
+    },
+    {
+        path: '*',
         element: <ErrorPage />,
-    }
+    },
 ]);

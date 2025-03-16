@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { uiCloseModal } from "../../redux/slices/uiSlice";
-import { ModalHeader } from "./ModalHeader";
+import { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { uiCloseModal } from '../../redux/slices/uiSlice';
+import { ModalHeader } from './ModalHeader';
+import { ProductModal } from '../../views/modules/ProductModal';
+import Cart from '../../pages/modules/Cart';
 
 
 export const Modal = () => {
@@ -12,11 +14,11 @@ export const Modal = () => {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") dispatch(uiCloseModal());
+            if (event.key === 'Escape') dispatch(uiCloseModal());
         };
 
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
     }, [dispatch]);
 
     const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -28,12 +30,15 @@ export const Modal = () => {
     if (!modalOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50" onClick={handleOverlayClick}>
-            <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-w-lg w-full transition-all scale-95 animate-fade-in">
+        <div className='fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50' onClick={handleOverlayClick}>
+            <div ref={modalRef} className='bg-white rounded-lg shadow-lg max-w-lg w-full transition-all scale-95 animate-fade-in'>
                 <ModalHeader close={() => dispatch(uiCloseModal())} />
-                <div className="p-4">
+                <div className='p-4'>
                     {
-                        modalFor === 'new_user' && <h3>Modal</h3>
+                        modalFor === 'add_product' && <ProductModal />
+                    }
+                    {
+                        modalFor === 'cart' && <Cart />
                     }
                 </div>
             </div>
