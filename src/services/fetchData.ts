@@ -2,13 +2,15 @@
 import Swal from "sweetalert2";
 import { access_key_id, base_url } from "../common/definitions/env";
 import { errorMsg } from "../mocks/errors";
+import { FetchMethod } from "../types/api";
 
 export const fetchData = async (
     path: string,
-    method: 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH',
+    method: FetchMethod,
     body: object | null,
-    authorization?: string, // Hacer que authorization sea opcional
-    header?: { [key:string]: string; }
+    header?: { [key:string]: string; },
+    signal?: AbortSignal,
+    authorization?: string,
 ) => {
 
     const headers: Record<string, string> = {
@@ -27,6 +29,7 @@ export const fetchData = async (
         response = await fetch(`${base_url}${path}`, {
             method,
             headers,
+            signal,
             ...(body && { body: JSON.stringify(body) }),
         });
 
