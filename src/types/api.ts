@@ -1,10 +1,12 @@
 
-export interface ApiDingResponse {
+export interface ResponseApiDing<T> {
     error: boolean;
     code: number;
     message: string;
-    data?: unknown;
+    data: T;
 }
+
+export type FetchMethod = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'
 
 export interface Access {
     accessToken: string;
@@ -20,4 +22,19 @@ export interface DataErrorResponse {
     code: string;
     message: string;
     type_error: string;
+}
+
+export interface ResponseBranchData {
+    data_created: string,
+    data_modified: string,
+    id: number,
+    name: string,
+    description: string,
+    type: string,
+    code: string,
+    address: string,
+    phone: string,
+    email: string,
+    cuit: string,
+    url: null
 }
