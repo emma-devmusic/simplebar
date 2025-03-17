@@ -34,7 +34,19 @@ export const fetchData = async (
         });
 
         if (!response.ok) {
-            Swal.fire('Ups!',`${errorMsg[response.status]}`, 'error' )
+            Swal.fire({
+                title: '<strong>¡Ups! Algo salió mal</strong>',
+                html: `<p style="font-size: 16px; color: #555;">${errorMsg[response.status]}</p>`,
+                icon: 'error',
+                iconColor: '#d33',
+                confirmButtonText: 'Entendido',
+                confirmButtonColor: '#3085d6',
+                customClass: {
+                    popup: 'swal2-popup-custom',
+                    title: 'swal2-title-custom',
+                    confirmButton: 'swal2-confirm-custom',
+                },
+            });
             throw new Error(`${errorMsg[response.status]} | fetchData`);
         }
 
