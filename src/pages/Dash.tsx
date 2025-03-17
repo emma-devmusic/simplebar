@@ -11,13 +11,11 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 import { getCategories } from '../redux/slices/categorySlice';
 import { getProducts } from '../redux/slices/productSlice';
 import { Product as ProductType } from '../types/product';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export const Dash = () => {
-    // const {tenant_path, branch_path} = useParams()
-    const { selectedCategory } = useAppSelector(
-        (state) => state.categories
-    );
+    const { branch_path } = useParams();
+    const { selectedCategory } = useAppSelector((state) => state.categories);
     const { products } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
 
@@ -30,6 +28,9 @@ export const Dash = () => {
         // dispatch(getProducts(`{tenant_path+'/'+branch_path}`));
         dispatch(getCategories('/data/Categories.json'));
         dispatch(getProducts('/data/Products.json'));
+        if (branch_path) {
+            localStorage.setItem('branch_path', branch_path);
+        }
     }, []);
 
     const filterProducts = (subCategoryId: number): ProductType[] => {
@@ -87,9 +88,14 @@ export const Dash = () => {
                                     </p>
                                 )}
                                 <div className="grid w-full grid-cols-1 gap-x-4 md:grid-cols-2">
-                                    {filterProducts(sub_cat.id).map((prod, index) => (
-                                        <Product product={prod} key={index}/>
-                                    ))}
+                                    {filterProducts(sub_cat.id).map(
+                                        (prod, index) => (
+                                            <Product
+                                                product={prod}
+                                                key={index}
+                                            />
+                                        )
+                                    )}
                                 </div>
                             </div>
                         ))}
