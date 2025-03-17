@@ -1,4 +1,4 @@
-import { ApiDingResponse } from "./api";
+import { ResponseApiDing } from "./api";
 
 export interface ProfileImage {
     id: number;
@@ -29,7 +29,7 @@ export interface UserDetailsData {
     default_image_profile: ProfileImage[];
 }
 
-export interface UserSearchResponse extends ApiDingResponse{
+export interface UserSearchResponse extends ResponseApiDing<DataSearchResponse>{
     data:    DataSearchResponse;
 }
 

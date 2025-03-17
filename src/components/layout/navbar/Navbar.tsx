@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { uiModal } from '../../../redux/slices/uiSlice';
 
 export const Navbar = () => {
-    const { products } = useAppSelector((state) => state.cart);
+    const { cartProducts } = useAppSelector((state) => state.cart);
     const dispatch = useAppDispatch();
 
     return (
@@ -22,7 +22,7 @@ export const Navbar = () => {
                         />
                     </div>
 
-                    {products.length > 0 && (
+                    {cartProducts.length > 0 && (
                         <div
                             className='relative flex items-center gap-4 rounded-full border border-gray-300 p-2 lg:hidden'
                             onClick={() => {
@@ -48,7 +48,7 @@ export const Navbar = () => {
                                 ></path>
                             </svg>
                             <span className='absolute -top-2 -right-2 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-danger text-xs font-bold text-white'>
-                                {products.length}
+                                {cartProducts.length}
                             </span>
                         </div>
                     )}

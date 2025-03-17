@@ -5,14 +5,14 @@ import { Trash2Icon } from 'lucide-react';
 import { removeProduct } from '../../redux/slices/cartSlice';
 
 const Cart = () => {
-    const { products } = useAppSelector((state) => state.cart);
+    const { cartProducts } = useAppSelector((state) => state.cart);
     const [orderMode, setOrderMode] = useState<'domicilio' | 'retiro'>(
         'domicilio'
     );
     const dispatch = useAppDispatch();
     return (
         <div className='flex w-full flex-col gap-2'>
-            {products.length > 0 && (
+            {cartProducts.length > 0 && (
                 <div className='mt-2 flex w-full justify-center'>
                     <Button
                         label='Envío a domicilio'
@@ -50,8 +50,8 @@ const Cart = () => {
                     </thead>
 
                     <tbody className='w-full divide-y divide-gray-200'>
-                        {products.length > 0 &&
-                            products.map((item: any, index: number) => (
+                        {cartProducts.length > 0 &&
+                            cartProducts.map((item, index: number) => (
                                 <tr key={index}>
                                     <td className='px-4 py-2 whitespace-nowrap text-gray-800'>
                                         {item.product.name}
@@ -60,13 +60,13 @@ const Cart = () => {
                                         <span>
                                             $
                                             {(
-                                                item.product.price *
+                                                Number(item.product.price) *
                                                 item.quantity
                                             ).toLocaleString()}
                                         </span>
-                                        <span className='ml-2 text-xs text-gray-700'>
+                                        <span className='ml-2 text-xs pt-0.5 text-gray-700'>
                                             ($
-                                            {item.product.price.toLocaleString()}{' '}
+                                            {Number(item.product.price).toLocaleString()}{' '}
                                             x {item.quantity})
                                         </span>
                                         <Button
@@ -82,12 +82,12 @@ const Cart = () => {
                                             }
                                             variant='plain-danger'
                                             label=''
-                                            className='hover:bg-red-100'
+                                            className='hover:bg-red-100 lg:mx-2'
                                         />
                                     </td>
                                 </tr>
                             ))}
-                        {products.length > 0 && (
+                        {cartProducts.length > 0 && (
                             <tr>
                                 <td className='px-4 py-2 whitespace-nowrap text-gray-400'>
                                     Resumen
@@ -98,11 +98,11 @@ const Cart = () => {
                                 >
                                     <span>
                                         $
-                                        {products
+                                        {cartProducts
                                             .reduce(
                                                 (acc, item) =>
                                                     acc +
-                                                    item.product.price *
+                                                    Number(item.product.price) *
                                                         item.quantity,
                                                 0
                                             )
@@ -111,7 +111,7 @@ const Cart = () => {
                                 </td>
                             </tr>
                         )}
-                        {orderMode === 'domicilio' && products.length > 0 && (
+                        {orderMode === 'domicilio' && cartProducts.length > 0 && (
                             <tr>
                                 <td className='px-4 py-2 whitespace-nowrap text-gray-400'>
                                     Costo de envío
@@ -124,7 +124,7 @@ const Cart = () => {
                                 </td>
                             </tr>
                         )}
-                        {products.length > 0 && (
+                        {cartProducts.length > 0 && (
                             <tr>
                                 <td className='px-4 py-2 whitespace-nowrap text-gray-800'>
                                     Total
@@ -136,10 +136,10 @@ const Cart = () => {
                                     <span>
                                         $
                                         {(
-                                            products.reduce(
+                                            cartProducts.reduce(
                                                 (acc, item) =>
                                                     acc +
-                                                    item.product.price *
+                                                    Number(item.product.price) *
                                                         item.quantity,
                                                 0
                                             ) +
@@ -153,7 +153,7 @@ const Cart = () => {
                         )}
                     </tbody>
                 </table>
-                {products.length <= 0 && (
+                {cartProducts.length <= 0 && (
                     <div className='flex h-24 w-full flex-col items-center justify-center rounded-e-lg py-2 text-center'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -171,18 +171,18 @@ const Cart = () => {
                 )}
             </div>
             <div className='flex w-full justify-center'>
-                {products.length > 0 && (
+                {cartProducts.length > 0 && (
                     <Button
                         label='Finalizar compra'
                         action={() => {
                             console.log({
-                                pedido: products,
+                                pedido: cartProducts,
                                 modo: orderMode,
                                 ammount: (
-                                    products.reduce(
+                                    cartProducts.reduce(
                                         (acc, item) =>
                                             acc +
-                                            item.product.price * item.quantity,
+                                            Number(item.product.price) * item.quantity,
                                         0
                                     ) + (orderMode === 'domicilio' ? 1000 : 0)
                                 ).toLocaleString(),
