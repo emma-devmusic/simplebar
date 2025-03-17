@@ -38,3 +38,11 @@ export interface ResponseBranchData {
     cuit: string,
     url: null
 }
+
+export interface MetaDataSearchResponse {
+    currentPage: number,
+    nextPage: null | any,
+    totalRecords: number,
+    recordsPerPage: number,
+    totalPages: number
+}

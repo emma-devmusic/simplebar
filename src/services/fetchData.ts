@@ -26,7 +26,7 @@ export const fetchData = async (
     let response = null;
 
     try {
-        response = await fetch(`${base_url}${path}`, {
+        response = await fetch(`${/*base_url*/''}${path}`, {
             method,
             headers,
             signal,
