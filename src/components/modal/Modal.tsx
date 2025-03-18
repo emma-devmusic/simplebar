@@ -5,12 +5,13 @@ import { ModalHeader } from './ModalHeader';
 import { ProductModal } from '../../views/modules/ProductModal';
 import Cart from '../../pages/modules/Cart';
 
-
 export const Modal = () => {
     const modalRef = useRef<HTMLDivElement>(null);
 
-    const { modal: { modalOpen, modalFor } } = useAppSelector( state => state.ui)
-    const dispatch = useAppDispatch()
+    const {
+        modal: { modalOpen, modalFor },
+    } = useAppSelector((state) => state.ui);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -22,7 +23,10 @@ export const Modal = () => {
     }, [dispatch]);
 
     const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        if (
+            modalRef.current &&
+            !modalRef.current.contains(event.target as Node)
+        ) {
             dispatch(uiCloseModal());
         }
     };
@@ -30,16 +34,19 @@ export const Modal = () => {
     if (!modalOpen) return null;
 
     return (
-        <div className='fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50' onClick={handleOverlayClick}>
-            <div ref={modalRef} className='bg-white rounded-lg shadow-lg max-w-lg w-full transition-all scale-95 animate-fade-in'>
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={handleOverlayClick}
+        >
+            <div
+                ref={modalRef}
+                className="animate-fade-in w-full max-w-lg scale-95 rounded-lg bg-white shadow-lg transition-all"
+            >
                 <ModalHeader close={() => dispatch(uiCloseModal())} />
-                <div className='p-4'>
-                    {
-                        modalFor === 'add_product' && <ProductModal />
-                    }
-                    {
-                        modalFor === 'cart' && <Cart />
-                    }
+                <div className="p-4">
+                    {(modalFor === 'add_product' ||
+                        modalFor === 'edit_product') && <ProductModal />}
+                    {modalFor === 'cart' && <Cart />}
                 </div>
             </div>
         </div>

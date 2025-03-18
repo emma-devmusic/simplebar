@@ -13,6 +13,7 @@ interface ProductSlice {
     isLoading: boolean;
     selectedProduct: Product | null;
     filteredProducts: SubcategoriesProducts[];
+    variationSelected: number
 }
 
 const initialState: ProductSlice = {
@@ -20,6 +21,7 @@ const initialState: ProductSlice = {
     isLoading: false,
     selectedProduct: null,
     filteredProducts: [],
+    variationSelected: 0
 };
 
 const productsSlice = createSlice({
@@ -62,11 +64,14 @@ const productsSlice = createSlice({
             state.filteredProducts = filteredProductsBySubCategory.filter(
               (subCategory) => subCategory.products.length > 0
             );
+          },
+          setVariationSelected(state, action: PayloadAction<number>){
+            state.variationSelected = action.payload
           }
     },
 });
 
-export const { getProducts, setProducts, setLoading, setSelectedProduct, setFilteredProducts } =
+export const { getProducts, setProducts, setLoading, setSelectedProduct, setFilteredProducts, setVariationSelected } =
     productsSlice.actions;
 
 export default productsSlice.reducer;

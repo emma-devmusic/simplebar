@@ -21,7 +21,6 @@ export const categoriesMiddleware = (state: MiddlewareAPI) => {
                 setLoading(true);
                 const response: ResponseApiDing<CategoryDataSearchResponse> =
                     await fetchData(path, 'GET', null);
-                console.log(response);
                 state.dispatch(setCategories(response.data.items));
                 state.dispatch(setSelectedCategory(response.data.items[0]));
             } catch (error) {

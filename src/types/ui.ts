@@ -29,6 +29,7 @@ export interface Modal {
     | 'new_user'
     | 'edit_user'
     | 'add_product'
+    | 'edit_product'
     | 'cart';
     modalOpen: boolean;
     modalTitle?: string;
