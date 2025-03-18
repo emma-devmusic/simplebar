@@ -49,7 +49,48 @@
                                 "id": "IMG1",
                                 "name": "Hamburguesa Clásica Image",
                                 "description": "Imagen de Hamburguesa Clásica",
-                                "url_image": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aGFtYnVyZ3Vlc2FzfGVufDB8fDB8fHwwm",
+                                "url_image": "",
+                                "main_image": true
+                            }
+                        ]
+                    },
+                    {
+                        "data_created": "2025-03-17T02:00:00.000Z",
+                        "data_modified": "2025-03-17T02:00:00.000Z",
+                        "id": 101,
+                        "name": "Hamburguesa Doble",
+                        "description": "Hamburguesa con doble carne vacuna, doble queso cheddar, lechuga, tomate y mayonesa en pan de sésamo.",
+                        "code": "CODE2",
+                        "sku": "SKU2",
+                        "price": 3500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR2",
+                                "variation": {
+                                    "id": 201,
+                                    "name": "Tamaño grande",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 301,
+                            "quantity": 50,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T02:00:00.000Z",
+                                "data_modified": "2025-03-17T02:00:00.000Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG2",
+                                "name": "Hamburguesa Doble Image",
+                                "description": "Imagen de Hamburguesa Doble",
+                                "url_image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aGFtYnVyZ3Vlc2FzfGVufDB8fDB8fHww",
                                 "main_image": true
                             }
                         ]

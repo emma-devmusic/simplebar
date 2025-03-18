@@ -57,7 +57,7 @@ const Cart = () => {
                                     <td className="px-4 py-2 whitespace-nowrap text-gray-800">
                                         {item.product.name}
                                     </td>
-                                    <td className="flex w-full items-center justify-end py-2 text-center whitespace-nowrap text-orange-400">
+                                    <td className="flex w-full items-center justify-end py-2 text-center whitespace-nowrap text-gray-700">
                                         <span>
                                             $
                                             {(
@@ -119,7 +119,7 @@ const Cart = () => {
                                 </td>
                                 <td
                                     colSpan={2}
-                                    className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                    className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
                                 >
                                     <span>
                                         $
@@ -144,7 +144,7 @@ const Cart = () => {
                                     </td>
                                     <td
                                         colSpan={2}
-                                        className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                        className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
                                     >
                                         <span>$1000</span>
                                     </td>
@@ -157,7 +157,7 @@ const Cart = () => {
                                 </td>
                                 <td
                                     colSpan={2}
-                                    className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                    className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
                                 >
                                     <span>
                                         $

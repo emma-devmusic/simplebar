@@ -43,11 +43,11 @@ const Product = ({ product }: ProductProps) => {
                                 </p>
                             </div>
                             <div className="flex w-full justify-between">
-                                <p className="text-right text-sm font-bold text-orange-400">
+                                <p className="text-right text-sm font-bold text-gray-700">
                                     $
                                     {product.product_variations[0].price.toLocaleString()}
                                 </p>
-                                {product.product_variations.length>1 && <Copy className='rotate-90 h-5' />}
+                                {product.product_variations.length>1 && <Copy className='h-5' />}
                             </div>
                         </div>
 
@@ -65,7 +65,7 @@ const Product = ({ product }: ProductProps) => {
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 23 24"
-                                    className="text-gray-300 h-16 lg:h-24"
+                                    className="text-gray-300 h-16 lg:h-24 xl:max-h-20"
                                 >
                                     <path
                                         fill="currentColor"

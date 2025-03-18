@@ -21,7 +21,7 @@ export const MenuWelcome = () => {
     return (
         <div className="h-full min-h-screen w-full bg-gray-100 bg-radial-[at_10%_0%] from-gray-50 from-65% to-gray-300 to-100% text-gray-700">
             <Navbar />
-            <div className="flex h-[calc(100vh-95px)] w-full md:h-[calc(100vh-103px)] lg:h-[calc(100vh-135px)] xl:h-[calc(100vh-143px)]">
+            <div className="flex h-[calc(100vh-95px)] w-full md:h-[calc(100vh-103px)] lg:h-[calc(100vh-130px)] xl:h-[calc(100vh-140px)]">
                 <div className="w-full overflow-y-auto">
                     <div className="mx-auto w-full sm:max-w-[480px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px]">
                         <Content />
@@ -32,7 +32,7 @@ export const MenuWelcome = () => {
                 <img
                     alt="Foto de perfil"
                     src={'/src/assets/img/isologo-ding-degraded.png'}
-                    className="size-4 rounded-full object-cover lg:size-6 xl:size-8 2xl:size-10"
+                    className="size-4 rounded-full object-cover lg:size-7 xl:size-8 2xl:size-9"
                 />
                 <p>Powered by Ding</p>
             </div>
