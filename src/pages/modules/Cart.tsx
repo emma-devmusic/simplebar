@@ -2,15 +2,35 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { useState } from 'react';
 import { Button } from '../../components';
 import { Trash2Icon } from 'lucide-react';
-import { removeProduct } from '../../redux/slices/cartSlice';
+import { ProductCart, removeProduct } from '../../redux/slices/cartSlice';
 import Swal from 'sweetalert2';
+import { uiModal } from '../../redux/slices/uiSlice';
+import { setSelectedProduct, setVariationSelected } from '../../redux/slices/productSlice';
 
 const Cart = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
+    const { products } = useAppSelector((state) => state.products);
     const [orderMode, setOrderMode] = useState<'domicilio' | 'retiro'>(
         'domicilio'
     );
     const dispatch = useAppDispatch();
+
+    const handleEditProduct = (cartProduct: ProductCart) => {
+
+        const productIndex = products.findIndex(prod=>prod.product_variations.some(item=>item.id === cartProduct.product.id))
+        const variationIndex = products[productIndex].product_variations.findIndex(item=>item.id === cartProduct.product.id)
+
+        dispatch(setVariationSelected(variationIndex))
+        dispatch(
+            uiModal({
+                modalFor: 'edit_product',
+                modalOpen: true,
+                modalTitle: cartProduct.product.name,
+            })
+        );
+        dispatch(setSelectedProduct(products[productIndex]));
+    };
+
     return (
         <div className="flex w-full flex-col gap-2">
             {cartProducts.length > 0 && (
@@ -53,25 +73,39 @@ const Cart = () => {
                     <tbody className="w-full divide-y divide-gray-200">
                         {cartProducts.length > 0 &&
                             cartProducts.map((item, index: number) => (
-                                <tr key={index}>
-                                    <td className="px-4 py-2 whitespace-nowrap text-gray-800">
-                                        {item.product.name}
+                                <tr key={index} className="h-12">
+                                    <td className="px-4 text-gray-800">
+                                        <div className="relative flex flex-col">
+                                            <span
+                                                onClick={() =>
+                                                    handleEditProduct(item)
+                                                }
+                                                className="absolute -top-3 left-0 cursor-pointer text-xs text-primary underline"
+                                            >
+                                                Editar
+                                            </span>
+                                            <span className="">
+                                                {item.product.name}
+                                            </span>
+                                        </div>
                                     </td>
-                                    <td className="flex w-full items-center justify-end py-2 text-center whitespace-nowrap text-orange-400">
-                                        <span>
-                                            $
-                                            {(
-                                                Number(item.product.price) *
-                                                item.quantity
-                                            ).toLocaleString()}
-                                        </span>
-                                        <span className="ml-2 pt-0.5 text-xs text-gray-700">
-                                            ($
-                                            {Number(
-                                                item.product.price
-                                            ).toLocaleString()}{' '}
-                                            x {item.quantity})
-                                        </span>
+                                    <td className="flex h-12 w-full items-center justify-end text-center whitespace-nowrap text-gray-700">
+                                        <div className="flex items-baseline justify-center gap-2">
+                                            <span className="text-xs text-gray-700">
+                                                ($
+                                                {Number(
+                                                    item.product.price
+                                                ).toLocaleString()}{' '}
+                                                x {item.quantity})
+                                            </span>
+                                            <span className="font-semibold text-gray-800">
+                                                $
+                                                {(
+                                                    Number(item.product.price) *
+                                                    item.quantity
+                                                ).toLocaleString()}
+                                            </span>
+                                        </div>
                                         <Button
                                             action={() => {
                                                 Swal.fire({
@@ -89,11 +123,6 @@ const Cart = () => {
                                                         'Sí, eliminar',
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        Swal.fire({
-                                                            title: 'Eliminado!',
-                                                            text:'El elemento ha sido eliminado del pedido.',
-                                                            confirmButtonColor: '#006ce7',
-                                                        });
                                                         dispatch(
                                                             removeProduct(
                                                                 item.product.id
@@ -103,15 +132,16 @@ const Cart = () => {
                                                 });
                                             }}
                                             icon={
-                                                <Trash2Icon className="h-4 w-4 text-red-500" />
+                                                <Trash2Icon className="h-4 w-4 px-0 text-red-500" />
                                             }
                                             variant="plain-danger"
                                             label=""
-                                            className="hover:bg-red-100 lg:mx-2"
+                                            className="!px-0 hover:bg-red-100 lg:mx-2"
                                         />
                                     </td>
                                 </tr>
                             ))}
+
                         {cartProducts.length > 0 && (
                             <tr>
                                 <td className="px-4 py-2 whitespace-nowrap text-gray-400">
@@ -119,9 +149,9 @@ const Cart = () => {
                                 </td>
                                 <td
                                     colSpan={2}
-                                    className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                    className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
                                 >
-                                    <span>
+                                    <span className="font-semibold">
                                         $
                                         {cartProducts
                                             .reduce(
@@ -144,9 +174,11 @@ const Cart = () => {
                                     </td>
                                     <td
                                         colSpan={2}
-                                        className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                        className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
                                     >
-                                        <span>$1000</span>
+                                        <span className="font-semibold">
+                                            $1000
+                                        </span>
                                     </td>
                                 </tr>
                             )}
@@ -157,7 +189,7 @@ const Cart = () => {
                                 </td>
                                 <td
                                     colSpan={2}
-                                    className="px-4 py-2 text-right whitespace-nowrap text-orange-400"
+                                    className="px-4 py-2 text-right font-bold whitespace-nowrap text-gray-700"
                                 >
                                     <span>
                                         $

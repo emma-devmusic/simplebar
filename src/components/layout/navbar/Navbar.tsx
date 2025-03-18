@@ -8,7 +8,7 @@ export const Navbar = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <header className='border-[1px] border-gray-200 bg-white'>
+        <header className='border-[1px] border-gray-200 bg-white shadow-md'>
             <div className='mx-auto flex h-14 lg:h-20 items-center px-4 sm:px-6 lg:px-8'>
                 <div className='flex w-full items-center justify-between gap-4'>
                     <div>

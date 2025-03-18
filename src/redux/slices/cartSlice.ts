@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductVariation } from '../../types/product';
 
-interface ProductCart {
+export interface ProductCart {
     product: ProductVariation,
     quantity: number,
 }

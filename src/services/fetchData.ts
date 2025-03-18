@@ -24,7 +24,7 @@ export const fetchData = async (
     }
 
     let response = null;
-
+    console.log(base_url)
     try {
         response = await fetch(`${/*base_url*/''}${path}`, {
             method,
