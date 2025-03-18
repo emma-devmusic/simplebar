@@ -1,4 +1,3 @@
-
 export interface ResponseApiDing<T> {
     error: boolean;
     code: number;
@@ -6,7 +5,7 @@ export interface ResponseApiDing<T> {
     data: T;
 }
 
-export type FetchMethod = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'
+export type FetchMethod = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH';
 
 export interface Access {
     accessToken: string;
@@ -25,24 +24,24 @@ export interface DataErrorResponse {
 }
 
 export interface ResponseBranchData {
-    data_created: string,
-    data_modified: string,
-    id: number,
-    name: string,
-    description: string,
-    type: string,
-    code: string,
-    address: string,
-    phone: string,
-    email: string,
-    cuit: string,
-    url: null
+    data_created: Date;
+    data_modified: Date;
+    id: number;
+    name: string;
+    description: string;
+    type: string;
+    code: string;
+    address: string;
+    phone: string;
+    email: string;
+    cuit: string;
+    url: null;
 }
 
 export interface MetaDataSearchResponse {
-    currentPage: number,
-    nextPage: null | any,
-    totalRecords: number,
-    recordsPerPage: number,
-    totalPages: number
+    currentPage: number;
+    nextPage: null;
+    totalRecords: number;
+    recordsPerPage: number;
+    totalPages: number;
 }
