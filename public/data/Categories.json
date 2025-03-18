@@ -1,0 +1,54 @@
+{
+    "error": false,
+    "code": 200,
+    "message": "Ok",
+    "data": {
+        "items": [
+            {
+                "id": 123,
+                "name": "Bebidas",
+                "description": "Categoría de bebidas naturales y cafés",
+                "subcategories": [
+                    { "id": 1, "name": "Bebidas Naturales", "description": "Jugos y refrescos naturales" },
+                    { "id": 2, "name": "Cafés", "description": "Variedad de cafés y bebidas calientes" }
+                ]
+            },
+            {
+                "id": 234,
+                "name": "Postres",
+                "description": "Dulces y tartas para toda ocasión",
+                "subcategories": [
+                    { "id": 3, "name": "Tartas", "description": "Variedad de tartas dulces y saladas" }
+                ]
+            },
+            {
+                "id": 345,
+                "name": "Entradas",
+                "description": "Aperitivos y snacks salados",
+                "subcategories": [
+                    { "id": 4, "name": "Entradas Saladas", "description": "Snacks y aperitivos para compartir" }
+                ]
+            },
+            {
+                "id": 456,
+                "name": "Sándwiches",
+                "description": "Lomitos, hamburguesas y más",
+                "subcategories": [
+                    { "id": 5, "name": "Lomitos", "description": "Lomitos clásicos y especiales" },
+                    { "id": 6, "name": "Otros", "description": "Variedad de opciones rápidas" },
+                    { "id": 7, "name": "Comida Rápida", "description": "Hamburguesas y opciones rápidas" },
+                    { "id": 8, "name": "Pizzas", "description": "Pizzas con ingredientes frescos" },
+                    { "id": 9, "name": "Ensaladas", "description": "Opciones saludables y frescas" },
+                    { "id": 10, "name": "Platos Principales", "description": "Platos elaborados y completos" }
+                ]
+            }
+        ],
+        "meta": {
+            "currentPage": 1,
+            "nextPage": null,
+            "totalRecords": 4,
+            "recordsPerPage": 10,
+            "totalPages": 1
+        }
+    }
+}

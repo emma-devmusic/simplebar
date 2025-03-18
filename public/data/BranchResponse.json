@@ -1,0 +1,19 @@
+{
+    "error": false,
+    "code": 200,
+    "message": "",
+    "data": {
+        "data_created": "2025-03-04T15:04:00.323Z",
+        "data_modified": "2025-03-08T04:05:47.222Z",
+        "id": 1,
+        "name": "test update",
+        "description": "test",
+        "type": "Central",
+        "code": "1234",
+        "address": "2",
+        "phone": "2",
+        "email": "email@email.com",
+        "cuit": "-",
+        "url": null
+    }
+}

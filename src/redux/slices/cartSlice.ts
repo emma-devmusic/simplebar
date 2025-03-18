@@ -1,25 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ProductVariation } from '../../types/product';
 
-interface ProductCart {
-    product: any,
+export interface ProductCart {
+    product: ProductVariation,
     quantity: number,
 }
 
 interface CartSlice {
-    products: ProductCart[],
-    selectedProduct: any
+    cartProducts: ProductCart[]
 }
 
 const initialState: CartSlice = {
-    products: [],
-    selectedProduct: {
-        id: '',
-        name: '',
-        price: '',
-        image: '',
-        category: '',
-        description: '',
-    },
+    cartProducts: [],
 }
 
 const cartSlice = createSlice({
@@ -27,30 +19,26 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         setCart(state, action: PayloadAction<any>) {
-            state.products = action.payload
-        },
-        setSelectedProduct(state, action: PayloadAction<any>){
-            state.selectedProduct = action.payload
+            state.cartProducts = action.payload
         },
         addOrUpdateProduct(state, action: PayloadAction<{ product: any; quantity: number }>) {
             const { product, quantity } = action.payload;
-            const existingProduct = state.products.find((item) => item.product.id === product.id);
+            const existingProduct = state.cartProducts.find((item) => item.product.id === product.id);
 
             if (existingProduct) {
                 existingProduct.quantity = quantity;
             } else {
-                state.products.push({ product, quantity });
+                state.cartProducts.push({ product, quantity });
             }
         },
-        removeProduct(state, action: PayloadAction<string>) {
-            state.products = state.products.filter((item) => item.product.id !== action.payload);
+        removeProduct(state, action: PayloadAction<number>) {
+            state.cartProducts = state.cartProducts.filter((item) => item.product.id !== action.payload);
         },
     }
 });
 
 export const {
     setCart,
-    setSelectedProduct,
     addOrUpdateProduct,
     removeProduct
 } = cartSlice.actions;

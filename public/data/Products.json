@@ -1,0 +1,1947 @@
+{
+    "error": false,
+    "code": 200,
+    "message": "Ok - Products",
+    "data": {
+        "items": [
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 1,
+                "name": "Hamburguesa Clásica",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 100,
+                        "name": "Hamburguesa Clásica",
+                        "description": "Hamburguesa con carne vacuna, queso cheddar, lechuga, tomate y mayonesa en pan de sésamo.",
+                        "code": "CODE1",
+                        "sku": "SKU1",
+                        "price": 2500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR1",
+                                "variation": {
+                                    "id": 200,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 300,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG1",
+                                "name": "Hamburguesa Clásica Image",
+                                "description": "Imagen de Hamburguesa Clásica",
+                                "url_image": "",
+                                "main_image": true
+                            }
+                        ]
+                    },
+                    {
+                        "data_created": "2025-03-17T02:00:00.000Z",
+                        "data_modified": "2025-03-17T02:00:00.000Z",
+                        "id": 101,
+                        "name": "Hamburguesa Doble",
+                        "description": "Hamburguesa con doble carne vacuna, doble queso cheddar, lechuga, tomate y mayonesa en pan de sésamo.",
+                        "code": "CODE2",
+                        "sku": "SKU2",
+                        "price": 3500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR2",
+                                "variation": {
+                                    "id": 201,
+                                    "name": "Tamaño grande",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 301,
+                            "quantity": 50,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T02:00:00.000Z",
+                                "data_modified": "2025-03-17T02:00:00.000Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG2",
+                                "name": "Hamburguesa Doble Image",
+                                "description": "Imagen de Hamburguesa Doble",
+                                "url_image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aGFtYnVyZ3Vlc2FzfGVufDB8fDB8fHww",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 400,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 7,
+                "sub_category_description": "Comida Rápida",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 2,
+                "name": "Pizza Napolitana",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 101,
+                        "name": "Pizza Napolitana",
+                        "description": "Pizza con salsa de tomate, mozzarella, rodajas de tomate y orégano.",
+                        "code": "CODE2",
+                        "sku": "SKU2",
+                        "price": 4500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR2",
+                                "variation": {
+                                    "id": 201,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 301,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG2",
+                                "name": "Pizza Napolitana Image",
+                                "description": "Imagen de Pizza Napolitana",
+                                "url_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe5oX62Jd4kjpTOiWxUVV0zNTApvQxaTMuEg&s",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 401,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 8,
+                "sub_category_description": "Pizzas",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 3,
+                "name": "Ensalada César",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 102,
+                        "name": "Ensalada César",
+                        "description": "Lechuga fresca, pollo grillado, croutones, queso parmesano y aderezo César.",
+                        "code": "CODE3",
+                        "sku": "SKU3",
+                        "price": 3200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR3",
+                                "variation": {
+                                    "id": 202,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 302,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG3",
+                                "name": "Ensalada César Image",
+                                "description": "Imagen de Ensalada César",
+                                "url_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPXmPhvQatOavq0B4uVInIwvTjyv-NRmcBBA&s",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 402,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 9,
+                "sub_category_description": "Ensaladas",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 4,
+                "name": "Milanesa con Papas",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 103,
+                        "name": "Milanesa con Papas",
+                        "description": "Milanesa de ternera acompañada con papas fritas y rodajas de limón.",
+                        "code": "CODE4",
+                        "sku": "SKU4",
+                        "price": 4800,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR4",
+                                "variation": {
+                                    "id": 203,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 303,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG4",
+                                "name": "Milanesa con Papas Image",
+                                "description": "Imagen de Milanesa con Papas",
+                                "url_image": "https://media.istockphoto.com/id/1905645778/es/foto/vista-a%C3%A9rea-de-un-plato-de-milanesa-con-papas-fritas-concepto-de-comida-argentina-comida.jpg?s=612x612&w=0&k=20&c=ZbnQfEOs6vxEj1NMw77Cn6LlW7GPCPJl44Ip-TGy2sM=",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 403,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 10,
+                "sub_category_description": "Platos Principales",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 5,
+                "name": "Empanadas de Carne",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 104,
+                        "name": "Empanadas de Carne",
+                        "description": "Empanadas fritas rellenas de carne cortada a cuchillo con condimentos típicos.",
+                        "code": "CODE5",
+                        "sku": "SKU5",
+                        "price": 1200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR5",
+                                "variation": {
+                                    "id": 204,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 304,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG5",
+                                "name": "Empanadas de Carne Image",
+                                "description": "Imagen de Empanadas de Carne",
+                                "url_image": "https://assets.unileversolutions.com/recipes-v2/237001.jpg",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 404,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 4,
+                "sub_category_description": "Entradas Saladas",
+                "category_id": 345,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 6,
+                "name": "Lomo Completo",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 105,
+                        "name": "Lomo Completo",
+                        "description": "Pan baguette con lomo, queso, lechuga, tomate, huevo y mayonesa.",
+                        "code": "CODE6",
+                        "sku": "SKU6",
+                        "price": 5800,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR6",
+                                "variation": {
+                                    "id": 205,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 305,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG6",
+                                "name": "Lomo Completo Image",
+                                "description": "Imagen de Lomo Completo",
+                                "url_image": "https://media-cdn.tripadvisor.com/media/photo-s/07/57/13/05/pizza-ranch.jpg",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 405,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 5,
+                "sub_category_description": "Lomitos",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 7,
+                "name": "Tarta de Frutilla",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 106,
+                        "name": "Tarta de Frutilla",
+                        "description": "Base de masa crocante con crema pastelera y frutillas frescas.",
+                        "code": "CODE7",
+                        "sku": "SKU7",
+                        "price": 2200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR7",
+                                "variation": {
+                                    "id": 206,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 306,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG7",
+                                "name": "Tarta de Frutilla Image",
+                                "description": "Imagen de Tarta de Frutilla",
+                                "url_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6lOTJvT0gUgRWNVDhJ3L38yajSdYi33JOkg&s",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 406,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 3,
+                "sub_category_description": "Tartas",
+                "category_id": 234,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 8,
+                "name": "Jugo de Naranja",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 107,
+                        "name": "Jugo de Naranja",
+                        "description": "Jugo de naranja exprimido natural sin azúcar añadida.",
+                        "code": "CODE8",
+                        "sku": "SKU8",
+                        "price": 1500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR8",
+                                "variation": {
+                                    "id": 207,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 307,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG8",
+                                "name": "Jugo de Naranja Image",
+                                "description": "Imagen de Jugo de Naranja",
+                                "url_image": "https://media.istockphoto.com/id/825882916/es/foto/fresco-vaso-de-jugo-de-naranja-en-la-parte-superior-de-mesa-r%C3%BAstico.jpg?s=612x612&w=0&k=20&c=mA3nL42YivNfZXe9pe3ICypVkN6DubpPRYoNg4oKlG0=",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 407,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 1,
+                "sub_category_description": "Bebidas Naturales",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 9,
+                "name": "Café Espresso",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 108,
+                        "name": "Café Espresso",
+                        "description": "Café negro intenso servido en taza pequeña.",
+                        "code": "CODE9",
+                        "sku": "SKU9",
+                        "price": 1000,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR9",
+                                "variation": {
+                                    "id": 208,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 308,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG9",
+                                "name": "Café Espresso Image",
+                                "description": "Imagen de Café Espresso",
+                                "url_image": "https://media.istockphoto.com/id/664313320/es/foto/caf%C3%A9-taza-de-caf%C3%A9-con-frijoles-en-la-mesa-vintage.jpg?s=612x612&w=0&k=20&c=bIb9Hng3vF87hh0niBDz95uUCSN5nmaLi1psxi1KNQc=",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 408,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 2,
+                "sub_category_description": "Cafés",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 10,
+                "name": "Batido de Frutilla",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 109,
+                        "name": "Batido de Frutilla",
+                        "description": "Batido cremoso hecho con frutillas frescas y leche.",
+                        "code": "CODE10",
+                        "sku": "SKU10",
+                        "price": 2000,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR10",
+                                "variation": {
+                                    "id": 209,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 309,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG10",
+                                "name": "Batido de Frutilla Image",
+                                "description": "Imagen de Batido de Frutilla",
+                                "url_image": "https://images.unsplash.com/photo-1559770761-1ab6f0b29d56?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 409,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 1,
+                "sub_category_description": "Bebidas Naturales",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 11,
+                "name": "Pizza Pepperoni",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 110,
+                        "name": "Pizza Pepperoni",
+                        "description": "Pizza con mozzarella y rodajas de pepperoni.",
+                        "code": "CODE11",
+                        "sku": "SKU11",
+                        "price": 4700,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR11",
+                                "variation": {
+                                    "id": 210,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 310,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG11",
+                                "name": "Pizza Pepperoni Image",
+                                "description": "Imagen de Pizza Pepperoni",
+                                "url_image": "https://images.unsplash.com/photo-1601924572055-c50cc3b1c4a4?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 410,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 8,
+                "sub_category_description": "Pizzas",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 12,
+                "name": "Tarta de Limón",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 111,
+                        "name": "Tarta de Limón",
+                        "description": "Tarta con base crocante, relleno de limón y merengue.",
+                        "code": "CODE12",
+                        "sku": "SKU12",
+                        "price": 2500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR12",
+                                "variation": {
+                                    "id": 211,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 311,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG12",
+                                "name": "Tarta de Limón Image",
+                                "description": "Imagen de Tarta de Limón",
+                                "url_image": "https://images.unsplash.com/photo-1559893088-c3e3d2c5e4c7?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 411,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 3,
+                "sub_category_description": "Tartas",
+                "category_id": 234,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 13,
+                "name": "Bagel con Salmón",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 112,
+                        "name": "Bagel con Salmón",
+                        "description": "Bagel tostado con queso crema, salmón y eneldo.",
+                        "code": "CODE13",
+                        "sku": "SKU13",
+                        "price": 3900,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR13",
+                                "variation": {
+                                    "id": 212,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 312,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG13",
+                                "name": "Bagel con Salmón Image",
+                                "description": "Imagen de Bagel con Salmón",
+                                "url_image": "https://via.placeholder.com/300",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 412,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 5,
+                "sub_category_description": "Lomitos",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 14,
+                "name": "Croissant de Chocolate",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 113,
+                        "name": "Croissant de Chocolate",
+                        "description": "Croissant relleno de chocolate fundido.",
+                        "code": "CODE14",
+                        "sku": "SKU14",
+                        "price": 1800,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR14",
+                                "variation": {
+                                    "id": 213,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 313,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG14",
+                                "name": "Croissant de Chocolate Image",
+                                "description": "Imagen de Croissant de Chocolate",
+                                "url_image": "https://images.unsplash.com/photo-1596040032627-7531de3ad44b?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 413,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 4,
+                "sub_category_description": "Entradas Saladas",
+                "category_id": 345,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.320Z",
+                "data_modified": "2025-03-17T01:46:36.320Z",
+                "id": 15,
+                "name": "Sopa de Calabaza",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.320Z",
+                        "data_modified": "2025-03-17T01:46:36.320Z",
+                        "id": 114,
+                        "name": "Sopa de Calabaza",
+                        "description": "Sopa cremosa de calabaza y especias.",
+                        "code": "CODE15",
+                        "sku": "SKU15",
+                        "price": 3100,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR15",
+                                "variation": {
+                                    "id": 214,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 314,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.320Z",
+                                "data_modified": "2025-03-17T01:46:36.320Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG15",
+                                "name": "Sopa de Calabaza Image",
+                                "description": "Imagen de Sopa de Calabaza",
+                                "url_image": "https://images.unsplash.com/photo-1633634638343-8eaa170115c8?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.320Z",
+                    "data_modified": "2025-03-17T01:46:36.320Z",
+                    "id": 414,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 10,
+                "sub_category_description": "Platos Principales",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 16,
+                "name": "Brownie de Chocolate",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 115,
+                        "name": "Brownie de Chocolate",
+                        "description": "Brownie denso con trozos de chocolate.",
+                        "code": "CODE16",
+                        "sku": "SKU16",
+                        "price": 2000,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR16",
+                                "variation": {
+                                    "id": 215,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 315,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG16",
+                                "name": "Brownie de Chocolate Image",
+                                "description": "Imagen de Brownie de Chocolate",
+                                "url_image": "https://images.unsplash.com/photo-1597520597962-f4e0102b18a8?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 415,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 3,
+                "sub_category_description": "Tartas",
+                "category_id": 234,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 17,
+                "name": "Cheesecake de Frutilla",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 116,
+                        "name": "Cheesecake de Frutilla",
+                        "description": "Cheesecake con base de galleta y frutillas frescas.",
+                        "code": "CODE17",
+                        "sku": "SKU17",
+                        "price": 2700,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR17",
+                                "variation": {
+                                    "id": 216,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 316,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG17",
+                                "name": "Cheesecake de Frutilla Image",
+                                "description": "Imagen de Cheesecake de Frutilla",
+                                "url_image": "https://images.unsplash.com/photo-1565799410892-711ee9aefb6a?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 416,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 3,
+                "sub_category_description": "Tartas",
+                "category_id": 234,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 18,
+                "name": "Sandwich Vegetariano",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 117,
+                        "name": "Sandwich Vegetariano",
+                        "description": "Pan integral con vegetales frescos y hummus.",
+                        "code": "CODE18",
+                        "sku": "SKU18",
+                        "price": 3500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR18",
+                                "variation": {
+                                    "id": 217,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 317,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG18",
+                                "name": "Sandwich Vegetariano Image",
+                                "description": "Imagen de Sandwich Vegetariano",
+                                "url_image": "https://images.unsplash.com/photo-1585496586067-e160203baa80?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 417,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 6,
+                "sub_category_description": "Otros",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 19,
+                "name": "Smoothie Verde",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 118,
+                        "name": "Smoothie Verde",
+                        "description": "Smoothie de espinaca, manzana verde y limón.",
+                        "code": "CODE19",
+                        "sku": "SKU19",
+                        "price": 2200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR19",
+                                "variation": {
+                                    "id": 218,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 318,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG19",
+                                "name": "Smoothie Verde Image",
+                                "description": "Imagen de Smoothie Verde",
+                                "url_image": "https://images.unsplash.com/photo-1527843815980-d1721995a64d?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 418,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 1,
+                "sub_category_description": "Bebidas Naturales",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 20,
+                "name": "Cappuccino",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 119,
+                        "name": "Cappuccino",
+                        "description": "Café con leche espumosa y canela.",
+                        "code": "CODE20",
+                        "sku": "SKU20",
+                        "price": 1200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR20",
+                                "variation": {
+                                    "id": 219,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 319,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG20",
+                                "name": "Cappuccino Image",
+                                "description": "Imagen de Cappuccino",
+                                "url_image": "https://images.unsplash.com/photo-1526045478516-99145907023c?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 419,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 2,
+                "sub_category_description": "Cafés",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 21,
+                "name": "Wrap de Pollo",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 120,
+                        "name": "Wrap de Pollo",
+                        "description": "Tortilla de trigo rellena de pollo grillado, lechuga, tomate y aderezo ranch.",
+                        "code": "CODE21",
+                        "sku": "SKU21",
+                        "price": 3600,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR21",
+                                "variation": {
+                                    "id": 220,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 320,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG21",
+                                "name": "Wrap de Pollo Image",
+                                "description": "Imagen de Wrap de Pollo",
+                                "url_image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 420,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 6,
+                "sub_category_description": "Otros",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 22,
+                "name": "Helado de Vainilla",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 121,
+                        "name": "Helado de Vainilla",
+                        "description": "Helado cremoso de vainilla con topping de chocolate.",
+                        "code": "CODE22",
+                        "sku": "SKU22",
+                        "price": 1500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR22",
+                                "variation": {
+                                    "id": 221,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 321,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG22",
+                                "name": "Helado de Vainilla Image",
+                                "description": "Imagen de Helado de Vainilla",
+                                "url_image": "https://images.unsplash.com/photo-1571731956672-6536ebd01d52?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 421,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 521,
+                "sub_category_description": "Postres Helados",
+                "category_id": 621,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 23,
+                "name": "Tacos de Carne",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 122,
+                        "name": "Tacos de Carne",
+                        "description": "Tacos de carne con guacamole, cebolla y cilantro.",
+                        "code": "CODE23",
+                        "sku": "SKU23",
+                        "price": 3900,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR23",
+                                "variation": {
+                                    "id": 222,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 322,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG23",
+                                "name": "Tacos de Carne Image",
+                                "description": "Imagen de Tacos de Carne",
+                                "url_image": "https://images.unsplash.com/photo-1599749113281-cab5fcddb4b5?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 422,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 10,
+                "sub_category_description": "Platos Principales",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 24,
+                "name": "Papas Fritas",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 123,
+                        "name": "Papas Fritas",
+                        "description": "Papas fritas crujientes con sal marina.",
+                        "code": "CODE24",
+                        "sku": "SKU24",
+                        "price": 1800,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR24",
+                                "variation": {
+                                    "id": 223,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 323,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG24",
+                                "name": "Papas Fritas Image",
+                                "description": "Imagen de Papas Fritas",
+                                "url_image": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 423,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 4,
+                "sub_category_description": "Entradas Saladas",
+                "category_id": 345,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 25,
+                "name": "Té Matcha Latte",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 124,
+                        "name": "Té Matcha Latte",
+                        "description": "Té verde matcha con leche y un toque de miel.",
+                        "code": "CODE25",
+                        "sku": "SKU25",
+                        "price": 2200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR25",
+                                "variation": {
+                                    "id": 224,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 324,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG25",
+                                "name": "Té Matcha Latte Image",
+                                "description": "Imagen de Té Matcha Latte",
+                                "url_image": "https://images.unsplash.com/photo-1529484926298-5cf4e8025a8f?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 424,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 1,
+                "sub_category_description": "Bebidas Naturales",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 26,
+                "name": "Hot Dog Clásico",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 125,
+                        "name": "Hot Dog Clásico",
+                        "description": "Hot dog con salchicha, ketchup, mostaza y cebolla.",
+                        "code": "CODE26",
+                        "sku": "SKU26",
+                        "price": 2500,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR26",
+                                "variation": {
+                                    "id": 225,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 325,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG26",
+                                "name": "Hot Dog Clásico Image",
+                                "description": "Imagen de Hot Dog Clásico",
+                                "url_image": "https://images.unsplash.com/photo-1541731075711-01e5f8796f5b?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 425,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 7,
+                "sub_category_description": "Comida Rápida",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 27,
+                "name": "Bowl de Frutas",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 126,
+                        "name": "Bowl de Frutas",
+                        "description": "Mix de frutas frescas: melón, sandía, kiwi y fresas.",
+                        "code": "CODE27",
+                        "sku": "SKU27",
+                        "price": 2000,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR27",
+                                "variation": {
+                                    "id": 226,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 326,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG27",
+                                "name": "Bowl de Frutas Image",
+                                "description": "Imagen de Bowl de Frutas",
+                                "url_image": "https://images.unsplash.com/photo-1560807707-8cc77767d783?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 426,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 526,
+                "sub_category_description": "Postres Naturales",
+                "category_id": 626,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 28,
+                "name": "Pizza Cuatro Quesos",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 127,
+                        "name": "Pizza Cuatro Quesos",
+                        "description": "Pizza con mozzarella, gorgonzola, parmesano y queso de cabra.",
+                        "code": "CODE28",
+                        "sku": "SKU28",
+                        "price": 5000,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR28",
+                                "variation": {
+                                    "id": 227,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 327,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG28",
+                                "name": "Pizza Cuatro Quesos Image",
+                                "description": "Imagen de Pizza Cuatro Quesos",
+                                "url_image": "https://images.unsplash.com/photo-1594007654613-85f57870fa23?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 427,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 8,
+                "sub_category_description": "Pizzas",
+                "category_id": 456,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 29,
+                "name": "Panqueques con Dulce de Leche",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 128,
+                        "name": "Panqueques con Dulce de Leche",
+                        "description": "Panqueques suaves rellenos con dulce de leche argentino.",
+                        "code": "CODE29",
+                        "sku": "SKU29",
+                        "price": 2400,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR29",
+                                "variation": {
+                                    "id": 228,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 328,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG29",
+                                "name": "Panqueques con Dulce de Leche Image",
+                                "description": "Imagen de Panqueques con Dulce de Leche",
+                                "url_image": "https://images.unsplash.com/photo-1514513878351-0947c6234215?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 428,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 528,
+                "sub_category_description": "Postres Dulces",
+                "category_id": 628,
+                "category_description": "Categoría general"
+            },
+            {
+                "data_created": "2025-03-17T01:46:36.321Z",
+                "data_modified": "2025-03-17T01:46:36.321Z",
+                "id": 30,
+                "name": "Smoothie de Mango",
+                "active": true,
+                "client_can_modify": false,
+                "manager_can_modify": true,
+                "product_variations": [
+                    {
+                        "data_created": "2025-03-17T01:46:36.321Z",
+                        "data_modified": "2025-03-17T01:46:36.321Z",
+                        "id": 129,
+                        "name": "Smoothie de Mango",
+                        "description": "Smoothie cremoso de mango maduro y yogur.",
+                        "code": "CODE30",
+                        "sku": "SKU30",
+                        "price": 2200,
+                        "weight": null,
+                        "productVariationVariations": [
+                            {
+                                "id": "VAR30",
+                                "variation": {
+                                    "id": 229,
+                                    "name": "Tamaño estándar",
+                                    "unit_measurement": "unidad"
+                                }
+                            }
+                        ],
+                        "stocks": {
+                            "id": 329,
+                            "quantity": 100,
+                            "due_date": null
+                        },
+                        "productImages": [
+                            {
+                                "data_created": "2025-03-17T01:46:36.321Z",
+                                "data_modified": "2025-03-17T01:46:36.321Z",
+                                "data_deleted": null,
+                                "user_created": null,
+                                "user_modified": null,
+                                "user_deleted": null,
+                                "id": "IMG30",
+                                "name": "Smoothie de Mango Image",
+                                "description": "Imagen de Smoothie de Mango",
+                                "url_image": "https://images.unsplash.com/photo-1523906630133-f6934a1ab7cc?fm=jpg&q=60&w=3000",
+                                "main_image": true
+                            }
+                        ]
+                    }
+                ],
+                "created_status": {
+                    "data_created": "2025-03-17T01:46:36.321Z",
+                    "data_modified": "2025-03-17T01:46:36.321Z",
+                    "id": 429,
+                    "description": "Producto creado correctamente"
+                },
+                "supplier_products": [],
+                "sub_category_id": 1,
+                "sub_category_description": "Bebidas Naturales",
+                "category_id": 123,
+                "category_description": "Categoría general"
+            }
+        ],
+        "meta": {
+            "currentPage": 1,
+            "nextPage": null,
+            "totalRecords": 2,
+            "recordsPerPage": 10,
+            "totalPages": 1
+        }
+    }
+}
