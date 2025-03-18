@@ -5,6 +5,8 @@ import { ProductVariation } from '../../types/product';
 import Slider from 'react-slick';
 import ProductModalContent from './ProductModalContent';
 import { setVariationSelected } from '../../redux/slices/productSlice';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export const ProductModal = () => {
     const { selectedProduct, variationSelected } = useAppSelector((state) => state.products);
