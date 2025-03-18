@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Category } from '../../types/categories';
+import { Dispatch, SetStateAction } from 'react';
 
 interface CategorySlice {
     categories: Category[];
@@ -17,7 +18,7 @@ const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
-        getCategories(_state, _action: PayloadAction<string>) {}, //middleware
+        getCategories(_state, _action: PayloadAction<{path: string, setIsLoading: Dispatch<SetStateAction<boolean>>}>) {}, //middleware
         setCategories(state, action: PayloadAction<Category[]>) {
             state.categories = action.payload;
         },

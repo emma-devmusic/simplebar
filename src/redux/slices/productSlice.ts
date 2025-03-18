@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '../../types/product';
 import { Category, SubCategory } from '../../types/categories';
+import { Dispatch, SetStateAction } from 'react';
 
 interface SubcategoriesProducts {
     subCategory: SubCategory,
@@ -25,7 +26,7 @@ const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        getProducts(_state, _action: PayloadAction<string>) {}, //middleware
+        getProducts(_state, _action: PayloadAction<{path: string, setIsLoading: Dispatch<SetStateAction<boolean>>}>) {}, //middleware
         setProducts(state, action: PayloadAction<Product[]>) {
             state.products = action.payload;
         },
