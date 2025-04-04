@@ -15,7 +15,6 @@ const Product = ({ product }: ProductProps) => {
         dispatch(
             uiModal({
                 modalFor: 'add_product',
-                modalOpen: true,
                 modalTitle: product.name,
             })
         );
@@ -32,10 +31,10 @@ const Product = ({ product }: ProductProps) => {
         >
             <Card className="w-full rounded-lg">
                 <Card.Body className="space-x-0 rounded-lg bg-white p-0 px-0 py-0 shadow-md">
-                    <div className="flex h-28 max-h-28 lg:h-32 w-full gap-2 rounded-lg md:flex-row">
+                    <div className="flex lg:h-32 lg:max-h-32 w-full gap-2 rounded-lg md:flex-row">
                         <div className="flex w-3/5 flex-col items-start justify-between gap-y-2 rounded-b-xl px-4 py-1.5 text-gray-600">
                             <div className="flex w-full flex-col items-start">
-                                <p className="truncate font-semibold">
+                                <p className="line-clamp-2 font-semibold">
                                     {product.product_variations[0].name}
                                 </p>
                                 <p className="line-clamp-3 w-full overflow-hidden text-justify text-xs">
@@ -54,7 +53,7 @@ const Product = ({ product }: ProductProps) => {
                         {product.product_variations[0].productImages[0]
                             .url_image ? (
                             <img
-                                className="h-full w-2/5 rounded-e-lg object-cover"
+                                className="h-full w-2/5 rounded-e-lg"
                                 src={
                                     product.product_variations[0]
                                         .productImages[0].url_image

@@ -1,37 +1,40 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Category } from '../../types/categories';
-import { Dispatch, SetStateAction } from 'react';
+import {
+    GetCategoryPayload,
+    ItemCategories,
+    SelectCategoryEditablePayload,
+} from '../../types/categories';
 
 interface CategorySlice {
-    categories: Category[];
-    isLoading: boolean;
-    selectedCategory: Category | null;
+    categories: ItemCategories[];
+    selectedCategory: ItemCategories;
 }
 
 const initialState: CategorySlice = {
     categories: [],
-    isLoading: false,
-    selectedCategory: null,
+    selectedCategory: {
+        id: 0,
+        name: '',
+        description: '',
+        subcategories: []
+    },
 };
 
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
-        getCategories(_state, _action: PayloadAction<{path: string, setIsLoading: Dispatch<SetStateAction<boolean>>}>) {}, //middleware
-        setCategories(state, action: PayloadAction<Category[]>) {
+        getCategories(_state, _action: PayloadAction<GetCategoryPayload>) {},// middleware
+        setCategories(state, action: PayloadAction<ItemCategories[]>) {
             state.categories = action.payload;
         },
-        setLoading(state, action: PayloadAction<boolean>) {
-            state.isLoading = action.payload;
-        },
-        setSelectedCategory(state, action: PayloadAction<Category | null>) {
+        setSelectedCategory(state, action: PayloadAction<SelectCategoryEditablePayload>) {
             state.selectedCategory = action.payload;
         },
     },
 });
 
-export const { getCategories, setCategories, setLoading, setSelectedCategory } =
+export const { getCategories, setCategories, setSelectedCategory } =
     categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

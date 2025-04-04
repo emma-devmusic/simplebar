@@ -1,33 +1,28 @@
-import { Dispatch, MiddlewareAPI, PayloadAction } from '@reduxjs/toolkit';
+import { Dispatch, MiddlewareAPI } from '@reduxjs/toolkit';
 import {
     setCategories,
-    setLoading,
     setSelectedCategory,
 } from '../slices/categorySlice';
 import { fetchData } from '../../services/fetchData';
-import { CategoryDataSearchResponse } from '../../types/categories';
+import { DataCategorySearchResponse, GetCategoryPayload } from '../../types/categories';
 import { ResponseApiDing } from '../../types/api';
-import { SetStateAction } from 'react';
+import { executeApiCall } from '../../services/executeApiCall';
 
 export const categoriesMiddleware = (state: MiddlewareAPI) => {
-    return (next: Dispatch) => async (action: PayloadAction<unknown>) => {
+    return (next: Dispatch) => async (action: any) => {
         next(action);
         if (action.type === 'categories/getCategories') {
-            const { path, setIsLoading } = action.payload as {
-                path: string;
-                setIsLoading: React.Dispatch<SetStateAction<boolean>>;
-            };
-            try {
-                setLoading(true);
-                const response: ResponseApiDing<CategoryDataSearchResponse> =
-                    await fetchData(path, 'GET', null);
-                state.dispatch(setCategories(response.data.items));
-                state.dispatch(setSelectedCategory(response.data.items[0]));
-            } catch (error) {
-                console.log(error, 'nivel 3 - desde redux middleware');
-            } finally {
-                setIsLoading(false);
-            }
+            const payload: GetCategoryPayload = action.payload
+            console.log('Llamada a la Api - MANAGE-CATEGORIES - SEARCH');
+            await executeApiCall(
+                payload.setIsLoading,
+                () => fetchData(`/pub-sts/categories/${payload.path}`, "GET", null),
+                state.dispatch,
+                (response: ResponseApiDing<DataCategorySearchResponse>) => {
+                    state.dispatch(setCategories(response.data.items)); 
+                    state.dispatch(setSelectedCategory(response.data.items[0]));
+                },
+            );
         }
     };
 };

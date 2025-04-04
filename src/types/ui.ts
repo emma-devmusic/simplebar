@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { ButtonProps } from "../components/buttons/Button";
 
 export interface ModalMsg {
     typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';
@@ -6,8 +7,25 @@ export interface ModalMsg {
 }
 
 export interface Modal {
-    modalFor:
-    | null
+    modalFor: ModalFor | null;
+    modalOpen: boolean;
+    modalTitle?: string;
+    typeMsg?: null | ModalTypeMessage;
+    msg?: string;
+    msgTitle?: string;
+    modalActions?: ActionButton[];
+}
+
+export interface ModalPayload {
+    modalFor: ModalFor;
+    modalTitle?: string;
+    typeMsg?: ModalTypeMessage;
+    msg?: string;
+    msgTitle?: string;
+    modalActions?: ActionButton[];
+}
+
+export type ModalFor =
     | 'validate_code'
     | '2F_code'
     | 'new_product'
@@ -28,11 +46,17 @@ export interface Modal {
     | 'edit_auction'
     | 'new_user'
     | 'edit_user'
+    | 'branch'
+    | 'action'
     | 'add_product'
     | 'edit_product'
     | 'cart';
-    modalOpen: boolean;
-    modalTitle?: string;
-    typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';
-    msg?: null | string | ReactElement;
-}
+
+export type ModalTypeMessage =
+    | 'error'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'spinner';
+
+export type ActionButton = ButtonProps

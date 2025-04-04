@@ -7,7 +7,7 @@ import {
     addOrUpdateProduct,
     removeProduct,
 } from '../../redux/slices/cartSlice';
-import { uiModal } from '../../redux/slices/uiSlice';
+import { uiCloseModal } from '../../redux/slices/uiSlice';
 
 interface ProductModalContentProps {
     productVariation: ProductVariation;
@@ -28,7 +28,7 @@ const ProductModalContent = ({
         {
             if (
                 cartProducts.some(
-                    (item) => productVariation.id === item.product.id
+                    (item) => productVariation?.id === item.product.id
                 ) &&
                 quantity === 0 &&
                 selectedProduct
@@ -39,7 +39,7 @@ const ProductModalContent = ({
                     addOrUpdateProduct({ product: productVariation, quantity })
                 );
             }
-            dispatch(uiModal({ modalFor: null, modalOpen: false }));
+            dispatch(uiCloseModal());
         }
     };
 
@@ -56,7 +56,7 @@ const ProductModalContent = ({
             cartProducts.some(
                 (item) =>
                     item.product.id ===
-                    selectedProduct?.product_variations[variationSelected].id
+                    selectedProduct?.product_variations[variationSelected]?.id
             )
         ) {
             setQuantity(
@@ -74,9 +74,9 @@ const ProductModalContent = ({
 
     return (
         <div className="flex min-h-full w-full flex-col items-center justify-between gap-4 space-y-3 p-2.5">
-            {productVariation.productImages[0].url_image ? (
+            {productVariation.productImages[0]?.url_image ? (
                 <img
-                    src={productVariation.productImages[0].url_image}
+                    src={productVariation.productImages[0]?.url_image ?? ''}
                     className="mx-auto h-42 self-center justify-self-center rounded-lg"
                 />
             ) : (
@@ -94,7 +94,7 @@ const ProductModalContent = ({
                     <p className="text-sm">Imagen no disponible</p>
                 </div>
             )}
-            <div className="flex flex-col space-y-2">
+            <div className="flex w-full flex-col space-y-2">
                 <div className="flex w-full items-center justify-between">
                     <p className="text-2xl font-bold">
                         {productVariation.name}
@@ -142,19 +142,21 @@ const ProductModalContent = ({
                     label={
                         (cartProducts.some(
                             (item) => productVariation.id === item.product.id
-                        ) && quantity === 0 ||
-                            (cartProducts.some(
-                                (item) => productVariation.id === item.product.id && quantity !== item.quantity
-                            )))
+                        ) &&
+                            quantity === 0) ||
+                        cartProducts.some(
+                            (item) =>
+                                productVariation.id === item.product.id &&
+                                quantity !== item.quantity
+                        )
                             ? 'Guardar cambios'
                             : 'Agregar producto'
                     }
                     variant="primary"
                     disabled={
-                        (!cartProducts.some(
+                        !cartProducts.some(
                             (item) => productVariation.id === item.product.id
-                        ) &&
-                            quantity === 0)
+                        ) && quantity === 0
                     }
                     type="button"
                     className="!px-1 min-[325px]:!px-4.5"

@@ -6,7 +6,7 @@ const SubCategorySelector = () => {
     return (
         <div className="flex h-8 items-start justify-start gap-1.5 overflow-x-auto overflow-y-hidden bg-gray-50 px-1 pt-2 lg:pt-1">
             {selectedCategory &&
-                selectedCategory?.subcategories.map((sub_cat) => (
+                selectedCategory?.subcategories?.map((sub_cat) => (
                     <div
                         onClick={(e) => {
                             e.preventDefault();

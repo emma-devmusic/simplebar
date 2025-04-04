@@ -24,7 +24,6 @@ const Cart = () => {
         dispatch(
             uiModal({
                 modalFor: 'edit_product',
-                modalOpen: true,
                 modalTitle: cartProduct.product.name,
             })
         );
@@ -73,19 +72,19 @@ const Cart = () => {
                     <tbody className="w-full divide-y divide-gray-200">
                         {cartProducts.length > 0 &&
                             cartProducts.map((item, index: number) => (
-                                <tr key={index} className="h-12">
-                                    <td className="px-4 text-gray-800">
-                                        <div className="relative flex flex-col">
+                                <tr key={index} className="">
+                                    <td className="px-4 text-gray-800  min-w-2/3">
+                                        <div className="relative flex flex-col items-start justify-end">
                                             <span
                                                 onClick={() =>
                                                     handleEditProduct(item)
                                                 }
-                                                className="absolute -top-3 left-0 cursor-pointer text-xs text-primary underline"
+                                                className="cursor-pointer text-xs text-primary underline"
                                             >
                                                 Editar
                                             </span>
                                             <span className="">
-                                                {item.product.name}
+                                                 {item.product.name}
                                             </span>
                                         </div>
                                     </td>

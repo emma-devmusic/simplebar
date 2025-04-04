@@ -9,11 +9,11 @@ import Cart from './modules/Cart';
 import { LayoutView } from '../components/layout';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { getCategories } from '../redux/slices/categorySlice';
-import { getProducts, setFilteredProducts } from '../redux/slices/productSlice';
+import { get_products, setFilteredProducts } from '../redux/slices/productSlice';
 import { useParams } from 'react-router-dom';
 
 export const Dash = () => {
-    const { branch_path } = useParams();
+    const { tenant_path, branch_path } = useParams();
     const { categories, selectedCategory } = useAppSelector(
         (state) => state.categories
     );
@@ -26,12 +26,8 @@ export const Dash = () => {
     });
 
     useEffect(() => {
-        // dispatch(getCategories(`{tenant_path+'/'+branch_path}`));
-        // dispatch(getProducts(`{tenant_path+'/'+branch_path}`));
-        dispatch(getProducts({ path: '/data/Products.json', setIsLoading }));
-        dispatch(
-            getCategories({ path: '/data/Categories.json', setIsLoading })
-        );
+        dispatch(get_products({ path: `${tenant_path}/${branch_path}`, setIsLoading }));
+        dispatch(getCategories({ path: `${tenant_path}/${branch_path}`, setIsLoading }));
         if (branch_path) {
             localStorage.setItem('branch_path', branch_path);
         }
