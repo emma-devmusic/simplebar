@@ -14,7 +14,6 @@ export const productsMiddleware = (state: MiddlewareAPI) => {
     return (next: Dispatch) => async (action: any) => {
         next(action);
         if (action.type === 'products/get_products') {
-            console.log("me ejecuto")
             const { path, setIsLoading }: GetProductPayload = action.payload;
             await executeApiCall(
                 setIsLoading,

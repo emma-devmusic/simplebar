@@ -1,7 +1,6 @@
 import { Dispatch, MiddlewareAPI } from '@reduxjs/toolkit';
 import {
-    setCategories,
-    setSelectedCategory,
+    setCategories
 } from '../slices/categorySlice';
 import { fetchData } from '../../services/fetchData';
 import { DataCategorySearchResponse, GetCategoryPayload } from '../../types/categories';
@@ -19,8 +18,7 @@ export const categoriesMiddleware = (state: MiddlewareAPI) => {
                 () => fetchData(`/pub-sts/categories/${payload.path}`, "GET", null),
                 state.dispatch,
                 (response: ResponseApiDing<DataCategorySearchResponse>) => {
-                    state.dispatch(setCategories(response.data.items)); 
-                    state.dispatch(setSelectedCategory(response.data.items[0]));
+                    state.dispatch(setCategories(response.data.items));
                 },
             );
         }

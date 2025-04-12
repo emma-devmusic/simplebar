@@ -1,11 +1,19 @@
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components';
 import { Trash2Icon } from 'lucide-react';
-import { ProductCart, removeProduct } from '../../redux/slices/cartSlice';
+import {
+    emptyCart,
+    ProductCart,
+    removeProduct,
+    setCart,
+} from '../../redux/slices/cartSlice';
 import Swal from 'sweetalert2';
 import { uiModal } from '../../redux/slices/uiSlice';
-import { setSelectedProduct, setVariationSelected } from '../../redux/slices/productSlice';
+import {
+    setSelectedProduct,
+    setVariationSelected,
+} from '../../redux/slices/productSlice';
 
 const Cart = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
@@ -15,12 +23,31 @@ const Cart = () => {
     );
     const dispatch = useAppDispatch();
 
+    useEffect(() => {
+        const cart_state_json = localStorage.getItem('cart_state');
+        if (cart_state_json) {
+            try {
+                const cart_state = JSON.parse(cart_state_json);
+                dispatch(setCart(cart_state));
+            } catch (error) {
+                console.error('Invalid JSON in localStorage:', error);
+            }
+        }
+    }, []);
+
     const handleEditProduct = (cartProduct: ProductCart) => {
+        const productIndex = products.findIndex((prod) =>
+            prod.product_variations.some(
+                (item) => item.id === cartProduct.product.id
+            )
+        );
+        const variationIndex = products[
+            productIndex
+        ].product_variations.findIndex(
+            (item) => item.id === cartProduct.product.id
+        );
 
-        const productIndex = products.findIndex(prod=>prod.product_variations.some(item=>item.id === cartProduct.product.id))
-        const variationIndex = products[productIndex].product_variations.findIndex(item=>item.id === cartProduct.product.id)
-
-        dispatch(setVariationSelected(variationIndex))
+        dispatch(setVariationSelected(variationIndex));
         dispatch(
             uiModal({
                 modalFor: 'edit_product',
@@ -31,7 +58,7 @@ const Cart = () => {
     };
 
     return (
-        <div className="flex w-full flex-col gap-2">
+        <div className="flex w-full flex-col gap-4">
             {cartProducts.length > 0 && (
                 <div className="mt-2 flex w-full justify-center">
                     <Button
@@ -56,9 +83,9 @@ const Cart = () => {
                     />
                 </div>
             )}
-            <div className="overflow-x-auto rounded-lg border border-gray-200">
-                <table className="w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                    <thead className="w-full text-left">
+            <div className="overflow-x-auto rounded-lg border border-gray-200 text-sm md:max-h-[42vh] 2xl:max-h-[50vh] overflow-y-auto">
+                <table className="w-full divide-y-2 divide-gray-200 bg-white relative">
+                    <thead className="w-full text-left sticky top-0 z-10 bg-white">
                         <tr>
                             <th className="px-4 py-2 font-medium whitespace-nowrap text-gray-900">
                                 Producto
@@ -73,7 +100,7 @@ const Cart = () => {
                         {cartProducts.length > 0 &&
                             cartProducts.map((item, index: number) => (
                                 <tr key={index} className="">
-                                    <td className="px-4 text-gray-800  min-w-2/3">
+                                    <td className="min-w-2/3 px-4 text-gray-800">
                                         <div className="relative flex flex-col items-start justify-end">
                                             <span
                                                 onClick={() =>
@@ -84,7 +111,7 @@ const Cart = () => {
                                                 Editar
                                             </span>
                                             <span className="">
-                                                 {item.product.name}
+                                                {item.product.name}
                                             </span>
                                         </div>
                                     </td>
@@ -245,6 +272,7 @@ const Cart = () => {
                                     ) + (orderMode === 'domicilio' ? 1000 : 0)
                                 ).toLocaleString(),
                             });
+                            dispatch(emptyCart());
                         }}
                     />
                 )}

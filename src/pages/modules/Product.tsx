@@ -51,12 +51,12 @@ const Product = ({ product }: ProductProps) => {
                         </div>
 
                         {product.product_variations[0].productImages[0]
-                            .url_image ? (
+                            ?.url_image ? (
                             <img
-                                className="h-full w-2/5 rounded-e-lg"
+                                className="h-full w-2/5 rounded-e-lg object-cover"
                                 src={
                                     product.product_variations[0]
-                                        .productImages[0].url_image
+                                        .productImages[0]?.url_image
                                 }
                             />
                         ) : (

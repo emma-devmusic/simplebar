@@ -2,39 +2,28 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     GetCategoryPayload,
     ItemCategories,
-    SelectCategoryEditablePayload,
 } from '../../types/categories';
 
 interface CategorySlice {
-    categories: ItemCategories[];
-    selectedCategory: ItemCategories;
+    categories: ItemCategories[]
 }
 
 const initialState: CategorySlice = {
-    categories: [],
-    selectedCategory: {
-        id: 0,
-        name: '',
-        description: '',
-        subcategories: []
-    },
+    categories: []
 };
 
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
-        getCategories(_state, _action: PayloadAction<GetCategoryPayload>) {},// middleware
+        getCategories(_state, _action: PayloadAction<GetCategoryPayload>) { },// middleware
         setCategories(state, action: PayloadAction<ItemCategories[]>) {
             state.categories = action.payload;
-        },
-        setSelectedCategory(state, action: PayloadAction<SelectCategoryEditablePayload>) {
-            state.selectedCategory = action.payload;
-        },
+        }
     },
 });
 
-export const { getCategories, setCategories, setSelectedCategory } =
+export const { getCategories, setCategories } =
     categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

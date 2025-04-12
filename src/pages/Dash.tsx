@@ -9,40 +9,45 @@ import Cart from './modules/Cart';
 import { LayoutView } from '../components/layout';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { getCategories } from '../redux/slices/categorySlice';
-import { get_products, setFilteredProducts } from '../redux/slices/productSlice';
-import { useParams } from 'react-router-dom';
+import {
+    get_products,
+    setFilteredProducts,
+} from '../redux/slices/productSlice';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 export const Dash = () => {
     const { tenant_path, branch_path } = useParams();
-    const { categories, selectedCategory } = useAppSelector(
-        (state) => state.categories
-    );
+    const { categories } = useAppSelector((state) => state.categories);
     const { products, filteredProducts } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const [value, handleInputChange] = useForm({
-        search: '',
-    });
-
+    const [value, handleInputChange] = useForm({ search: '' });
+    const [searchParams, setSearchParams] = useSearchParams();
+    
     useEffect(() => {
-        dispatch(get_products({ path: `${tenant_path}/${branch_path}`, setIsLoading }));
-        dispatch(getCategories({ path: `${tenant_path}/${branch_path}`, setIsLoading }));
-        if (branch_path) {
-            localStorage.setItem('branch_path', branch_path);
+        dispatch(get_products({path: `${tenant_path}/${branch_path}?limit=50`, setIsLoading,}));
+        dispatch(getCategories({path: `${tenant_path}/${branch_path}`, setIsLoading,}));
+        if (branch_path) localStorage.setItem('branch_path', branch_path);
+    }, [tenant_path, branch_path]);
+    
+    useEffect(() => {
+        if (!searchParams.get('category') &&categories.length>0) {
+            searchParams.set('category', `${categories[0].id}`);
+            setSearchParams(searchParams);
         }
-    }, []);
-
+    }, [categories]);
+    
     useEffect(() => {
+        const selectedCategory = categories.find((item) => item.id === Number(searchParams.get('category')))
         if (selectedCategory) {
             dispatch(
                 setFilteredProducts({
                     filterText: value.search,
-                    selectedCategory: selectedCategory,
+                    selectedCategory,
                 })
             );
         }
-    }, [value.search, selectedCategory]);
+    }, [value.search, searchParams]);
 
     return (
         <div className="flex w-full flex-col gap-2 lg:flex-row">
@@ -53,8 +58,14 @@ export const Dash = () => {
             ) : (
                 <div className="relative flex w-full flex-col gap-2 shadow-sm lg:w-4/2">
                     <div className="sticky top-0 w-full bg-gray-50 shadow-sm">
-                        <CategorySelector />
-                        <SubCategorySelector />
+                        <CategorySelector
+                            searchParams={searchParams}
+                            setSearchParams={setSearchParams}
+                        />
+                        <SubCategorySelector
+                            searchParams={searchParams}
+                            setSearchParams={setSearchParams}
+                        />
                         <div className="px-4 py-2">
                             <div className="relative flex w-full items-center">
                                 <Input

@@ -48,14 +48,11 @@ const productsSlice = createSlice({
                         const products = state.products.filter(
                             (prod) =>
                                 prod.sub_category_id === subCategory.id &&
-                                (prod.name
-                                    .toLowerCase()
-                                    .includes(lowerSearchValue) ||
-                                    prod.product_variations.some((prod_var) =>
-                                        prod_var.description
-                                            .toLowerCase()
-                                            .includes(lowerSearchValue)
-                                    ))
+                                (prod.name.toLowerCase().includes(lowerSearchValue)
+                                    ||
+                                prod.product_variations.some((prod_var) =>prod_var.description.toLowerCase().includes(lowerSearchValue)
+                                     || 
+                                    prod_var.name.toLowerCase().includes(lowerSearchValue)))
                         );
 
                         return {
