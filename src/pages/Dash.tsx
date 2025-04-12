@@ -47,7 +47,7 @@ export const Dash = () => {
                 })
             );
         }
-    }, [value.search, searchParams]);
+    }, [value.search, searchParams, categories]);
 
     return (
         <div className="flex w-full flex-col gap-2 lg:flex-row">
