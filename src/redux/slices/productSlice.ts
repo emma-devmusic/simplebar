@@ -25,11 +25,11 @@ const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        get_products(_state, _action: PayloadAction<GetProductPayload>) {}, //middleware
+        get_products(_state, _action: PayloadAction<GetProductPayload>) { }, //middleware
         set_products(state, action: PayloadAction<Product[]>) {
             state.products = action.payload;
         },
-        get_product_by_id(_state, _action: PayloadAction<GetProductByIdPayload>) {},//middleware
+        get_product_by_id(_state, _action: PayloadAction<GetProductByIdPayload>) { },//middleware
         setSelectedProduct(state, action: PayloadAction<Product | null>) {
             state.selectedProduct = action.payload;
         },
@@ -50,9 +50,11 @@ const productsSlice = createSlice({
                                 prod.sub_category_id === subCategory.id &&
                                 (prod.name.toLowerCase().includes(lowerSearchValue)
                                     ||
-                                prod.product_variations.some((prod_var) =>prod_var.description.toLowerCase().includes(lowerSearchValue)
-                                     || 
-                                    prod_var.name.toLowerCase().includes(lowerSearchValue)))
+                                    prod.product_variations.some((prod_var) => prod_var.description.toLowerCase().includes(lowerSearchValue)
+                                        ||
+                                        prod_var.name.toLowerCase().includes(lowerSearchValue))
+                                ) &&
+                                prod.active
                         );
 
                         return {

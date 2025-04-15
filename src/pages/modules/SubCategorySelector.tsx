@@ -20,7 +20,7 @@ const SubCategorySelector = ({
     };
 
     return (
-        <div className="flex h-8 items-start justify-start gap-1.5 overflow-x-auto overflow-y-hidden bg-gray-50 px-1 pt-2 lg:pt-1">
+        <div className="flex h-8 items-end justify-start gap-1 overflow-x-auto bg-gray-50 px-1">
             {categories
                 .find(
                     (category) =>
@@ -37,10 +37,10 @@ const SubCategorySelector = ({
                         id={`subcat-${sub_cat.id}`}
                         onClick={() => handleSubCategoryClick(`${sub_cat.id}`)}
                         key={sub_cat.id}
-                        className={`flex h-8 cursor-pointer items-start justify-center rounded-t-2xl bg-slate-400 px-4 pt-0.5 text-nowrap md:items-center md:pt-0`}
+                        className={`flex h-6 cursor-pointer items-center rounded-t-2xl bg-slate-400 px-4`}
                     >
                         <p
-                            className={`text-center text-sm font-semibold text-white`}
+                            className={`text-sm font-semibold text-white text-nowrap`}
                         >
                             {sub_cat.name}
                         </p>

@@ -1,9 +1,11 @@
 import { Copy } from 'lucide-react';
 import { Card } from '../../components';
-import { setSelectedProduct } from '../../redux/slices/productSlice';
+import { setSelectedProduct, setVariationSelected } from '../../redux/slices/productSlice';
 import { uiModal } from '../../redux/slices/uiSlice';
 import { useAppDispatch } from '../../redux/store';
 import { Product as ProductType } from '../../types/product';
+import { useEffect } from 'react';
+import useValidateImage from '../../hooks/useValidateImage';
 
 interface ProductProps {
     product: ProductType;
@@ -11,6 +13,9 @@ interface ProductProps {
 
 const Product = ({ product }: ProductProps) => {
     const dispatch = useAppDispatch();
+    const { imageError, imagePath, setImagePath } = useValidateImage({
+        initialPath: '',
+    });
     const addProductToCart = (product: ProductType) => {
         dispatch(
             uiModal({
@@ -19,25 +24,44 @@ const Product = ({ product }: ProductProps) => {
             })
         );
         dispatch(setSelectedProduct(product));
+        dispatch(setVariationSelected(0));
     };
+
+    useEffect(() => {
+        if (
+            product.product_variations[0]?.productImages.some(
+                (img) => img.main_image
+            )
+        ) {
+            setImagePath(
+                product.product_variations[0]?.productImages.find(
+                    (img) => img.main_image
+                )?.url_image as string
+            );
+        } else {
+            setImagePath(
+                product.product_variations[0]?.productImages[0]?.url_image
+            );
+        }
+    }, []);
 
     return (
         <div
             key={product.product_variations[0].id}
-            className="flex w-full cursor-pointer flex-col gap-2 py-2"
+            className="flex w-full cursor-pointer p-2 md:w-1/2"
             onClick={() => {
                 addProductToCart(product);
             }}
         >
             <Card className="w-full rounded-lg">
-                <Card.Body className="space-x-0 rounded-lg bg-white p-0 px-0 py-0 shadow-md">
-                    <div className="flex lg:h-32 lg:max-h-32 w-full gap-2 rounded-lg md:flex-row">
-                        <div className="flex w-3/5 flex-col items-start justify-between gap-y-2 rounded-b-xl px-4 py-1.5 text-gray-600">
-                            <div className="flex w-full flex-col items-start">
-                                <p className="line-clamp-2 font-semibold">
+                <Card.Body className="rounded-lg bg-white !p-0 shadow-md">
+                    <div className="flex h-28 min-h-28 w-full gap-2 rounded-lg md:flex-row lg:h-32 lg:min-h-32">
+                        <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-4 py-1.5 text-gray-600">
+                            <div className="flex w-full flex-col items-start gap-1 lg:gap-1.5">
+                                <p className="line-clamp-2 text-base/5 font-semibold lg:text-base/5">
                                     {product.product_variations[0].name}
                                 </p>
-                                <p className="line-clamp-3 w-full overflow-hidden text-justify text-xs">
+                                <p className="line-clamp-3 w-full overflow-hidden text-xs/3 lg:text-sm/5">
                                     {product.product_variations[0].description}
                                 </p>
                             </div>
@@ -46,32 +70,32 @@ const Product = ({ product }: ProductProps) => {
                                     $
                                     {product.product_variations[0].price.toLocaleString()}
                                 </p>
-                                {product.product_variations.length>1 && <Copy className='h-5' />}
+                                {product.product_variations.length > 1 && (
+                                    <Copy className="h-5" />
+                                )}
                             </div>
                         </div>
 
-                        {product.product_variations[0].productImages[0]
-                            ?.url_image ? (
+                        {imagePath && !imageError ? (
                             <img
                                 className="h-full w-2/5 rounded-e-lg object-cover"
-                                src={
-                                    product.product_variations[0]
-                                        .productImages[0]?.url_image
-                                }
+                                src={imagePath}
                             />
                         ) : (
-                            <div className="h-full w-2/5 flex flex-col items-center justify-center rounded-e-lg">
+                            <div className="flex h-full w-2/5 flex-col items-center justify-center rounded-e-lg">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 23 24"
-                                    className="text-gray-300 h-16 lg:h-24 xl:max-h-20"
+                                    className="h-16 text-gray-300 lg:h-24 xl:max-h-20"
                                 >
                                     <path
                                         fill="currentColor"
                                         d="M18.06 23h1.66c.84 0 1.53-.65 1.63-1.47L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26c1.44 1.42 2.43 2.89 2.43 5.29zM1 22v-1h15.03v1c0 .54-.45 1-1.03 1H2c-.55 0-1-.46-1-1m15.03-7C16.03 7 1 7 1 15zM1 17h15v2H1z"
                                     ></path>
                                 </svg>
-                                <p className="text-[10px] md:text-xs text-center">Imagen no disponible</p>
+                                <p className="px-2 text-center text-xs">
+                                    Imagen no disponible
+                                </p>
                             </div>
                         )}
                     </div>
