@@ -6,6 +6,7 @@ interface UiSlice {
     modal: Modal;
     menuOpen: boolean;
     isLoading: boolean;
+    sidebarOpen: boolean;
 }
 
 const initialState: UiSlice = {
@@ -20,6 +21,7 @@ const initialState: UiSlice = {
     },
     menuOpen: false,
     isLoading: false,
+    sidebarOpen: false,
 }
 
 const uiSlice = createSlice({
@@ -44,6 +46,9 @@ const uiSlice = createSlice({
         uiCloseModal(state) {
             state.modal = initialState.modal;
         },
+        toggleSidebar(state){
+            state.sidebarOpen = !state.sidebarOpen
+        }
     }
 });
 
@@ -52,6 +57,7 @@ export const {
     uiSetLoading,
     uiModal,
     uiCloseModal,
+    toggleSidebar
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
