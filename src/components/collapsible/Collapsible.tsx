@@ -4,11 +4,12 @@ import { ReactNode } from "react"
 interface CollapsibleProps {
     name: ReactNode;
     children: ReactNode;
+    className?: string
 }
 
-export const Collapsible = ({name, children}:CollapsibleProps) => {
+export const Collapsible = ({name, children, className = ""}:CollapsibleProps) => {
     return (
-        <details className="group [&_summary::-webkit-details-marker]:hidden  rounded-md border-[1px] border-gray-200 bg-zinc-50">
+        <details className={`group [&_summary::-webkit-details-marker]:hidden  rounded-md border-[1px] border-gray-200 bg-zinc-50 ${className}`}>
             <summary
                 className="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg hover:bg-blue-50  transition-all p-4 text-gray-900"
             >

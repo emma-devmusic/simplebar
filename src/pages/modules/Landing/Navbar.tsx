@@ -14,8 +14,12 @@ const Navbar = () => {
     const dispatch = useAppDispatch()
 
     return (
-        <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white">
-            {sidebarOpen && <OffsetCanvas><Sidebar /></OffsetCanvas>}
+        <header className="sticky border-b-[0.5px] border-gray-200 top-0 z-40 w-full bg-white max-h-14">
+            {sidebarOpen && (
+                <OffsetCanvas>
+                    <Sidebar />
+                </OffsetCanvas>
+            )}
             <nav className="relative z-10 flex max-w-max flex-1 items-center justify-center mx-auto">
                 <div className="group flex-1 list-none items-center space-x-1 container h-14 px-4 w-screen flex justify-between">
                     <a
@@ -36,12 +40,11 @@ const Navbar = () => {
 
                     {/* desktop */}
                     <ul className="hidden md:flex gap-3">
-                        {sidebarLinks.map((route: SidebarLinks, i) => (
-                            <li>
+                        {sidebarLinks.map((route: SidebarLinks) => (
+                            <li key={route.href}>
                                 <a
                                     rel="noreferrer noopener"
                                     href={route.href}
-                                    key={i}
                                     className={`text-base font-semibold rounded-lg p-2 hover:bg-[#e9e9f5] hover:text-[#18181a]`}
                                 >
                                     {route.label}
