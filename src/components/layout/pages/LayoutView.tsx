@@ -8,8 +8,8 @@ interface LayoutViewProps {
 export const LayoutView = ({ title, children }: LayoutViewProps) => {
 
     return (
-        <div className="flex flex-col gap-8">
-            <h2 className="text-2xl mt-4">{title}</h2>
+        <div className="flex flex-col gap-4">
+            <h2 className="text-2xl mt-8 text-center">{title}</h2>
             <div className="flex flex-col gap-8">
                 {children}
             </div>

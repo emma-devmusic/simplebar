@@ -7,7 +7,8 @@ import {
     addOrUpdateProduct,
     removeProduct,
 } from '../../redux/slices/cartSlice';
-import { uiModal } from '../../redux/slices/uiSlice';
+import { uiCloseModal } from '../../redux/slices/uiSlice';
+import useValidateImage from '../../hooks/useValidateImage';
 
 interface ProductModalContentProps {
     productVariation: ProductVariation;
@@ -17,7 +18,7 @@ const ProductModalContent = ({
     productVariation,
 }: ProductModalContentProps) => {
     const { cartProducts } = useAppSelector((state) => state.cart);
-
+    const { imagePath, setImagePath, imageError } = useValidateImage({ initialPath: '' });
     const dispatch = useAppDispatch();
     const [quantity, setQuantity] = useState<number>(0);
     const { selectedProduct, variationSelected } = useAppSelector(
@@ -28,7 +29,7 @@ const ProductModalContent = ({
         {
             if (
                 cartProducts.some(
-                    (item) => productVariation.id === item.product.id
+                    (item) => productVariation?.id === item.product.id
                 ) &&
                 quantity === 0 &&
                 selectedProduct
@@ -39,7 +40,7 @@ const ProductModalContent = ({
                     addOrUpdateProduct({ product: productVariation, quantity })
                 );
             }
-            dispatch(uiModal({ modalFor: null, modalOpen: false }));
+            dispatch(uiCloseModal());
         }
     };
 
@@ -56,7 +57,7 @@ const ProductModalContent = ({
             cartProducts.some(
                 (item) =>
                     item.product.id ===
-                    selectedProduct?.product_variations[variationSelected].id
+                    selectedProduct?.product_variations[variationSelected]?.id
             )
         ) {
             setQuantity(
@@ -70,14 +71,56 @@ const ProductModalContent = ({
         } else {
             setQuantity(0);
         }
+
+        if (selectedProduct) {
+            if (
+                selectedProduct.product_variations[
+                    variationSelected
+                ]?.productImages.some((img) => img.main_image)
+            ) {
+                const imagePath =
+                    (selectedProduct.product_variations[
+                        variationSelected
+                    ]?.productImages.find((img) => img.main_image)
+                        ?.url_image as string);
+                setImagePath(imagePath);
+            } else {
+                const imagePath = 
+                    selectedProduct.product_variations[variationSelected]
+                        ?.productImages[0]?.url_image
+                setImagePath(imagePath);
+            }
+        }
     }, [variationSelected]);
 
+    useEffect(()=>{
+        if (selectedProduct) {
+            if (
+                selectedProduct.product_variations[
+                    variationSelected
+                ]?.productImages.some((img) => img.main_image)
+            ) {
+                const imagePath =
+                    (selectedProduct.product_variations[
+                        variationSelected
+                    ]?.productImages.find((img) => img.main_image)
+                        ?.url_image as string);
+                setImagePath(imagePath);
+            } else {
+                const imagePath = 
+                    selectedProduct.product_variations[variationSelected]
+                        ?.productImages[0]?.url_image
+                setImagePath(imagePath);
+            }
+        }
+    },[])
+
     return (
-        <div className="flex min-h-full w-full flex-col items-center justify-between gap-4 space-y-3 p-2.5">
-            {productVariation.productImages[0].url_image ? (
+        <div className="flex min-h-full w-full flex-col items-center justify-between gap-4 gap-y-3 p-2.5">
+            {imagePath && !imageError ? (
                 <img
-                    src={productVariation.productImages[0].url_image}
-                    className="mx-auto h-42 self-center justify-self-center rounded-lg"
+                    src={imagePath ?? ''}
+                    className="h-42 self-center justify-self-center rounded-lg"
                 />
             ) : (
                 <div className="flex h-42 w-full flex-col items-center justify-center rounded-e-lg">
@@ -94,7 +137,7 @@ const ProductModalContent = ({
                     <p className="text-sm">Imagen no disponible</p>
                 </div>
             )}
-            <div className="flex flex-col space-y-2">
+            <div className="flex w-full flex-col gap-y-2">
                 <div className="flex w-full items-center justify-between">
                     <p className="text-2xl font-bold">
                         {productVariation.name}
@@ -103,7 +146,7 @@ const ProductModalContent = ({
                         ${productVariation.price.toLocaleString()}
                     </p>
                 </div>
-                <p className="self-start justify-self-start text-justify">
+                <p className="self-start justify-self-start">
                     {productVariation.description}
                 </p>
             </div>
@@ -142,19 +185,21 @@ const ProductModalContent = ({
                     label={
                         (cartProducts.some(
                             (item) => productVariation.id === item.product.id
-                        ) && quantity === 0 ||
-                            (cartProducts.some(
-                                (item) => productVariation.id === item.product.id && quantity !== item.quantity
-                            )))
+                        ) &&
+                            quantity === 0) ||
+                        cartProducts.some(
+                            (item) =>
+                                productVariation.id === item.product.id &&
+                                quantity !== item.quantity
+                        )
                             ? 'Guardar cambios'
                             : 'Agregar producto'
                     }
                     variant="primary"
                     disabled={
-                        (!cartProducts.some(
+                        !cartProducts.some(
                             (item) => productVariation.id === item.product.id
-                        ) &&
-                            quantity === 0)
+                        ) && quantity === 0
                     }
                     type="button"
                     className="!px-1 min-[325px]:!px-4.5"

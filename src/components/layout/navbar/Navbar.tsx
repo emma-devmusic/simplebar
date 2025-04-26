@@ -29,7 +29,6 @@ export const Navbar = () => {
                                 dispatch(
                                     uiModal({
                                         modalFor: 'cart',
-                                        modalOpen: true,
                                         modalTitle: 'Mi Pedido',
                                     })
                                 );

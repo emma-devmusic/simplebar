@@ -1,6 +1,6 @@
 export interface ResponseApiDing<T> {
     error: boolean;
-    code: number;
+    code: string;
     message: string;
     data: T;
 }

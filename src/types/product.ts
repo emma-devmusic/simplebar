@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { MetaDataSearchResponse } from './api';
 
 export interface ProductDataSearchResponse {
@@ -73,4 +74,16 @@ export interface CreatedStatus {
     data_modified: Date;
     id: number;
     description: string;
+}
+
+export interface DingPayload {
+    setIsLoading: Dispatch<SetStateAction<boolean>>
+}
+
+export interface GetProductPayload extends DingPayload {
+    path: string;
+}
+
+export interface GetProductByIdPayload extends DingPayload {
+    path: string;
 }

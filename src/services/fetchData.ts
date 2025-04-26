@@ -1,16 +1,14 @@
 
-import Swal from "sweetalert2";
 import { access_key_id, base_url } from "../common/definitions/env";
-import { errorMsg } from "../mocks/errors";
-import { FetchMethod } from "../types/api";
+import { DataErrorResponse, FetchMethod } from "../types/api";
 
 export const fetchData = async (
     path: string,
     method: FetchMethod,
     body: object | null,
+    authorization?: string | null, // Hacer que authorization sea opcional
+    signalController?: any,
     header?: { [key:string]: string; },
-    signal?: AbortSignal,
-    authorization?: string,
 ) => {
 
     const headers: Record<string, string> = {
@@ -26,28 +24,16 @@ export const fetchData = async (
     let response = null;
     console.log(base_url)
     try {
-        response = await fetch(`${/*base_url*/''}${path}`, {
+        response = await fetch(`${base_url}${path}`, {
             method,
             headers,
-            signal,
             ...(body && { body: JSON.stringify(body) }),
+            signal: signalController
         });
 
         if (!response.ok) {
-            Swal.fire({
-                title: '<strong>¡Ups! Algo salió mal</strong>',
-                html: `<p style="font-size: 16px; color: #555;">${errorMsg[response.status]}</p>`,
-                icon: 'error',
-                iconColor: '#d33',
-                confirmButtonText: 'Entendido',
-                confirmButtonColor: '#3085d6',
-                customClass: {
-                    popup: 'swal2-popup-custom',
-                    title: 'swal2-title-custom',
-                    confirmButton: 'swal2-confirm-custom',
-                },
-            });
-            throw new Error(`${errorMsg[response.status]} | fetchData`);
+            const error:DataErrorResponse = await response.json();
+            throw error;
         }
 
         return await response.json();

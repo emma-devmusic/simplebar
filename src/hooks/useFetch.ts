@@ -13,7 +13,7 @@ export const useFetch = <T,>(enpoint: string, method: FetchMethod, obj: object |
 
     const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState<ResponseApiDing<T>>({
-        code: 0,
+        code: "",
         error: false,
         message: '',
         data: {} as T

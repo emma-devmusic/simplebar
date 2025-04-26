@@ -1,28 +1,40 @@
-import { Dispatch, MiddlewareAPI, PayloadAction } from '@reduxjs/toolkit';
+import { Dispatch, MiddlewareAPI } from '@reduxjs/toolkit';
 import { fetchData } from '../../services/fetchData';
-import { setLoading, setProducts } from '../slices/productSlice';
-import { ProductDataSearchResponse } from '../../types/product';
+import {
+    GetProductByIdPayload,
+    GetProductPayload,
+    Product,
+    ProductDataSearchResponse,
+} from '../../types/product';
 import { ResponseApiDing } from '../../types/api';
-import { SetStateAction } from 'react';
+import { executeApiCall } from '../../services/executeApiCall';
+import { set_products, setSelectedProduct } from '../slices/productSlice';
 
 export const productsMiddleware = (state: MiddlewareAPI) => {
-    return (next: Dispatch) => async (action: PayloadAction<unknown>) => {
+    return (next: Dispatch) => async (action: any) => {
         next(action);
-        if (action.type === 'products/getProducts') {
-            const { path, setIsLoading } = action.payload as {
-                path: string;
-                setIsLoading: React.Dispatch<SetStateAction<boolean>>;
-            };
-            try {
-                setIsLoading(true);
-                const response: ResponseApiDing<ProductDataSearchResponse> =
-                    await fetchData(path, 'GET', null);
-                state.dispatch(setProducts(response.data.items));
-            } catch (error) {
-                console.log(error, 'nivel 3 - desde redux middleware');
-            } finally {
-                setLoading(false);
-            }
+        if (action.type === 'products/get_products') {
+            const { path, setIsLoading }: GetProductPayload = action.payload;
+            await executeApiCall(
+                setIsLoading,
+                () =>
+                    fetchData(`/pub-sts/products/${path}`,'GET',null),
+                state.dispatch,
+                (response: ResponseApiDing<ProductDataSearchResponse>) => {
+                    state.dispatch(set_products(response.data.items));
+                }
+            );
+        }
+        if (action.type === 'product/get_product_by_id') {
+            const { path, setIsLoading } = action.payload as GetProductByIdPayload
+            await executeApiCall(
+                setIsLoading,
+                () => fetchData(`/sts/manage-products/products/${path}`, 'GET', null),
+                state.dispatch,
+                (response: ResponseApiDing<Product>) => {
+                    state.dispatch(setSelectedProduct(response.data))
+                }
+            )
         }
     };
 };
