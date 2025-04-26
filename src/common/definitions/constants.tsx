@@ -1,5 +1,5 @@
 
-import { LayoutDashboard, List, Package, Settings, UserCircleIcon, UsersIcon } from "lucide-react";
+import { CircleDollarSign, MessageSquareText, MessagesSquare, MonitorCog } from "lucide-react";
 import { ReactNode } from "react";
 import { tdKey } from "../../types/table";
 
@@ -14,34 +14,24 @@ const sizeIconsSidebar = 18
 
 export const sidebarLinks: SidebarLinks[] = [
     {
-        label: 'Pedidos',
-        icon: <List size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: '/orders'
+        label: 'Características',
+        icon: <MonitorCog size={sizeIconsSidebar} className="min-w-[18px]" />,
+        href: '#features'
     },
     {
-        label: 'Tablero',
-        icon: <LayoutDashboard size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: "/",
+        label: 'Testimonios',
+        icon: <MessageSquareText size={sizeIconsSidebar} className="min-w-[18px]" />,
+        href: "#testimonials",
     },
     {
-        label: 'Productos',
-        icon: <Package size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: "/products",
+        label: 'Precios',
+        icon: <CircleDollarSign size={sizeIconsSidebar} className="min-w-[18px]" />,
+        href: "#pricing",
     },
     {
-        label: 'Usuarios',
-        icon: <UsersIcon size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: "/users",
-    },
-    {
-        label: 'Mi Perfil',
-        icon: <UserCircleIcon size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: "/profile",
-    },
-    {
-        label: 'Configuraciones',
-        icon: <Settings size={sizeIconsSidebar} className="min-w-[18px]" />,
-        href: "/settings",
+        label: 'FAQ',
+        icon: <MessagesSquare size={sizeIconsSidebar} className="min-w-[18px]" />,
+        href: "#faq",
     }
 ]
 
