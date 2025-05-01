@@ -102,7 +102,7 @@ export const Team = () => {
   return (
     <section
       id="team"
-      className="container py-24 sm:py-32"
+      className="container"
     >
       <h2 className="text-3xl md:text-4xl font-bold">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
@@ -142,6 +142,7 @@ export const Team = () => {
               <Card.Footer className="w-full flex gap-2 justify-center bg-transparent">
                 {socialNetworks.map(({ name, url }: SociaNetworkslProps) => (
                     <a
+                      key={name}
                       rel="noreferrer noopener"
                       href={url}
                       target="_blank"

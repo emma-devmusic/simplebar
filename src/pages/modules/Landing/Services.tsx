@@ -30,7 +30,7 @@ const serviceList: ServiceProps[] = [
 
 export const Services = () => {
   return (
-    <section className="container ">
+    <section className="container">
       <div className="grid lg:grid-cols-2 place-items-center">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold">
@@ -47,7 +47,7 @@ export const Services = () => {
 
           <div className="flex flex-col gap-8">
             {serviceList.map(({ icon, title, description }: ServiceProps) => (
-              <Card className="rounded-lg border bg-card text-card-foreground shadow-sm border-gray-300" key={title}>
+              <Card className="border border-gray-300" key={title}>
                 <Card.Header className="border-b-0 flex flex-col space-y-1.5 p-6 md:flex-row justify-start items-start gap-4">
                   <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
                     {icon}

@@ -1,18 +1,18 @@
-import logo from '../../../assets/img/isologo-ding-degraded.png'
+import logo from '../../../assets/img/logo-ding.png'
 
 export const Footer = () => {
   return (
-    <footer id="footer">
+    <footer id="footer bg-red-500">
       <hr className="w-100vw mx-auto" />
 
-      <section className="container py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
+      <section className="container py-20 px-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
         <div className="col-span-full xl:col-span-2">
           <a
             rel="noreferrer noopener"
             href="/"
             className="font-bold text-xl flex"
           >
-            <img src={logo} className='w-24' />
+            <img src={logo} className='w-[90%]' />
             ShadcnUI/React
           </a>
         </div>

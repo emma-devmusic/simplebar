@@ -4,7 +4,7 @@ export const Cta = () => {
   return (
     <section
       id="cta"
-      className="bg-gray-200 py-16 my-24 sm:my-32 px-20"
+      className="bg-gray-200 p-8 lg:py-8 lg:p-0 lg:px-20 lg:w-full"
     >
       <div className="container lg:grid lg:grid-cols-2 place-items-center">
         <div className="lg:col-start-1">
@@ -24,12 +24,12 @@ export const Cta = () => {
         </div>
 
         <div className="space-y-4 lg:col-start-2">
-          <Button action={()=>{console.log("mock")}} label="Request a Demo" className="w-full md:mr-4 md:w-auto rounded-lg"/>
+        <Button action={()=>{console.log("mock")}} label="Request a Demo" className="w-full md:mr-4 md:w-auto"/>
           <Button
             label="View all features"
             action={()=>{console.log("mock")}} 
             variant="primary-outline"
-            className="w-full md:w-auto rounded-lg"
+            className="w-full md:w-auto"
             />
         </div>
       </div>

@@ -36,7 +36,7 @@ export const Sponsors = () => {
   return (
     <section
       id="sponsors"
-      className="container py-24 text-gray-500"
+      className="container text-gray-500"
     >
       <h2 className="text-center text-md lg:text-2xl font-bold mb-8 text-primary">
         Investors and founders

@@ -1,11 +1,44 @@
 import { Check, Github, Lightbulb, Linkedin } from "lucide-react";
 import { Avatar, Badge, Button, Card } from "../../../components";
-import { ParallaxLayer } from "@react-spring/parallax";
+
+interface MediaLink {
+    href: string;
+    ariaLabel: string;
+    icon: React.ReactNode;
+}
+
+const mediaLinks: MediaLink[] = [
+    {
+        href: "https://github.com/leoMirandaa",
+        ariaLabel: "Github icon",
+        icon: <Github className="w-5 h-5" />,
+    },
+    {
+        href: "https://twitter.com/leo_mirand4",
+        ariaLabel: "X icon",
+        icon: (
+            <svg
+                role="img"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="fill-foreground w-5 h-5"
+            >
+                <title>X</title>
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+            </svg>
+        ),
+    },
+    {
+        href: "https://www.linkedin.com/in/leopoldo-miranda/",
+        ariaLabel: "Linkedin icon",
+        icon: <Linkedin size={20} />,
+    },
+];
 
 export const Hero = () => {
     return (
-        <ParallaxLayer offset={0} speed={1}>
             <section className="px-6 flex justify-center items-center pt-20 gap-10">
+                
                 <div className="text-center lg:text-start space-y-6 w-full lg:w-1/2">
                     <main className="text-5xl md:text-6xl font-bold">
                         <h1 className="inline">
@@ -42,99 +75,29 @@ export const Hero = () => {
                         </a>
                     </div>
                 </div>
-
-                {/* Hero cards sections */}
                 <div className="w-full lg:w-1/2 hidden lg:block">
                     <div className="hidden lg:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
-                        {/* Testimonial */}
-                        <ParallaxLayer offset={0} speed={1}>
-                            <Card className="absolute border border-gray-200  w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+                            <Card className="absolute border border-gray-200  w-[340px] -top-[15px] drop-shadow-xl ">
                                 <Card.Header className="flex flex-row items-center gap-4 pb-2 border-b-0">
                                     <Avatar img="https://github.com/shadcn.png" />
 
                                     <div className="flex flex-col">
-                                        <p className="text-lg flex flex-col space-y-1.5">John Doe React</p>
+                                        <p>John Doe React</p>
                                         <p className="text-sm text-muted-foreground">@john_doe</p>
                                     </div>
                                 </Card.Header>
 
-                                <Card.Body className="p-6 pt-0">This landing page is awesome!</Card.Body>
+                                <Card.Body className="">This landing page is awesome!</Card.Body>
                             </Card>
-                        </ParallaxLayer>
 
-                        {/* Team */}
-                        <ParallaxLayer offset={0} speed={1.5}>
-                            <Card className="absolute border border-gray-200 right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
-                                <Card.Header className="border-b-0 mt-8 flex flex-col justify-center items-center pb-2 gap-1">
-                                    <img
-                                        src="https://i.pravatar.cc/150?img=58"
-                                        alt="user avatar"
-                                        className="absolute grayscale-[0%] -top-12 rounded-full w-24 h-24 aspect-square object-cover"
-                                    />
-                                    <p className="text-center text-2xl flex flex-col pt-1.5">Leo Miranda</p>
-                                    <p className="text-sm text-muted-foreground font-normal text-primary">
-                                        Frontend Developer
-                                    </p>
-                                </Card.Header>
-
-                                <Card.Body className="p-6 pt-0 text-center pb-2">
-                                    <p>
-                                        I really enjoy transforming ideas into functional software that
-                                        exceeds expectations
-                                    </p>
-                                </Card.Body>
-
-                                <Card.Footer className="flex items-center pb-6 pt-0 bg-transparent">
-                                    <a
-                                        rel="noreferrer noopener"
-                                        href="https://github.com/leoMirandaa"
-                                        target="_blank"
-                                        className="hover:bg-gray-100 hover:text-accent-foreground rounded-md p-2.5"
-                                        style={{ zIndex: "999 !important" }}
-                                    >
-                                        <span className="sr-only">Github icon</span>
-                                        <Github className="w-5 h-5" />
-                                    </a>
-                                    <a
-                                        rel="noreferrer noopener"
-                                        href="https://twitter.com/leo_mirand4"
-                                        target="_blank"
-                                        className={"hover:bg-gray-100 hover:text-accent-foreground rounded-md p-2.5"}
-                                    >
-                                        <span className="sr-only">X icon</span>
-                                        <svg
-                                            role="img"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="fill-foreground w-5 h-5"
-                                        >
-                                            <title>X</title>
-                                            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                                        </svg>
-                                    </a>
-
-                                    <a
-                                        rel="noreferrer noopener"
-                                        href="https://www.linkedin.com/in/leopoldo-miranda/"
-                                        target="_blank"
-                                        className={"hover:bg-gray-100 hover:text-accent-foreground rounded-md p-2.5"}
-                                    >
-                                        <span className="sr-only">Linkedin icon</span>
-                                        <Linkedin size="20" />
-                                    </a>
-                                </Card.Footer>
-                            </Card>
-                        </ParallaxLayer>
-
-                        {/* Pricing */}
-                        <ParallaxLayer offset={0} speed={2}>
+                        
                             <Card className="absolute border p-2 border-gray-200 top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
                                 <Card.Header className="border-b-0 pb-1 flex flex-col gap-1">
                                     <p className="flex item-center text-black justify-between text-2xl font-semibold leading-none tracking-tight">
                                         Free
                                         <Badge
                                             variant="outlined"
-                                            className="text-primary"
+                                            className="text-primary pt-1"
                                         >
                                             Most popular
                                         </Badge>
@@ -169,12 +132,8 @@ export const Hero = () => {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                        </ParallaxLayer>
 
-                        {/* Service */}
-
-                        <ParallaxLayer offset={0} speed={1.2}>
-                            <Card className="z-20 absolute w-[350px]  right-0 bottom-[100px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+                            <Card className="z-20 absolute w-[350px]  right-0 bottom-[50px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
                                 <Card.Header className="space-y-1 flex lg:flex-row justify-start items-start gap-4 p-6">
                                     <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
                                         <Lightbulb />
@@ -188,10 +147,43 @@ export const Hero = () => {
                                     </div>
                                 </Card.Header>
                             </Card>
-                        </ParallaxLayer>
+
+                            <Card className="absolute border border-gray-200 right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl">
+                                <Card.Header className="border-b-0 mt-8 flex flex-col justify-center items-center pb-2 gap-1">
+                                    <img
+                                        src="https://i.pravatar.cc/150?img=58"
+                                        alt="user avatar"
+                                        className="absolute -top-12 rounded-full w-24 h-24 "
+                                    />
+                                    <p className="text-center text-2xl  pt-1.5">Leo Miranda</p>
+                                    <p className="text-sm text-muted-foreground font-normal text-primary">
+                                        Frontend Developer
+                                    </p>
+                                </Card.Header>
+
+                                <Card.Body className="p-6 pt-0 text-center pb-2">
+                                    <p>
+                                        I really enjoy transforming ideas into functional software that
+                                        exceeds expectations
+                                    </p>
+                                </Card.Body>
+
+                                <Card.Footer className="flex items-center pb-6 pt-0 bg-transparent">
+                                    {mediaLinks.map(({ href, ariaLabel, icon }) => (
+                                        <a
+                                            key={href}
+                                            rel="noreferrer noopener"
+                                            href={href}
+                                            target="_blank"
+                                            className="hover:bg-gray-100 hover:text-accent-foreground rounded-md p-2.5"
+                                        >
+                                            <span className="sr-only">{ariaLabel}</span>
+                                            {icon}
+                                        </a>))}
+                                </Card.Footer>
+                            </Card>
                     </div>
                 </div>
             </section>
-        </ParallaxLayer>
     );
 };
