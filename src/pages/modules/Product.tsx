@@ -50,19 +50,29 @@ const Product = ({ product }: ProductProps) => {
     }, []);
 
     useEffect(() => {
-        if (nameRef.current) {
-            const lineHeight = parseFloat(
-                window.getComputedStyle(nameRef.current).lineHeight
-            );
-            const nameHeight = nameRef.current.offsetHeight;
-
-            if (nameHeight > lineHeight) {
-                setDescriptionClamp(2);
-            } else {
-                setDescriptionClamp(3);
+        const updateClamp = () => {
+            if (nameRef.current) {
+                const lineHeight = parseFloat(
+                    window.getComputedStyle(nameRef.current).lineHeight
+                );
+                const nameHeight = nameRef.current.offsetHeight;
+    
+                if (nameHeight > lineHeight) {
+                    setDescriptionClamp(2);
+                } else {
+                    setDescriptionClamp(3);
+                }
             }
-        }
-    }, []); //Escuchar el window width como dependencia
+        };
+    
+        updateClamp();
+    
+        window.addEventListener('resize', updateClamp);
+    
+        return () => {
+            window.removeEventListener('resize', updateClamp);
+        };
+    }, []);
 
     return (
         <div
@@ -81,7 +91,13 @@ const Product = ({ product }: ProductProps) => {
                                     {product.product_variations[0].name}
                                 </p>
                                 <p
-                                    className={`line-clamp-${descriptionClamp} w-full overflow-hidden text-xs/3 lg:text-sm/5`}
+                                    className={`${
+                                        descriptionClamp === 2
+                                          ? 'line-clamp-2'
+                                          : descriptionClamp === 3
+                                          ? 'line-clamp-3'
+                                          : ''
+                                      } w-full overflow-hidden text-xs/3 lg:text-sm/5`}
                                 >
                                     {product.product_variations[0].description}
                                 </p>
