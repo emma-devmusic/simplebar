@@ -1,18 +1,12 @@
-import { SetURLSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useAppSelector } from '../../redux/store';
 
-interface CategorySelectorProps {
-    searchParams: URLSearchParams;
-    setSearchParams: SetURLSearchParams;
-}
 
-const CategorySelector = ({
-    searchParams,
-    setSearchParams,
-}: CategorySelectorProps) => {
+const CategorySelector = () => {
 
     const { categories } = useAppSelector((state) => state.categories);
-    
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const handleCategoryClick = (categoryId: string) => {
         searchParams.set('category', categoryId);
         setSearchParams(searchParams);
@@ -21,6 +15,19 @@ const CategorySelector = ({
 
     return (
         <div className="flex h-10 items-start justify-start gap-1 overflow-x-auto bg-gray-50 px-1">
+            <div
+                id={`all`}
+                onClick={() => {
+                    setSearchParams("");
+                }}
+                className={`flex h-8 w-auto shadow-sm px-4 cursor-pointer rounded-b-3xl
+                            ${searchParams.get('category') ? 'bg-sky-200' : 'h-9 items-center bg-sky-300 md:h-10'} 
+                            transition-all duration-300`}
+            >
+                <p className={`text-lg text-nowrap font-semibold text-white`}>
+                    Todos
+                </p>
+            </div>
             {categories.length > 0 &&
                 categories.map((category) => (
                     <div

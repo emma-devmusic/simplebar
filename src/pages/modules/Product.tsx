@@ -4,7 +4,7 @@ import { setSelectedProduct, setVariationSelected } from '../../redux/slices/pro
 import { uiModal } from '../../redux/slices/uiSlice';
 import { useAppDispatch } from '../../redux/store';
 import { Product as ProductType } from '../../types/product';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useValidateImage from '../../hooks/useValidateImage';
 
 interface ProductProps {
@@ -16,6 +16,10 @@ const Product = ({ product }: ProductProps) => {
     const { imageError, imagePath, setImagePath } = useValidateImage({
         initialPath: '',
     });
+
+    const [descriptionClamp, setDescriptionClamp] = useState(3);
+    const nameRef = useRef<HTMLParagraphElement>(null);
+
     const addProductToCart = (product: ProductType) => {
         dispatch(
             uiModal({
@@ -45,6 +49,21 @@ const Product = ({ product }: ProductProps) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (nameRef.current) {
+            const lineHeight = parseFloat(
+                window.getComputedStyle(nameRef.current).lineHeight
+            );
+            const nameHeight = nameRef.current.offsetHeight;
+
+            if (nameHeight > lineHeight) {
+                setDescriptionClamp(2);
+            } else {
+                setDescriptionClamp(3);
+            }
+        }
+    }, []); //Escuchar el window width como dependencia
+
     return (
         <div
             key={product.product_variations[0].id}
@@ -58,10 +77,12 @@ const Product = ({ product }: ProductProps) => {
                     <div className="flex h-28 min-h-28 w-full gap-2 rounded-lg md:flex-row lg:h-32 lg:min-h-32">
                         <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-4 py-1.5 text-gray-600">
                             <div className="flex w-full flex-col items-start gap-1 lg:gap-1.5">
-                                <p className="line-clamp-2 text-base/5 font-semibold lg:text-base/5">
+                                <p ref={nameRef} className="line-clamp-2 text-base/5 font-semibold lg:text-base/5">
                                     {product.product_variations[0].name}
                                 </p>
-                                <p className="line-clamp-3 w-full overflow-hidden text-xs/3 lg:text-sm/5">
+                                <p
+                                    className={`line-clamp-${descriptionClamp} w-full overflow-hidden text-xs/3 lg:text-sm/5`}
+                                >
                                     {product.product_variations[0].description}
                                 </p>
                             </div>

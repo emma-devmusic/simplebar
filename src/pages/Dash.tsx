@@ -1,41 +1,33 @@
-import { Input, Spinner } from '../components';
+import { Spinner } from '../components';
 import { useForm } from '../hooks/useForm';
 import { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
-import CategorySelector from './modules/CategorySelector';
-import Product from './modules/Product';
-import SubCategorySelector from './modules/SubCategorySelector';
 import Cart from './modules/Cart';
 import { LayoutView } from '../components/layout';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { getCategories } from '../redux/slices/categorySlice';
 import {
     get_products,
+    setAllFilteredProducts,
     setFilteredProducts,
 } from '../redux/slices/productSlice';
 import { useParams, useSearchParams } from 'react-router-dom';
+import FilterSection from './modules/FilterSection';
+import ProductsSection from './modules/ProductsSection';
 
 export const Dash = () => {
+
     const { tenant_path, branch_path } = useParams();
     const { categories } = useAppSelector((state) => state.categories);
-    const { products, filteredProducts } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [value, handleInputChange] = useForm({ search: '' });
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     
     useEffect(() => {
         dispatch(get_products({path: `${tenant_path}/${branch_path}?limit=50`, setIsLoading,}));
         dispatch(getCategories({path: `${tenant_path}/${branch_path}`, setIsLoading,}));
         if (branch_path) localStorage.setItem('branch_path', branch_path);
     }, [tenant_path, branch_path]);
-    
-    useEffect(() => {
-        if (!searchParams.get('category') &&categories.length>0) {
-            searchParams.set('category', `${categories[0].id}`);
-            setSearchParams(searchParams);
-        }
-    }, [categories]);
     
     useEffect(() => {
         const selectedCategory = categories.find((item) => item.id === Number(searchParams.get('category')))
@@ -46,6 +38,11 @@ export const Dash = () => {
                     selectedCategory,
                 })
             );
+        } else {
+            dispatch(setAllFilteredProducts({
+                filterText: value.search,
+                categories
+            }))
         }
     }, [value.search, searchParams, categories]);
 
@@ -76,73 +73,8 @@ export const Dash = () => {
                 </div>
             ) : (
                 <div className="relative flex w-full flex-col shadow-sm lg:w-4/2">
-                    <div id='sticky-div' className="sticky top-0 w-full bg-gray-50 shadow-sm ">
-                        <CategorySelector
-                            searchParams={searchParams}
-                            setSearchParams={setSearchParams}
-                        />
-                        <SubCategorySelector
-                            searchParams={searchParams}
-                            setSearchParams={setSearchParams}
-                        />
-                        <div className="px-4 py-2">
-                            <div className="relative flex w-full items-center">
-                                <Input
-                                    label="Busca tus productos"
-                                    className="rounded-lg bg-gray-50"
-                                    isFloatingLabel
-                                    placeholder="Hamburguesa"
-                                    name="search"
-                                    value={value.search}
-                                    onChange={handleInputChange}
-                                    size="sm"
-                                    inputClass="rounded-lg"
-                                    labelClass="rounded-lg !bg-gray-50"
-                                    type="text"
-                                    iconPosition="left"
-                                />
-                                <Search className="absolute right-3.5 h-4 w-4 text-gray-400" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex h-full w-full flex-col gap-2 py-2">
-                        {products && filteredProducts.length > 0 ? (
-                            filteredProducts.map((item) => (
-                                <div
-                                    id={`${item.subCategory.id}`}
-                                    key={item.subCategory.id}
-                                    className="w-full"
-                                >
-                                    <p className="text-lg font-bold pl-2">
-                                        {item.subCategory.name}
-                                    </p>
-                                    <div className="flex w-full flex-wrap">
-                                        {item.products.map((prod, index) => (
-                                            <Product
-                                                product={prod}
-                                                key={index}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="flex h-full w-full flex-col items-center gap-2 px-4 py-4 pt-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width={'4rem'}
-                                    viewBox="0 0 23 24"
-                                    className="text-gray-300"
-                                >
-                                    <path
-                                        fill="currentColor"
-                                        d="M18.06 23h1.66c.84 0 1.53-.65 1.63-1.47L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26c1.44 1.42 2.43 2.89 2.43 5.29zM1 22v-1h15.03v1c0 .54-.45 1-1.03 1H2c-.55 0-1-.46-1-1m15.03-7C16.03 7 1 7 1 15zM1 17h15v2H1z"
-                                    ></path>
-                                </svg>
-                                <p className="">No se encontraron productos</p>
-                            </div>
-                        )}
-                    </div>
+                    <FilterSection inputValue={value.search} handleInputChange={handleInputChange}/>
+                    <ProductsSection />
                 </div>
             )}
             <div className="relative hidden w-full flex-col gap-2 px-4 lg:flex">
