@@ -67,6 +67,41 @@ const productsSlice = createSlice({
                 (subCategory) => subCategory.products.length > 0
             ) : [];
         },
+        setAllFilteredProducts(
+            state,
+            action: PayloadAction<{
+                filterText: string;
+                categories: ItemCategories[]
+            }>
+        ) {
+            const lowerSearchValue = action.payload.filterText.toLowerCase();
+            const { categories } = action.payload;
+        
+            const filteredProductsBySubCategory = categories.flatMap((category) =>
+                category.subcategories?.map((subCategory) => {
+                    const products = state.products.filter(
+                        (prod) =>
+                            prod.sub_category_id === subCategory.id &&
+                            (prod.name.toLowerCase().includes(lowerSearchValue) ||
+                                prod.product_variations.some(
+                                    (prod_var) =>
+                                        prod_var.description.toLowerCase().includes(lowerSearchValue) ||
+                                        prod_var.name.toLowerCase().includes(lowerSearchValue)
+                                )) &&
+                            prod.active
+                    );
+        
+                    return {
+                        subCategory,
+                        products,
+                    };
+                }) || []
+            );
+        
+            state.filteredProducts = filteredProductsBySubCategory.filter(
+                (subCategory) => subCategory.products.length > 0
+            );
+        },
         setVariationSelected(state, action: PayloadAction<number>) {
             state.variationSelected = action.payload;
         },
@@ -79,6 +114,7 @@ export const {
     setSelectedProduct,
     setFilteredProducts,
     setVariationSelected,
+    setAllFilteredProducts
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

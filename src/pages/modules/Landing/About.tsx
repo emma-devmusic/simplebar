@@ -29,7 +29,7 @@ export const About = () => {
             id="about"
             className="container flex justify-center w-full"
         >
-            <div className="bg-gray-50 border border-gray-300 rounded-lg py-12">
+            <div className="bg-gray-50 border border-gray-300 rounded-lg py-8">
                 <div className="px-6 flex flex-col-reverse md:flex-row gap-8 md:gap-12">
                     <img
                         src={"https://shadcn-landing-page.vercel.app/assets/pilot-CA74Nnvm.png"}
