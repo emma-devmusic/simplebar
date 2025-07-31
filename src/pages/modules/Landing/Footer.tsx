@@ -2,18 +2,16 @@ import logo from '../../../assets/img/logo-ding.png'
 
 export const Footer = () => {
   return (
-    <footer id="footer bg-red-500">
-      <hr className="w-100vw mx-auto" />
+    <footer id="footer" className='w-full bg-gray-100'>
 
-      <section className="container py-20 px-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
-        <div className="col-span-full xl:col-span-2">
+      <section className="container place-items-center mx-auto py-20 px-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
+        <div className="col-span-full xl:col-span-2 ">
           <a
             rel="noreferrer noopener"
             href="/"
-            className="font-bold text-xl flex"
+            className="font-bold text-xl flex h-32"
           >
-            <img src={logo} className='w-[90%]' />
-            ShadcnUI/React
+            <img src={logo} className='w-full object-contain' />
           </a>
         </div>
 
@@ -148,20 +146,6 @@ export const Footer = () => {
             </a>
           </div>
         </div>
-      </section>
-
-      <section className="container pb-14 text-center">
-        <h3>
-          &copy; 2024 Landing page made by{" "}
-          <a
-            rel="noreferrer noopener"
-            target="_blank"
-            href="https://www.linkedin.com/in/leopoldo-miranda/"
-            className="text-primary transition-all border-primary hover:border-b-2"
-          >
-            Leo Miranda
-          </a>
-        </h3>
       </section>
     </footer>
   );
