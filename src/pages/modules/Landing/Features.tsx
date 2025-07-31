@@ -1,43 +1,7 @@
+import { characteristics, CharacteristicsProps, featureList } from "../../../common/definitions/constants";
 import { Badge, Card } from "../../../components";
 
-interface FeatureProps {
-  title: string;
-  description: string;
-  image: string;
-}
 
-const features: FeatureProps[] = [
-  {
-    title: "Responsive Design",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    image: "https://shadcn-landing-page.vercel.app/assets/looking-ahead-DDDoMk_3.png",
-  },
-  {
-    title: "Intuitive user interface",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    image: "https://shadcn-landing-page.vercel.app/assets/reflecting-tA1rdXzJ.png",
-  },
-  {
-    title: "AI-Powered insights",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    image: "https://shadcn-landing-page.vercel.app/assets/growth-DZ7EdHJS.png",
-  },
-];
-
-const featureList: string[] = [
-  "Dark/Light theme",
-  "Reviews",
-  "Features",
-  "Pricing",
-  "Contact form",
-  "Our team",
-  "Responsive design",
-  "Newsletter",
-  "Minimalist",
-];
 
 export const Features = () => {
   return (
@@ -66,7 +30,7 @@ export const Features = () => {
       </div>
 
       <div className="flex flex-wrap justify-center">
-        {features.map(({ title, description, image }: FeatureProps) => (
+        {characteristics.map(({ title, description, image }: CharacteristicsProps) => (
           <div className="w-full md:w-1/2 lg:w-1/3 p-4" key={title}>
             <Card key={title} className="border border-gray-300">
               <Card.Header className="border-b-transparent pt-6 !text-black">
