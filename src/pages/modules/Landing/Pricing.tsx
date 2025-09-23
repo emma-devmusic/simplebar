@@ -1,138 +1,84 @@
-import { Check } from "lucide-react";
-import { Badge, Button, Card } from "../../../components";
-
-enum PopularPlanType {
-  NO = 0,
-  YES = 1,
-}
-
-interface PricingProps {
-  title: string;
-  popular: PopularPlanType;
-  price: number;
-  description: string;
-  buttonText: string;
-  benefitList: string[];
-}
-
-const pricingList: PricingProps[] = [
-  {
-    title: "Free",
-    popular: 0,
-    price: 0,
-    description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-    buttonText: "Get Started",
-    benefitList: [
-      "1 Team member",
-      "2 GB Storage",
-      "Upto 4 pages",
-      "Community support",
-      "lorem ipsum dolor",
-    ],
-  },
-  {
-    title: "Premium",
-    popular: 1,
-    price: 5,
-    description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-    buttonText: "Start Free Trial",
-    benefitList: [
-      "4 Team member",
-      "4 GB Storage",
-      "Upto 6 pages",
-      "Priority support",
-      "lorem ipsum dolor",
-    ],
-  },
-  {
-    title: "Enterprise",
-    popular: 0,
-    price: 40,
-    description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-    buttonText: "Contact US",
-    benefitList: [
-      "10 Team member",
-      "8 GB Storage",
-      "Upto 10 pages",
-      "Priority support",
-      "lorem ipsum dolor",
-    ],
-  },
-];
+import { Check, Circle } from 'lucide-react';
+import { Card } from '../../../components';
+import {
+    pricingList,
+    PricingProps,
+} from '../../../common/definitions/constants';
+import { motion } from 'framer-motion';
 
 export const Pricing = () => {
-  return (
-    <section
-      id="pricing"
-      className="container "
-    >
-      <h2 className="text-3xl md:text-4xl font-bold text-center">
-        Get
-        <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {" "}
-          Unlimited{" "}
-        </span>
-        Access
-      </h2>
-      <h3 className="text-xl text-center text-muted-foreground pt-4 pb-8">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
-        reiciendis.
-      </h3>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {pricingList.map((pricing: PricingProps) => (
-          <Card
-            key={pricing.title}
-            className={
-              pricing.popular === PopularPlanType.YES
-                ? "drop-shadow-xl shadow-black/10 dark:shadow-white/10 border !border-gray-200"
-                : " border !border-gray-200"
-            }
-          >
-            <Card.Header className="flex flex-col space-y-1.5 border-b-0">
-              <p className="text-2xl font-semibold leading-none tracking-tight flex item-center justify-between text-black">
-                {pricing.title}
-                {pricing.popular === PopularPlanType.YES ? (
-                  <Badge
-                    variant="solid"
-                    className="!text-sm text-secondary border-secondary bg-transparent"
-                  >
-                    Most popular
-                  </Badge>
-                ) : null}
-              </p>
-              <div>
-                <span className="text-3xl font-bold text-black">${pricing.price}</span>
-                <span className="text-gray-400 font-normal"> /month</span>
-              </div>
+    return (
+        <section id="pricing" className="container px-10 py-16">
+            <motion.h2
+                className="text-center text-3xl font-bold md:text-4xl"
+                initial={{ scale: 0.95 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+            >
+                Paquete de
+                <span className="bg-gradient-to-b bg-clip-text text-secondary">
+                    {' '}
+                    Promociones
+                </span>
+            </motion.h2>
+            <motion.p
+                className="text-muted-foreground pt-4 pb-8 text-left text-xl text-gray-600 sm:text-center"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+            >
+                Descubre nuestras opciones de precios flexibles diseñadas para
+                adaptarse a tus necesidades, desde planes básicos accesibles
+                hasta paquetes premium con servicios avanzados y personalizados.
+            </motion.p>
+            <div className="flex flex-wrap justify-between gap-8">
+                {pricingList.map((pricing: PricingProps) => (
+                    <Card
+                        key={pricing.title}
+                        className={
+                            'group w-full border !border-gray-300 transition-all duration-500 hover:-translate-y-4 hover:!border-primary hover:shadow-xl md:w-[45%] lg:w-[30%]'
+                        }
+                    >
+                        <Card.Header className="flex flex-col items-center gap-3 border-b-0 text-gray-600">
+                            <p className="item-center flex justify-center text-xl leading-none font-semibold tracking-tight group-hover:text-secondary">
+                                {pricing.title}
+                            </p>
+                            <span className="text-5xl font-bold group-hover:text-green-600">
+                                ${pricing.price}
+                            </span>
+                            <span className="font-normal">mensuales</span>
+                        </Card.Header>
 
-              <p className="text-sm text-gray-400">{pricing.description}</p>
-            </Card.Header>
+                        <p className="text-center text-sm">
+                            {typeof pricing.releasePrice === 'number'
+                                ? `Lanzamiento: $${pricing.releasePrice}`
+                                : pricing.releasePrice}
+                        </p>
+                        <hr className="m-auto mt-1.5 mb-4 w-4/5 text-gray-400" />
 
-            <Card.Body className="pt-0">
-              <Button label={pricing.buttonText} action={()=>{console.log("mock")}} className="w-full rounded-lg" />
-            </Card.Body>
-
-            <hr className="w-4/5 m-auto mb-4 text-gray-400 " />
-
-            <Card.Footer className="flex items-center pt-0 bg-transparent">
-              <div className="space-y-4">
-                {pricing.benefitList.map((benefit: string) => (
-                  <span
-                    key={benefit}
-                    className="flex"
-                  >
-                    <Check className="text-green-500" />{" "}
-                    <h3 className="ml-2">{benefit}</h3>
-                  </span>
+                        <Card.Footer className="flex items-center bg-transparent pt-0">
+                            <div className="space-y-3">
+                                {pricing.includedFeatures.map(
+                                    (benefit: string) => (
+                                        <span key={benefit} className="flex">
+                                            <Check className="my-auto w-6 min-w-6 text-primary" />{' '}
+                                            <h3 className="ml-2">{benefit}</h3>
+                                        </span>
+                                    )
+                                )}
+                                {pricing.notIncludedFeatures.map(
+                                    (benefit: string) => (
+                                        <span key={benefit} className="flex">
+                                            <Circle className="my-auto w-6 min-w-6 text-red-500" />{' '}
+                                            <h3 className="ml-2">{benefit}</h3>
+                                        </span>
+                                    )
+                                )}
+                            </div>
+                        </Card.Footer>
+                    </Card>
                 ))}
-              </div>
-            </Card.Footer>
-          </Card>
-        ))}
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 };

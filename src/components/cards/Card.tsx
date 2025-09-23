@@ -29,7 +29,7 @@ interface ActionsProps {
 // Componente Principal Card
 export const Card = ({ children, className = "" }: CardProps) => {
     return (
-        <div className={`rounded-lg shadow bg-white ${className}`}>
+        <div className={`rounded-lg overflow-hidden shadow bg-white ${className}`}>
             {children}
         </div>
     )

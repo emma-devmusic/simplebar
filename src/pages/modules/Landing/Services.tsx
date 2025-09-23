@@ -1,74 +1,46 @@
-import { ChartArea, DollarSign, Wallet } from "lucide-react";
-import { Card } from "../../../components";
-
-interface ServiceProps {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-}
-
-const serviceList: ServiceProps[] = [
-  {
-    title: "Code Collaboration",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <ChartArea className="size-12" />,
-  },
-  {
-    title: "Project Management",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <Wallet className="size-12" />,
-  },
-  {
-    title: "Task Automation",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <DollarSign className="size-12" />,
-  },
-];
+import { ImageAnimated } from "../../../components/imageAnimated/ImageAnimated";
+import { motion } from "framer-motion"
 
 export const Services = () => {
+
   return (
-    <section className="container">
-      <div className="grid lg:grid-cols-2 place-items-center">
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold">
-            <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-              Client-Centric{" "}
-            </span>
-            Services
-          </h2>
+    <section id="services" className="w-screen min-h-72 flex justify-center bg-[url('src/assets/img/bg-newsletter.png'),url('../img/bg-bottom.png'),linear-gradient(149deg,rgba(119,82,235,1)_0%,rgba(14,111,255,1)_150%)] bg-no-repeat bg-cover bg-[left_top,right_bottom]">
+      <div className="container p-10 text-white w-full flex items-center h-full flex-col lg:flex-row">
+        <div className="w-full lg:w-1/2 ">
+          <motion.h2 className="text-center md:text-left text-3xl md:text-4xl font-bold"
+            initial={{ scale: 0.95 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}>
+            Lleva el {" "}
+            <strong className="bg-gradient-to-br bg-clip-text">
+              Control
+            </strong><br />
+            donde quieras
+          </motion.h2>
 
-          <p className="text-muted-foreground text-xl mt-4 mb-8 text-gray-500">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-            dolor.
-          </p>
-
-          <div className="flex flex-col gap-8">
-            {serviceList.map(({ icon, title, description }: ServiceProps) => (
-              <Card className="border border-gray-300" key={title}>
-                <Card.Header className="border-b-0 flex flex-col space-y-1.5 p-6 md:flex-row justify-start items-start gap-4">
-                  <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                    {icon}
-                  </div>
-                  <div>
-                    <p className="text-2xl font-semibold leading-none tracking-tight text-black">{title}</p>
-                    <p className="text-sm text-muted-foreground mt-2 tracking-wider font-normal text-gray-400">
-                      {description}
-                    </p>
-                  </div>
-                </Card.Header>
-              </Card>
-            ))}
-          </div>
+          <motion.p className="text-muted-foreground text-lg mt-4 mb-8"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}>
+            Gestiona y conecta tu negocio gastronómico desde cualquier lugar. Accede a tus herramientas clave, mantén el contacto con tus clientes y administra todo de manera eficiente, sin importar dónde te encuentres.
+          </motion.p>
         </div>
+        <motion.div className="w-full flex justify-center items-center lg:w-[40%] lg:relative top-8 -mb-28 lg:-mb-0"
+          initial={{ scale: 0.8 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}>
+          <ImageAnimated
+            src={"src/assets/img/laptop-backoffice.png"}
+            alt="About services"
+            className="lg:absolute right-auto left-auto w-2/3"
+          />
+          <ImageAnimated
+            src={"src/assets/img/smarphone.png"}
+            alt="About services"
+            className="lg:absolute right-0 left-auto w-1/5 -translate-y-1/4 -translate-x-1/2"
+          />
+        </motion.div>
 
-        <img
-          src={"https://shadcn-landing-page.vercel.app/assets/cube-leg-DppWNJeX.png"}
-          className="w-[300px] md:w-[500px] lg:w-[600px] object-contain"
-          alt="About services"
-        />
       </div>
     </section>
   );

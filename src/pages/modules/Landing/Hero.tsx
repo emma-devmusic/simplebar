@@ -1,189 +1,121 @@
-import { Check, Github, Lightbulb, Linkedin } from "lucide-react";
-import { Avatar, Badge, Button, Card } from "../../../components";
-
-interface MediaLink {
-    href: string;
-    ariaLabel: string;
-    icon: React.ReactNode;
-}
-
-const mediaLinks: MediaLink[] = [
-    {
-        href: "https://github.com/leoMirandaa",
-        ariaLabel: "Github icon",
-        icon: <Github className="w-5 h-5" />,
-    },
-    {
-        href: "https://twitter.com/leo_mirand4",
-        ariaLabel: "X icon",
-        icon: (
-            <svg
-                role="img"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                className="fill-foreground w-5 h-5"
-            >
-                <title>X</title>
-                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-            </svg>
-        ),
-    },
-    {
-        href: "https://www.linkedin.com/in/leopoldo-miranda/",
-        ariaLabel: "Linkedin icon",
-        icon: <Linkedin size={20} />,
-    },
-];
+import bgHero from '../../../assets/img/bg-hero.jpg';
+import { ImageAnimated } from '../../../components/imageAnimated/ImageAnimated';
+import { motion } from 'framer-motion';
+import { ReactTyped } from 'react-typed';
 
 export const Hero = () => {
     return (
-            <section className="px-6 flex justify-center items-center pt-20 gap-10">
-                
-                <div className="text-center lg:text-start space-y-6 w-full lg:w-1/2">
-                    <main className="text-5xl md:text-6xl font-bold">
-                        <h1 className="inline">
-                            <span className="inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
-                                Shadcn
-                            </span>{" "}
-                            landing page
-                        </h1>{" "}
-                        for{" "}
+        <section
+            id="hero"
+            className={`flex w-screen justify-center overflow-hidden bg-cover bg-bottom bg-no-repeat px-10 pb-10`}
+            style={{ backgroundImage: `url(${bgHero})` }}
+        >
+            <div className="flex h-screen max-h-[50rem] max-w-[80rem] items-center justify-center gap-10 2xl:h-[75vh]">
+                <motion.div
+                    className="flex min-h-full max-w-xl flex-col items-center justify-center px-4 text-center"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    <h1
+                        className={
+                            '!font-base !mb-5 !text-3xl leading-normal font-bold text-white sm:!text-4xl md:text-3xl md:leading-normal lg:!text-[54px]'
+                        }
+                    >
+                        <span className="me-4 inline bg-gradient-to-r from-[#F596D3] to-[#D247BF] bg-clip-text text-transparent">
+                            Simplebar
+                        </span>
+                        te facilita el manejo de tu{' '}
                         <h2 className="inline">
-                            <span className="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
-                                React
-                            </span>{" "}
-                            developers
+                            <span
+                                className="mb-4 inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] bg-clip-text font-semibold text-transparent"
+                                aria-live="polite"
+                                role="status"
+                            >
+                                <ReactTyped
+                                    strings={[
+                                        'Negocio',
+                                        'Bar',
+                                        'Restaurante',
+                                        'Local',
+                                    ]}
+                                    backSpeed={35}
+                                    typeSpeed={50}
+                                    startDelay={500}
+                                    contentType="text"
+                                    shuffle={false}
+                                    backDelay={1000}
+                                    loop
+                                    smartBackspace
+                                    cursorChar={'|'}
+                                />
+                            </span>
                         </h2>
-                    </main>
-
-                    <p className="text-xl text-muted-foreground lg:w-10/12 mx-auto lg:mx-0">
-                        Build your React landing page effortlessly with the required sections
-                        to your project.
+                    </h1>
+                    <p className="mx-auto max-w-xl !text-lg text-slate-500 dark:text-white/60">
+                        Encargate sólo de llevar tu local gastronómico, nosotros
+                        nos encargamos del resto.
                     </p>
-
-                    <div className="space-y-4 justify-center flex-col lg:flex-row lg:justify-start items-center flex lg:space-y-0 lg:space-x-4">
-                        <Button label="Get Started" action={() => { console.log("mock") }} className="w-full lg:w-1/3" />
-
-                        <a
-                            rel="noreferrer noopener"
-                            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-                            target="_blank"
-                            className={`flex shrink-0 rounded border w-full justify-center lg:w-1/3 px-4.5 py-2.5 text-sm font-medium transition-all hover:cursor-pointer focus:ring-1 active:translate-y-[1px] disabled:bg-gray-400 disabled:border-gray-400 disabled:text-gray-200 disabled:active:translate-y-[0px] border-primary text-primary hover:text-white hover:bg-primary-hover`}
+                    <form
+                        role="form"
+                        aria-label="Formulario de suscripción"
+                        className="relative my-5 w-full max-w-sm rounded-full bg-[#0f172A]"
+                    >
+                        <label htmlFor="email" className="sr-only">
+                            Ingresá tu email
+                        </label>
+                        <input
+                            id="email"
+                            className="form-input h-12 w-full rounded-full border-none bg-slate-50 pr-12 pl-4 focus:ring-0 focus:outline-none"
+                            type="email"
+                            placeholder="Ingresá tu email"
+                            name="email"
+                            required
+                            aria-required="true"
+                        />
+                        <button
+                            type="submit"
+                            className="absolute top-1/2 right-0 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#ef4444] text-primary"
+                            aria-label="Enviar formulario"
+                            title="Enviar formulario"
                         >
-                            Github Repository
-                            <Github className="ml-2 w-5 h-5" />
-                        </a>
-                    </div>
-                </div>
-                <div className="w-full lg:w-1/2 hidden lg:block">
-                    <div className="hidden lg:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
-                            <Card className="absolute border border-gray-200  w-[340px] -top-[15px] drop-shadow-xl ">
-                                <Card.Header className="flex flex-row items-center gap-4 pb-2 border-b-0">
-                                    <Avatar img="https://github.com/shadcn.png" />
-
-                                    <div className="flex flex-col">
-                                        <p>John Doe React</p>
-                                        <p className="text-sm text-muted-foreground">@john_doe</p>
-                                    </div>
-                                </Card.Header>
-
-                                <Card.Body className="">This landing page is awesome!</Card.Body>
-                            </Card>
-
-                        
-                            <Card className="absolute border p-2 border-gray-200 top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
-                                <Card.Header className="border-b-0 pb-1 flex flex-col gap-1">
-                                    <p className="flex item-center text-black justify-between text-2xl font-semibold leading-none tracking-tight">
-                                        Free
-                                        <Badge
-                                            variant="outlined"
-                                            className="text-primary pt-1"
-                                        >
-                                            Most popular
-                                        </Badge>
-                                    </p>
-                                    <div>
-                                        <span className="text-3xl text-black font-bold">$0</span>
-                                        <span className="text-sm text-gray-500 text-muted-foreground spacing-"> /month</span>
-                                    </div>
-
-                                    <p className="text-sm text-gray-500 font-normal">
-                                        Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
-                                    </p>
-                                </Card.Header>
-
-                                <Card.Body className="border-b border-gray-300">
-                                    <Button label="Start Free Trial" action={() => { console.log("mock") }} className="w-full" />
-                                </Card.Body>
-
-                                <Card.Footer className="flex bg-transparent">
-                                    <div className="space-y-4">
-                                        {["4 Team member", "4 GB Storage", "Upto 6 pages"].map(
-                                            (benefit: string) => (
-                                                <span
-                                                    key={benefit}
-                                                    className="flex"
-                                                >
-                                                    <Check className="text-green-500" />{" "}
-                                                    <h3 className="ml-2">{benefit}</h3>
-                                                </span>
-                                            )
-                                        )}
-                                    </div>
-                                </Card.Footer>
-                            </Card>
-
-                            <Card className="z-20 absolute w-[350px]  right-0 bottom-[50px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
-                                <Card.Header className="space-y-1 flex lg:flex-row justify-start items-start gap-4 p-6">
-                                    <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                                        <Lightbulb />
-                                    </div>
-                                    <div>
-                                        <p className="text-2xl !font-medium leading-none tracking-tight text-black">Light & dark mode</p>
-                                        <p className="text-base font-normal text-gray-400 mt-2 text-muted-foreground pe-3">
-                                            Lorem ipsum dolor sit amet consect adipisicing elit. Consectetur
-                                            natusm.
-                                        </p>
-                                    </div>
-                                </Card.Header>
-                            </Card>
-
-                            <Card className="absolute border border-gray-200 right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl">
-                                <Card.Header className="border-b-0 mt-8 flex flex-col justify-center items-center pb-2 gap-1">
-                                    <img
-                                        src="https://i.pravatar.cc/150?img=58"
-                                        alt="user avatar"
-                                        className="absolute -top-12 rounded-full w-24 h-24 "
-                                    />
-                                    <p className="text-center text-2xl  pt-1.5">Leo Miranda</p>
-                                    <p className="text-sm text-muted-foreground font-normal text-primary">
-                                        Frontend Developer
-                                    </p>
-                                </Card.Header>
-
-                                <Card.Body className="p-6 pt-0 text-center pb-2">
-                                    <p>
-                                        I really enjoy transforming ideas into functional software that
-                                        exceeds expectations
-                                    </p>
-                                </Card.Body>
-
-                                <Card.Footer className="flex items-center pb-6 pt-0 bg-transparent">
-                                    {mediaLinks.map(({ href, ariaLabel, icon }) => (
-                                        <a
-                                            key={href}
-                                            rel="noreferrer noopener"
-                                            href={href}
-                                            target="_blank"
-                                            className="hover:bg-gray-100 hover:text-accent-foreground rounded-md p-2.5"
-                                        >
-                                            <span className="sr-only">{ariaLabel}</span>
-                                            {icon}
-                                        </a>))}
-                                </Card.Footer>
-                            </Card>
-                    </div>
-                </div>
-            </section>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                                role="img"
+                                className="iconify iconify--akar-icons fs-3 -translate-x-[1px] text-white"
+                                focusable="false"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="m9.474 16l9.181 3.284a1.1 1.1 0 0 0 1.462-.887L21.99 4.239c.114-.862-.779-1.505-1.567-1.13L2.624 11.605c-.88.42-.814 1.69.106 2.017l2.44.868l1.33.467M13 17.26l-1.99 3.326c-.65.808-1.959.351-1.959-.683V17.24a2 2 0 0 1 .53-1.356l3.871-4.2"
+                                ></path>
+                            </svg>
+                        </button>
+                    </form>
+                    <p className="text-base text-slate-300">
+                        ¿Necesitás ayuda? Contactános
+                    </p>
+                </motion.div>
+                <motion.div
+                    className="hidden w-full max-w-[80rem] lg:block lg:max-w-md"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5, ease: 'easeOut' }}
+                >
+                    <ImageAnimated
+                        src="src/assets/img/hero-charts.png"
+                        alt="Hero charts"
+                    />
+                </motion.div>
+            </div>
+        </section>
     );
 };
