@@ -1,8 +1,8 @@
 export const Testimonials = () => {
   return (
-    <section id="testimonios" className="py-20 border-t border-neutral-900 bg-neutral-950 text-neutral-100">
+    <section id="testimonios" className="py-20 border-t bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-semibold text-center">Lo que dicen <span className="text-[#C7A24D]">nuestros clientes</span></h2>
+        <h2 className="text-3xl font-semibold text-center">Lo que dicen <span className="text-primary">nuestros clientes</span></h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Cards */}
           <figure className="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur">

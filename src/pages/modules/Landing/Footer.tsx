@@ -4,7 +4,7 @@ export const Footer = () => {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span className="inline-block h-7 w-7 rounded bg-[#C7A24D]"></span>
+          <span className="inline-block h-7 w-7 rounded bg-primary"></span>
           <span className="text-sm text-neutral-400">© {new Date().getFullYear()} Simplebar</span>
         </div>
         <nav className="flex gap-4 text-sm text-neutral-400">
