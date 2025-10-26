@@ -1,5 +1,4 @@
-import { Avatar } from '../../shared/Avatar';
-import logo from '../../../assets/img/isologo-ding-degraded.png';
+import logo from '../../../assets/img/simplebar.png';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { uiModal } from '../../../redux/slices/uiSlice';
 
@@ -15,13 +14,18 @@ export const Navbar = () => {
             <div className="mx-auto flex h-12 items-center px-4 sm:px-6 lg:h-16 lg:px-8">
                 <div className="flex w-full items-center justify-between gap-4">
                     <div>
-                        <Avatar
+                        {/* <Avatar
                             img={logo}
-                            title="Ding"
-                            subTitle="food"
-                            className="text-gray-700"
-                            titleClass="relative text-xl lg:text-2xl top-1"
-                            subTitleClass="relative -top-1 left-[3px]"
+                            title='Ding'
+                            subTitle='food'
+                            className='text-gray-700'
+                            titleClass='relative text-xl lg:text-2xl top-1'
+                            subTitleClass='relative -top-1 left-[3px]'
+                        /> */}
+                        <img
+                            src={logo}
+                            alt='Simplebar Logo'
+                            className='h-8 w-8 lg:h-10 lg:w-10'
                         />
                     </div>
 

@@ -1,48 +1,23 @@
-import { TestimonialProps, testimonials } from "../../../common/definitions/constants";
-import { Avatar, Card } from "../../../components";
-
-
 export const Testimonials = () => {
   return (
-    <section
-      id="testimonials"
-      className="container"
-    >
-      <h2 className="text-3xl md:text-4xl font-bold">
-        Discover Why
-        <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {" "}
-          People Love{" "}
-        </span>
-        This Landing Page
-      </h2>
-
-      <p className="text-xl text-gray-500 pt-4 pb-8">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non unde error
-        facere hic reiciendis illo
-      </p>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
-        {testimonials.map(
-          ({ image, name, userName, comment }: TestimonialProps) => (
-            <Card
-              key={userName}
-              className="rounded-lg border bg-card border-gray-200 text-card-foreground shadow-sm max-w-md md:break-inside-avoid overflow-hidden"
-            >
-              <Card.Header className="flex space-y-1.5 items-center gap-4 pb-2 border-b-0">
-                <Avatar className="relative flex shrink-0 overflow-hidden rounded-full" img={image}>
-                </Avatar>
-
-                <div className="flex flex-col">
-                  <p className="text-lg font-semibold leading-none tracking-tight text-black">{name}</p>
-                  <p className="text-sm text-gray-500 pt-1">{userName}</p>
-                </div>
-              </Card.Header>
-
-              <Card.Body className="pt-0 text-gray-700">{comment}</Card.Body>
-            </Card>
-          )
-        )}
+    <section id="testimonios" className="py-20 border-t border-neutral-900 bg-neutral-950 text-neutral-100">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-semibold text-center">Lo que dicen <span className="text-[#C7A24D]">nuestros clientes</span></h2>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Cards */}
+          <figure className="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur">
+            <blockquote className="text-neutral-200">"Reducimos demoras en salón y delivery en un 22%."</blockquote>
+            <figcaption className="mt-4 text-sm text-neutral-400">— Bar La Esquina</figcaption>
+          </figure>
+          <figure className="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur">
+            <blockquote className="text-neutral-200">"El menú QR con stock en tiempo real nos salvó los fines de semana."</blockquote>
+            <figcaption className="mt-4 text-sm text-neutral-400">— Pizzería Centro</figcaption>
+          </figure>
+          <figure className="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur">
+            <blockquote className="text-neutral-200">"Reportes claros para decidir compras y turnos."</blockquote>
+            <figcaption className="mt-4 text-sm text-neutral-400">— Café Del Sol</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   );

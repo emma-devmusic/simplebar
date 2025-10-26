@@ -1,83 +1,51 @@
-import { Check, Circle } from 'lucide-react';
-import { Card } from '../../../components';
-import {
-    pricingList,
-    PricingProps,
-} from '../../../common/definitions/constants';
-import { motion } from 'framer-motion';
-
 export const Pricing = () => {
     return (
-        <section id="pricing" className="container px-10 py-16">
-            <motion.h2
-                className="text-center text-3xl font-bold md:text-4xl"
-                initial={{ scale: 0.95 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-            >
-                Paquete de
-                <span className="bg-gradient-to-b bg-clip-text text-secondary">
-                    {' '}
-                    Promociones
-                </span>
-            </motion.h2>
-            <motion.p
-                className="text-muted-foreground pt-4 pb-8 text-left text-xl text-gray-600 sm:text-center"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-            >
-                Descubre nuestras opciones de precios flexibles diseñadas para
-                adaptarse a tus necesidades, desde planes básicos accesibles
-                hasta paquetes premium con servicios avanzados y personalizados.
-            </motion.p>
-            <div className="flex flex-wrap justify-between gap-8">
-                {pricingList.map((pricing: PricingProps) => (
-                    <Card
-                        key={pricing.title}
-                        className={
-                            'group w-full border !border-gray-300 transition-all duration-500 hover:-translate-y-4 hover:!border-primary hover:shadow-xl md:w-[45%] lg:w-[30%]'
-                        }
-                    >
-                        <Card.Header className="flex flex-col items-center gap-3 border-b-0 text-gray-600">
-                            <p className="item-center flex justify-center text-xl leading-none font-semibold tracking-tight group-hover:text-secondary">
-                                {pricing.title}
-                            </p>
-                            <span className="text-5xl font-bold group-hover:text-green-600">
-                                ${pricing.price}
-                            </span>
-                            <span className="font-normal">mensuales</span>
-                        </Card.Header>
-
-                        <p className="text-center text-sm">
-                            {typeof pricing.releasePrice === 'number'
-                                ? `Lanzamiento: $${pricing.releasePrice}`
-                                : pricing.releasePrice}
-                        </p>
-                        <hr className="m-auto mt-1.5 mb-4 w-4/5 text-gray-400" />
-
-                        <Card.Footer className="flex items-center bg-transparent pt-0">
-                            <div className="space-y-3">
-                                {pricing.includedFeatures.map(
-                                    (benefit: string) => (
-                                        <span key={benefit} className="flex">
-                                            <Check className="my-auto w-6 min-w-6 text-primary" />{' '}
-                                            <h3 className="ml-2">{benefit}</h3>
-                                        </span>
-                                    )
-                                )}
-                                {pricing.notIncludedFeatures.map(
-                                    (benefit: string) => (
-                                        <span key={benefit} className="flex">
-                                            <Circle className="my-auto w-6 min-w-6 text-red-500" />{' '}
-                                            <h3 className="ml-2">{benefit}</h3>
-                                        </span>
-                                    )
-                                )}
-                            </div>
-                        </Card.Footer>
-                    </Card>
-                ))}
+        <section id="precios" className="py-20 border-t border-neutral-900 bg-neutral-950 text-neutral-100">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="text-center max-w-2xl mx-auto">
+                    <h2 className="text-3xl font-semibold">Planes y <span className="text-[#C7A24D]">precios</span></h2>
+                    <p className="mt-3 text-neutral-300">Elegí el plan que mejor se adapte a tu operación. Sin costos ocultos.</p>
+                </div>
+                <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {/* Básico */}
+                    <div className="rounded-2xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur flex flex-col">
+                        <h3 className="font-semibold">Básico</h3>
+                        <p className="mt-2 text-sm text-neutral-300">Ideal para cafeterías y food trucks.</p>
+                        <div className="mt-6 text-3xl font-bold">$14.900 <span className="text-base font-medium text-neutral-400">/mes</span></div>
+                        <ul className="mt-6 space-y-2 text-sm text-neutral-300">
+                            <li>POS + Menú QR</li>
+                            <li>1 sucursal</li>
+                            <li>Soporte por chat</li>
+                        </ul>
+                        <a href="#cta" className="mt-6 inline-block text-center px-4 py-2 rounded-md border border-neutral-700 hover:border-neutral-500">Elegir plan</a>
+                    </div>
+                    {/* Pro */}
+                    <div className="rounded-2xl border border-[#C7A24D] p-6 bg-[#C7A24D]/10 flex flex-col">
+                        <div className="self-start text-xs font-semibold bg-[#C7A24D] text-neutral-900 rounded px-2 py-0.5">Recomendado</div>
+                        <h3 className="mt-2 font-semibold">Pro</h3>
+                        <p className="mt-2 text-sm text-neutral-200">Para restaurantes con salón y delivery.</p>
+                        <div className="mt-6 text-3xl font-bold">$29.900 <span className="text-base font-medium text-neutral-300">/mes</span></div>
+                        <ul className="mt-6 space-y-2 text-sm text-neutral-200">
+                            <li>Todo del Básico</li>
+                            <li>Reservas & Gestión de sala</li>
+                            <li>Reportes en tiempo real</li>
+                            <li>Integración con delivery</li>
+                        </ul>
+                        <a href="#cta" className="mt-6 inline-block text-center px-4 py-2 rounded-md bg-[#C7A24D] text-neutral-900 font-medium hover:brightness-110">Elegir plan</a>
+                    </div>
+                    {/* Multi */}
+                    <div className="rounded-2xl border border-neutral-800 p-6 bg-neutral-900/60 backdrop-blur flex flex-col">
+                        <h3 className="font-semibold">Multi-sucursal</h3>
+                        <p className="mt-2 text-sm text-neutral-300">Para cadenas y franquicias.</p>
+                        <div className="mt-6 text-3xl font-bold">A medida</div>
+                        <ul className="mt-6 space-y-2 text-sm text-neutral-300">
+                            <li>Usuarios y roles avanzados</li>
+                            <li>Reportes consolidados</li>
+                            <li>SLAs y soporte dedicado</li>
+                        </ul>
+                        <a href="#demo" className="mt-6 inline-block text-center px-4 py-2 rounded-md border border-neutral-700 hover:border-neutral-500">Solicitar cotización</a>
+                    </div>
+                </div>
             </div>
         </section>
     );

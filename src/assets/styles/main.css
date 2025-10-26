@@ -132,4 +132,7 @@ html {
 
 .scroll-target {
     scroll-margin-top: calc(var(--sticky-height, 0px) + 8px);
+    .container {
+        max-width: 1260px !important;
+    }
 }

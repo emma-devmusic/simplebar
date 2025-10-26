@@ -1,120 +1,83 @@
-import bgHero from '../../../assets/img/bg-hero.jpg';
-import { ImageAnimated } from '../../../components/imageAnimated/ImageAnimated';
 import { motion } from 'framer-motion';
-import { ReactTyped } from 'react-typed';
 
 export const Hero = () => {
     return (
-        <section
-            id="hero"
-            className={`flex w-screen justify-center overflow-hidden bg-cover bg-bottom bg-no-repeat px-10 pb-10`}
-            style={{ backgroundImage: `url(${bgHero})` }}
-        >
-            <div className="flex h-screen max-h-[50rem] max-w-[80rem] items-center justify-center gap-10 2xl:h-[75vh]">
-                <motion.div
-                    className="flex min-h-full max-w-xl flex-col items-center justify-center px-4 text-center"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                >
-                    <h1
-                        className={
-                            '!font-base !mb-5 !text-3xl leading-normal font-bold text-white sm:!text-4xl md:text-3xl md:leading-normal lg:!text-[54px]'
-                        }
+        <section id="hero" className="relative overflow-hidden bg-neutral-950 text-neutral-100">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(199,162,77,0.15),transparent_60%)]"></div>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-28">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: 'easeOut' }}
                     >
-                        <span className="me-4 inline bg-gradient-to-r from-[#F596D3] to-[#D247BF] bg-clip-text text-transparent">
-                            Simplebar
+                        <span className="inline-flex items-center gap-2 rounded-full border border-[#C7A24D]/30 bg-[#C7A24D]/10 px-3 py-1 text-xs font-medium text-[#C7A24D] mb-4">
+                            Nuevo · Gestión integral
                         </span>
-                        te facilita el manejo de tu{' '}
-                        <h2 className="inline">
-                            <span
-                                className="mb-4 inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] bg-clip-text font-semibold text-transparent"
-                                aria-live="polite"
-                                role="status"
-                            >
-                                <ReactTyped
-                                    strings={[
-                                        'Negocio',
-                                        'Bar',
-                                        'Restaurante',
-                                        'Local',
-                                    ]}
-                                    backSpeed={35}
-                                    typeSpeed={50}
-                                    startDelay={500}
-                                    contentType="text"
-                                    shuffle={false}
-                                    backDelay={1000}
-                                    loop
-                                    smartBackspace
-                                    cursorChar={'|'}
-                                />
-                            </span>
-                        </h2>
-                    </h1>
-                    <p className="mx-auto max-w-xl !text-lg text-slate-500 dark:text-white/60">
-                        Encargate sólo de llevar tu local gastronómico, nosotros
-                        nos encargamos del resto.
-                    </p>
-                    <form
-                        role="form"
-                        aria-label="Formulario de suscripción"
-                        className="relative my-5 w-full max-w-sm rounded-full bg-[#0f172A]"
+                        <h1 className="text-4xl sm:text-5xl font-semibold leading-tight">
+                            Gestión <span className="text-[#C7A24D]">simple</span> para bares y restaurantes
+                        </h1>
+                        <p className="mt-4 text-neutral-300 max-w-xl">
+                            Unificá <strong>POS, Menú QR, Reservas, Delivery y Reportes</strong> en un solo sistema. Interfaz intuitiva, soporte en español y onboarding en minutos.
+                        </p>
+                        <div className="mt-8 flex flex-wrap gap-3">
+                            <a href="#cta" className="px-5 py-3 rounded-md bg-[#C7A24D] text-neutral-900 font-medium hover:brightness-110">
+                                Probar gratis 14 días
+                            </a>
+                            <a href="#demo" className="px-5 py-3 rounded-md border border-neutral-700 hover:border-neutral-500">
+                                Solicitar demo
+                            </a>
+                        </div>
+                        <p className="mt-3 text-xs text-neutral-400">Sin tarjeta · Cancelás cuando quieras</p>
+                    </motion.div>
+
+                    {/* Mockup / Placeholder */}
+                    <motion.div 
+                        className="relative"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.5, ease: 'easeOut' }}
                     >
-                        <label htmlFor="email" className="sr-only">
-                            Ingresá tu email
-                        </label>
-                        <input
-                            id="email"
-                            className="form-input h-12 w-full rounded-full border-none bg-slate-50 pr-12 pl-4 focus:ring-0 focus:outline-none"
-                            type="email"
-                            placeholder="Ingresá tu email"
-                            name="email"
-                            required
-                            aria-required="true"
-                        />
-                        <button
-                            type="submit"
-                            className="absolute top-1/2 right-0 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#ef4444] text-primary"
-                            aria-label="Enviar formulario"
-                            title="Enviar formulario"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                                role="img"
-                                className="iconify iconify--akar-icons fs-3 -translate-x-[1px] text-white"
-                                focusable="false"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="m9.474 16l9.181 3.284a1.1 1.1 0 0 0 1.462-.887L21.99 4.239c.114-.862-.779-1.505-1.567-1.13L2.624 11.605c-.88.42-.814 1.69.106 2.017l2.44.868l1.33.467M13 17.26l-1.99 3.326c-.65.808-1.959.351-1.959-.683V17.24a2 2 0 0 1 .53-1.356l3.871-4.2"
-                                ></path>
-                            </svg>
-                        </button>
-                    </form>
-                    <p className="text-base text-slate-300">
-                        ¿Necesitás ayuda? Contactános
-                    </p>
-                </motion.div>
-                <motion.div
-                    className="hidden w-full max-w-[80rem] lg:block lg:max-w-md"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, ease: 'easeOut' }}
-                >
-                    <ImageAnimated
-                        src="src/assets/img/hero-charts.png"
-                        alt="Hero charts"
-                    />
-                </motion.div>
+                        <div className="rounded-2xl border border-neutral-800 p-4 shadow-xl bg-neutral-900/60 backdrop-blur">
+                            <div className="aspect-[16/10] rounded-lg border border-neutral-800 bg-neutral-900 p-4">
+                                {/* Dashboard placeholder */}
+                                <div className="grid grid-cols-12 gap-3 h-full">
+                                    <div className="col-span-12 md:col-span-8 space-y-3">
+                                        <div className="h-36 rounded-md bg-neutral-800/80"></div>
+                                        <div className="grid grid-cols-3 gap-3">
+                                            <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                            <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                            <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-12 md:col-span-4 space-y-3">
+                                        <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                        <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                        <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* phone */}
+                            <div className="absolute -bottom-6 -right-4 w-40 rotate-6">
+                                <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-3 shadow-2xl">
+                                    <div className="aspect-[9/19] rounded-xl bg-neutral-800/70 p-2">
+                                        <div className="h-8 w-24 mx-auto mt-2 rounded bg-[#C7A24D]/40"></div>
+                                        <div className="mt-3 space-y-2 px-2">
+                                            <div className="h-4 rounded bg-neutral-700/80"></div>
+                                            <div className="h-4 rounded bg-neutral-700/60 w-10/12"></div>
+                                            <div className="h-24 rounded bg-neutral-700/40"></div>
+                                            <div className="h-4 rounded bg-neutral-700/60 w-8/12"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* badge */}
+                            <div className="absolute -top-3 -left-3 rounded-full bg-[#C7A24D] text-neutral-900 text-xs font-semibold px-3 py-1 shadow">
+                                Demo UI
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -1,30 +1,6 @@
-import logo from "../../../assets/img/isologo-ding-degraded.png";
-import { /*Github, */ Menu } from 'lucide-react';
-import { Sidebar } from "../../../components/layout";
-import { SidebarLinks, sidebarLinks } from "../../../common/definitions/constants";
-import OffsetCanvas from "../../../components/offser-canvas/OffsetCanvas";
-import { RootState, useAppDispatch, useAppSelector } from "../../../redux/store";
-import { toggleSidebar } from "../../../redux/slices/uiSlice";
-import { useEffect, useState } from "react";
+import { Menu } from 'lucide-react';
 
 const Navbar = () => {
-    const { sidebarOpen } = useAppSelector((state: RootState) => state.ui);
-    const dispatch = useAppDispatch();
-
-    const [isTop, setIsTop] = useState(true);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsTop(window.scrollY === 0);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
     const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
         e.preventDefault();
         const targetElement = document.querySelector(href);
@@ -42,46 +18,26 @@ const Navbar = () => {
     };
 
     return (
-        <header
-            className={`fixed transition-colors duration-500 top-0 z-40 w-full ${
-                isTop
-                    ? "bg-transparent border-transparent text-white"
-                    : "bg-white shadow-md py-2 border-gray-200 border-b-[0.5px]"
-            }`}
-        >
-            {sidebarOpen && (
-                <OffsetCanvas>
-                    <Sidebar />
-                </OffsetCanvas>
-            )}
-            <nav className="relative z-10 flex max-w-max flex-1 items-center justify-center mx-auto">
-                <div className="group flex-1 list-none items-center space-x-1 container h-14 px-4 w-screen flex justify-between">
-                    <a rel="noreferrer noopener" href="/" className="font-bold flex items-center">
-                        <img src={logo} alt="Logo Ding" className="h-8" />
-                        <p className="ml-2 font-bold text-xl flex">Ding</p>
-                    </a>
-
-                    <span className="flex md:hidden">
-                        <Menu className="cursor-pointer" onClick={() => dispatch(toggleSidebar())} />
-                    </span>
-
-                    {/* desktop */}
-                    <ul className="hidden md:flex gap-3">
-                        {sidebarLinks.map((route: SidebarLinks) => (
-                            <li key={route.href}>
-                                <a
-                                    rel="noreferrer noopener"
-                                    href={route.href}
-                                    onClick={(e) => handleSmoothScroll(e, route.href)}
-                                    className={`text-base font-semibold rounded-lg p-2 hover:bg-[#e9e9f5] hover:text-[#18181a]`}
-                                >
-                                    {route.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+        <header className="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+                <a href="#" className="flex items-center gap-2 font-semibold text-neutral-100">
+                    <span className="inline-block h-8 w-8 rounded-lg bg-[#C7A24D]"></span>
+                    <span className="text-lg">Simplebar</span>
+                </a>
+                <nav className="hidden md:flex items-center gap-6 text-sm">
+                    <a href="#features" className="text-neutral-300 hover:text-white" onClick={(e) => handleSmoothScroll(e, "#features")}>Funciones</a>
+                    <a href="#precios" className="text-neutral-300 hover:text-white" onClick={(e) => handleSmoothScroll(e, "#precios")}>Precios</a>
+                    <a href="#testimonios" className="text-neutral-300 hover:text-white" onClick={(e) => handleSmoothScroll(e, "#testimonios")}>Clientes</a>
+                    <a href="#contacto" className="text-neutral-300 hover:text-white" onClick={(e) => handleSmoothScroll(e, "#contacto")}>Contacto</a>
+                </nav>
+                <div className="hidden md:flex items-center gap-3">
+                    <a href="#" className="px-4 py-2 rounded-md border border-neutral-700 hover:border-neutral-500 text-sm text-neutral-300">Ingresar</a>
+                    <a href="#cta" className="px-4 py-2 rounded-md bg-[#C7A24D] text-neutral-900 font-medium text-sm hover:brightness-110" onClick={(e) => handleSmoothScroll(e, "#cta")}>Probar gratis</a>
                 </div>
-            </nav>
+                <button className="md:hidden p-2 rounded border border-neutral-700 text-neutral-300" aria-label="Abrir menú">
+                    <Menu className="h-5 w-5" />
+                </button>
+            </div>
         </header>
     );
 };

@@ -1,33 +1,23 @@
 import Navbar from './modules/Landing/Navbar';
 import { Hero } from './modules/Landing/Hero';
-// import { Sponsors } from './modules/Landing/Sponsors';
-import { About } from './modules/Landing/About';
-import { HowItWorks } from './modules/Landing/HowItWorks';
-// import { Features } from './modules/Landing/Features';
-import { Services } from './modules/Landing/Services';
-// import { Cta } from './modules/Landing/CTA';
-// import { Testimonials } from './modules/Landing/Testimonials';
-// import { Team } from './modules/Landing/Team';
+import { Features } from './modules/Landing/Features';
+import { Dashboard } from './modules/Landing/Dashboard';
 import { Pricing } from './modules/Landing/Pricing';
-// import { FAQ } from './modules/Landing/FAQ';
+import { Testimonials } from './modules/Landing/Testimonials';
+import { ContactCTA } from './modules/Landing/ContactCTA';
 import { Footer } from './modules/Landing/Footer';
 
 export const WelcomePage = () => {
     return (
-        <main  className='mt-0'>
+        <main className='mt-0 bg-neutral-950'>
             <Navbar />
-            <div className='w-full overflow-x-hidden flex flex-col items-center'>
+            <div className='w-full overflow-x-hidden'>
                 <Hero />
-                <HowItWorks />
-                <Services />
+                <Features />
+                <Dashboard />
                 <Pricing />
-                <About />
-                {/* <FAQ /> */}
-                {/* <Sponsors /> */}
-                {/* <Features /> */}
-                {/* <Cta />
                 <Testimonials />
-                <Team /> */}
+                <ContactCTA />
                 <Footer />
             </div>
         </main>
