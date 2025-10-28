@@ -1,6 +1,6 @@
 export const Dashboard = () => {
   return (
-    <section className="py-20 border-t bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+    <section className="py-20 border-t border-neutral-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h2 className="text-3xl font-semibold">Un <span className="text-primary">dashboard</span> que muestra lo importante</h2>
@@ -21,19 +21,19 @@ export const Dashboard = () => {
             <a href="#cta" className="px-5 py-3 rounded-md bg-primary text-neutral-900 font-medium hover:brightness-110">Crear cuenta</a>
           </div>
         </div>
-        <div className="rounded-2xl  border-neutral-300 dark:border-neutral-800 p-6 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
-          <div className="aspect-[16/10] rounded-lg border border-neutral-800 bg-neutral-900 p-4 grid grid-cols-12 gap-3">
+        <div className="rounded-2xl border border-neutral-300 dark:border-neutral-800 p-6 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
+          <div className="aspect-[16/10] rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 p-4 grid grid-cols-12 gap-3">
             <div className="col-span-12 md:col-span-7 space-y-3">
-              <div className="h-40 rounded-md bg-neutral-800/80"></div>
+              <div className="h-40 rounded-md bg-neutral-300/80 dark:bg-neutral-800/80"></div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="h-24 rounded-md bg-neutral-800/60"></div>
-                <div className="h-24 rounded-md bg-neutral-800/60"></div>
+                <div className="h-24 rounded-md bg-neutral-300/60 dark:bg-neutral-800/60"></div>
+                <div className="h-24 rounded-md bg-neutral-300/60 dark:bg-neutral-800/60"></div>
               </div>
             </div>
             <div className="col-span-12 md:col-span-5 space-y-3">
-              <div className="h-24 rounded-md bg-neutral-800/60"></div>
-              <div className="h-24 rounded-md bg-neutral-800/60"></div>
-              <div className="h-24 rounded-md bg-neutral-800/60"></div>
+              <div className="h-24 rounded-md bg-neutral-300/60 dark:bg-neutral-800/60"></div>
+              <div className="h-24 rounded-md bg-neutral-300/60 dark:bg-neutral-800/60"></div>
+              <div className="h-24 rounded-md bg-neutral-300/60 dark:bg-neutral-800/60"></div>
             </div>
           </div>
         </div>

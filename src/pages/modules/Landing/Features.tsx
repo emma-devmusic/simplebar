@@ -4,7 +4,7 @@ export const Features = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl font-semibold">Todo en <span className="text-primary">un solo</span> lugar</h2>
-          <p className="mt-3 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300">Centralizá operaciones y reducí errores y tiempos muertos.</p>
+          <p className="mt-3 text-neutral-600 dark:text-neutral-300">Centralizá operaciones y reducí errores y tiempos muertos.</p>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -16,7 +16,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">POS ultra ágil</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Búsqueda por texto/QR, modificadores, dividir cuenta, propinas y tickets fiscales.</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Búsqueda por texto/QR, modificadores, dividir cuenta, propinas y tickets fiscales.</p>
           </article>
 
           {/* Menú QR */}
@@ -28,7 +28,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">Menú digital con QR</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Fotos y alérgenos, stock en tiempo real, multi-idioma y "añadir al pedido".</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Fotos y alérgenos, stock en tiempo real, multi-idioma y "añadir al pedido".</p>
           </article>
 
           {/* Reservas */}
@@ -39,7 +39,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">Reservas y sala</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Plano de salón, turnos, lista de espera y confirmaciones por WhatsApp.</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Plano de salón, turnos, lista de espera y confirmaciones por WhatsApp.</p>
           </article>
 
           {/* Delivery */}
@@ -50,7 +50,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">Delivery integrado</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Integraciones con apps, repartidores propios, seguimiento y promos.</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Integraciones con apps, repartidores propios, seguimiento y promos.</p>
           </article>
 
           {/* Reportes */}
@@ -61,7 +61,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">Reportes en tiempo real</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Ventas, ticket promedio, rotación de mesas y alertas de stock.</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Ventas, ticket promedio, rotación de mesas y alertas de stock.</p>
           </article>
 
           {/* Soporte */}
@@ -72,7 +72,7 @@ export const Features = () => {
               </svg>
             </div>
             <h3 className="font-semibold">Soporte cercano</h3>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-600 dark:text-neutral-300 text-sm">Equipo en español, onboarding guiado y recursos de capacitación.</p>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300 text-sm">Equipo en español, onboarding guiado y recursos de capacitación.</p>
           </article>
         </div>
       </div>
