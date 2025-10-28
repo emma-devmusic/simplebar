@@ -18,7 +18,7 @@ export const Dashboard = () => {
           </ul>
           <div className="mt-8 flex gap-3">
             <a href="#demo" className="px-5 py-3 rounded-md border border-neutral-700 hover:border-neutral-500">Ver demo</a>
-            <a href="#cta" className="px-5 py-3 rounded-md bg-primary text-neutral-900 font-medium hover:brightness-110">Crear cuenta</a>
+            <a href="#cta" className="px-5 py-3 rounded-md bg-primary text-white dark:text-neutral-900 font-medium hover:brightness-110">Crear cuenta</a>
           </div>
         </div>
         <div className="rounded-2xl border border-neutral-300 dark:border-neutral-800 p-6 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
