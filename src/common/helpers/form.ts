@@ -1,6 +1,12 @@
-import { FiledsForm, FormNewPassword, FormsInputs, ObjectErrorsMessages, ObjectPasswordChecks } from "../../types/form";
+import {
+    FiledsForm,
+    FormNewPassword,
+    FormsInputs,
+    ObjectErrorsMessages,
+    ObjectPasswordChecks,
+} from '../../types/form';
 
-export const OBJECT_LABELS_FIELDS:Record<FiledsForm, string> = {
+export const OBJECT_LABELS_FIELDS: Record<FiledsForm, string> = {
     name: 'Nombre',
     last_name: 'Apellido',
     email: 'Correo Electrónico',
@@ -18,10 +24,13 @@ export const OBJECT_LABELS_FIELDS:Record<FiledsForm, string> = {
     cell_phone_bussines: 'Teléfono de la Empresa',
     address_bussines: 'Dirección de la Empresa',
     cell_phone_secondary: 'Teléfono Secundario',
-    role_id: 'Tipo de Usuario'
+    role_id: 'Tipo de Usuario',
+    phone: 'Teléfono',
+    fullname: 'Nombre Completo',
+    destination_address: 'Dirección de Envío',
 };
 
-export const OBJECT_PLACEHOLDERS_FIELDS:Record<FiledsForm, string> = {
+export const OBJECT_PLACEHOLDERS_FIELDS: Record<FiledsForm, string> = {
     name: 'Ingresa tu nombre',
     last_name: 'Ingresa tu apellido',
     email: 'Ingresa tu correo electrónico',
@@ -39,9 +48,11 @@ export const OBJECT_PLACEHOLDERS_FIELDS:Record<FiledsForm, string> = {
     cell_phone_bussines: 'Ingresa el teléfono de la empresa',
     address_bussines: 'Ingresa la dirección de la empresa',
     cell_phone_secondary: 'Ingresa un teléfono secundario',
-    role_id: 'Selecciona un tipo de usuario'
+    role_id: 'Selecciona un tipo de usuario',
+    fullname: 'Ingresa tu nombre completo',
+    phone: 'Ingresa tu número de teléfono',
+    destination_address: 'Ingresa la dirección de envío',
 };
-
 
 const initialErrorsObject = {
     name: '',
@@ -59,8 +70,10 @@ const initialErrorsObject = {
     cuit: '',
     name_bussines: '',
     phone_bussines: '',
-    address_bussines: ''
-}
+    address_bussines: '',
+    fullname: '',
+    destination_address: '',
+};
 const fields = [''];
 
 export const formValidate = (
@@ -68,10 +81,12 @@ export const formValidate = (
     requiredFields: string[] = fields
 ): ObjectErrorsMessages => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const phoneRegex = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
+    const phoneRegex =
+        /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,}$/;
     const lastNameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,}$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const dniRegex = /^\d{8,10}$/;
     const addressRegex = /^[a-zA-Z0-9\s,.'-]{5,}$/;
     const ageRegex = /^\d{1,2}$/;
@@ -94,6 +109,9 @@ export const formValidate = (
         name_bussines: '',
         cell_phone_bussines: '',
         address_bussines: '',
+        phone: '',
+        fullname: '',
+        destination_address: '',
     };
 
     // Validar cada campo
@@ -118,7 +136,8 @@ export const formValidate = (
     if (requiredFields.includes('password') && !formData.password) {
         errors.password = 'La contraseña es obligatoria';
     } else if (formData.password && !passwordRegex.test(formData.password)) {
-        errors.password = 'La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un número y un carácter especial.';
+        errors.password =
+            'La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un número y un carácter especial.';
     }
 
     if (requiredFields.includes('password2') && !formData.password2) {
@@ -133,7 +152,7 @@ export const formValidate = (
         errors.dni = 'DNI Inválido';
     }
 
-    if (requiredFields.includes('phone') && !formData.cell_phone) {
+    if (requiredFields.includes('cell_phone') && !formData.cell_phone) {
         errors.cell_phone = 'El teléfono es obligatorio';
     } else if (formData.cell_phone && !phoneRegex.test(formData.cell_phone)) {
         errors.cell_phone = 'Número Inválido';
@@ -155,8 +174,12 @@ export const formValidate = (
         errors.gender_type = 'Debes seleccionar alguna opción';
     }
 
-    if (requiredFields.includes('two_factor_enabled') && !formData.two_factor_enabled) {
-        errors.two_factor_enabled = 'Debes habilitar la autenticación en dos pasos';
+    if (
+        requiredFields.includes('two_factor_enabled') &&
+        !formData.two_factor_enabled
+    ) {
+        errors.two_factor_enabled =
+            'Debes habilitar la autenticación en dos pasos';
     }
 
     if (requiredFields.includes('cuil') && !formData.cuil) {
@@ -173,20 +196,59 @@ export const formValidate = (
 
     if (requiredFields.includes('name_bussines') && !formData.name_bussines) {
         errors.name_bussines = 'El nombre de la empresa es obligatorio';
-    } else if (formData.name_bussines && !nameRegex.test(formData.name_bussines)) {
+    } else if (
+        formData.name_bussines &&
+        !nameRegex.test(formData.name_bussines)
+    ) {
         errors.name_bussines = 'Nombre de empresa inválido';
     }
 
-    if (requiredFields.includes('cell_phone_bussines') && !formData.cell_phone_bussines) {
+    if (
+        requiredFields.includes('cell_phone_bussines') &&
+        !formData.cell_phone_bussines
+    ) {
         errors.cell_phone_bussines = 'El teléfono de la empresa es obligatorio';
-    } else if (formData.cell_phone_bussines && !phoneRegex.test(formData.cell_phone_bussines)) {
+    } else if (
+        formData.cell_phone_bussines &&
+        !phoneRegex.test(formData.cell_phone_bussines)
+    ) {
         errors.cell_phone_bussines = 'Número de empresa inválido';
     }
 
-    if (requiredFields.includes('address_bussines') && !formData.address_bussines) {
+    if (
+        requiredFields.includes('address_bussines') &&
+        !formData.address_bussines
+    ) {
         errors.address_bussines = 'La dirección de la empresa es obligatoria';
-    } else if (formData.address_bussines && !addressRegex.test(formData.address_bussines)) {
+    } else if (
+        formData.address_bussines &&
+        !addressRegex.test(formData.address_bussines)
+    ) {
         errors.address_bussines = 'Dirección de empresa inválida';
+    }
+
+    if (requiredFields.includes('fullname') && !formData.fullname) {
+        errors.fullname = 'El nombre es obligatorio';
+    } else if (formData.fullname && !nameRegex.test(formData.fullname)) {
+        errors.fullname = 'Nombre Inválido';
+    }
+
+    if (requiredFields.includes('phone') && !formData.phone) {
+        errors.phone = 'El teléfono es obligatorio';
+    } else if (formData.phone && !phoneRegex.test(formData.phone)) {
+        errors.phone = 'Número Inválido';
+    }
+
+    if (
+        requiredFields.includes('destination_address') &&
+        !formData.destination_address
+    ) {
+        errors.destination_address = 'La dirección es obligatoria';
+    } else if (
+        formData.destination_address &&
+        !addressRegex.test(formData.destination_address)
+    ) {
+        errors.destination_address = 'Dirección Inválida';
     }
 
     // Contar errores
@@ -201,21 +263,20 @@ export const formValidate = (
     };
 };
 
-
 // VALIDA LOS PASSWORD PARA EL CAMBIO DE CONTRASEÑA
 export const validateNewPassword = (passwordForm: FormNewPassword) => {
     let flag = false;
-    const { old_password, new_password, new_password_2 } = passwordForm
+    const { old_password, new_password, new_password_2 } = passwordForm;
 
     const errors: ObjectPasswordChecks = {
-        pass_length: (new_password.length >= 8),
-        pass_uppercase: (/[A-Z]/.test(new_password)),
-        pass_lowercase: (/[a-z]/.test(new_password)),
-        pass_specialCaracter: (/[!@#$%^&*(),.?":{}|<>]/.test(new_password)),
-        pass_number: (/[0-9]/.test(new_password)),
+        pass_length: new_password.length >= 8,
+        pass_uppercase: /[A-Z]/.test(new_password),
+        pass_lowercase: /[a-z]/.test(new_password),
+        pass_specialCaracter: /[!@#$%^&*(),.?":{}|<>]/.test(new_password),
+        pass_number: /[0-9]/.test(new_password),
         pass_2: new_password === new_password_2 && new_password.length > 0,
-        pass_new_old: new_password !== old_password
-    }
+        pass_new_old: new_password !== old_password,
+    };
 
     if (
         errors.pass_length &&
@@ -227,10 +288,10 @@ export const validateNewPassword = (passwordForm: FormNewPassword) => {
         new_password !== old_password &&
         old_password.length > 5
     ) {
-        flag = true
+        flag = true;
     }
     return {
         errors,
-        flag
-    }
-}
+        flag,
+    };
+};

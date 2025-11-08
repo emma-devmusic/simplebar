@@ -1,27 +1,55 @@
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { useEffect, useState } from 'react';
-import { Button } from '../../components';
-import { Trash2Icon } from 'lucide-react';
 import {
     emptyCart,
     ProductCart,
     removeProduct,
     setCart,
 } from '../../redux/slices/cartSlice';
-import Swal from 'sweetalert2';
 import { uiModal } from '../../redux/slices/uiSlice';
 import {
     setSelectedProduct,
     setVariationSelected,
 } from '../../redux/slices/productSlice';
+import { OrderModeSelector, CartTable } from './Cart/index';
+import { useForm } from '../../hooks/useForm';
+import { formValidate } from '../../common/helpers';
+import { FormsInputs, ObjectErrorsMessages } from '../../types/form';
+import { Button, Input } from '../../components';
+import { executeApiCall } from '../../services/executeApiCall';
+import { fetchData } from '../../services/fetchData';
+import { OrderCreate } from '../../types/orders';
+
+const initialState = {
+    fullname: '',
+    phone: '',
+    email: '',
+    destination_address: '',
+};
 
 const Cart = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
     const { products } = useAppSelector((state) => state.products);
-    const [orderMode, setOrderMode] = useState<'domicilio' | 'retiro'>(
-        'domicilio'
-    );
     const dispatch = useAppDispatch();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [orderMode, setOrderMode] = useState<'delivery' | 'pickup'>(
+        'delivery'
+    );
+    const [flag, setFlag] = useState<boolean>(false);
+    const [errorMsg, setErrorMsg] = useState({} as ObjectErrorsMessages);
+
+    const [values, handleInputChange, reset] = useForm(initialState);
+
+    useEffect(() => {
+        const msgs = formValidate(
+            values as FormsInputs,
+            orderMode === 'delivery'
+                ? ['fullname', 'phone', 'destination_address']
+                : ['fullname', 'phone']
+        );
+        setErrorMsg(msgs);
+    }, [values, orderMode]);
 
     useEffect(() => {
         const cart_state_json = localStorage.getItem('cart_state');
@@ -33,7 +61,7 @@ const Cart = () => {
                 console.error('Invalid JSON in localStorage:', error);
             }
         }
-    }, []);
+    }, [dispatch]);
 
     const handleEditProduct = (cartProduct: ProductCart) => {
         const productIndex = products.findIndex((prod) =>
@@ -57,226 +85,121 @@ const Cart = () => {
         dispatch(setSelectedProduct(products[productIndex]));
     };
 
+    const handleRemoveProduct = (productId: number) => {
+        dispatch(removeProduct(productId));
+    };
+
+    const handleCheckout = async () => {
+        setFlag(true);
+        console.log('Error Messages:', errorMsg);
+        if (errorMsg.hasErrors) return;
+
+        try {
+            const orderPayload: OrderCreate = {
+                type: orderMode,
+                customer: {
+                    fullname: values.fullname,
+                    phone: values.phone,
+                    email: values.email || undefined,
+                },
+                items: cartProducts.map((item) => ({
+                    product_variation_id: item.product.id,
+                    name: item.product.name,
+                    unit_price: item.product.price,
+                    quantity: item.quantity,
+                })),
+            };
+            if (orderMode === 'delivery') {
+                orderPayload['shipment'] = {
+                    destination_address: {
+                        address: values.destination_address,
+                    },
+                    shipping_cost: 0,
+                };
+            }
+
+            await executeApiCall(
+                setIsLoading,
+                () =>
+                    fetchData(`/sls/manage-sales/orders`, 'POST', orderPayload),
+                dispatch,
+                () => {
+                    reset(initialState);
+                    dispatch(emptyCart());
+                },
+                '¡Pedido realizado con éxito!'
+            );
+        } catch (error) {
+            console.error('Error al finalizar la compra:', error);
+        }
+    };
+
     return (
         <div className="flex w-full flex-col gap-4">
-            {cartProducts.length > 0 && (
-                <div className="mt-2 flex w-full justify-center">
-                    <Button
-                        label="Envío a domicilio"
-                        className="w-1/2 !rounded-e-none"
-                        action={() => {
-                            setOrderMode('domicilio');
-                        }}
-                        variant={
-                            orderMode === 'domicilio' ? 'primary' : 'secondary'
-                        }
-                    />
-                    <Button
-                        label="Para retirar"
-                        className="w-1/2 !rounded-s-none"
-                        action={() => {
-                            setOrderMode('retiro');
-                        }}
-                        variant={
-                            orderMode === 'retiro' ? 'primary' : 'secondary'
-                        }
-                    />
-                </div>
+            <OrderModeSelector
+                orderMode={orderMode}
+                setOrderMode={setOrderMode}
+            />
+            <Input
+                disabled={isLoading}
+                label="Nombre"
+                placeholder="Juan..."
+                name="fullname"
+                type="text"
+                value={values?.fullname}
+                onChange={handleInputChange}
+                errorMsg={flag ? errorMsg.fullname : ''}
+                required
+            />
+            <Input
+                disabled={isLoading}
+                label="Teléfono"
+                placeholder="3624000000"
+                name="phone"
+                type="text"
+                value={values?.phone}
+                onChange={handleInputChange}
+                errorMsg={flag ? errorMsg.phone : ''}
+                required={values.fullname && values.email ? true : false}
+            />
+            {orderMode === 'delivery' && (
+                <Input
+                    disabled={isLoading}
+                    label="Dirección del envío"
+                    placeholder="Av. Sarmiento 123"
+                    name="destination_address"
+                    type="text"
+                    value={values.destination_address}
+                    onChange={handleInputChange}
+                    errorMsg={flag ? errorMsg.destination_address : ''}
+                    required
+                />
             )}
-            <div className="overflow-x-auto rounded-lg border border-gray-200 text-sm md:max-h-[42vh] 2xl:max-h-[50vh] overflow-y-auto">
-                <table className="w-full divide-y-2 divide-gray-200 bg-white relative">
-                    <thead className="w-full text-left sticky top-0 z-10 bg-white">
-                        <tr>
-                            <th className="px-4 py-2 font-medium whitespace-nowrap text-gray-900">
-                                Producto
-                            </th>
-                            <th className="px-4 py-2 text-right font-medium whitespace-nowrap text-gray-900">
-                                Precio ($)
-                            </th>
-                        </tr>
-                    </thead>
+            <Input
+                disabled={isLoading}
+                label="Correo electrónico (opcional)"
+                placeholder="juan@gmail.com"
+                name="email"
+                type="email"
+                value={values.email}
+                errorMsg={flag ? errorMsg.email : ''}
+                onChange={handleInputChange}
+            />
+            <CartTable
+                orderMode={orderMode}
+                onEditProduct={handleEditProduct}
+                onRemoveProduct={handleRemoveProduct}
+            />
 
-                    <tbody className="w-full divide-y divide-gray-200">
-                        {cartProducts.length > 0 &&
-                            cartProducts.map((item, index: number) => (
-                                <tr key={index} className="">
-                                    <td className="min-w-2/3 px-4 text-gray-800">
-                                        <div className="relative flex flex-col items-start justify-end">
-                                            <span
-                                                onClick={() =>
-                                                    handleEditProduct(item)
-                                                }
-                                                className="cursor-pointer text-xs text-primary underline"
-                                            >
-                                                Editar
-                                            </span>
-                                            <span className="">
-                                                {item.product.name}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td className="flex h-12 w-full items-center justify-end text-center whitespace-nowrap text-gray-700">
-                                        <div className="flex items-baseline justify-center gap-2">
-                                            <span className="text-xs text-gray-700">
-                                                ($
-                                                {Number(
-                                                    item.product.price
-                                                ).toLocaleString()}{' '}
-                                                x {item.quantity})
-                                            </span>
-                                            <span className="font-semibold text-gray-800">
-                                                $
-                                                {(
-                                                    Number(item.product.price) *
-                                                    item.quantity
-                                                ).toLocaleString()}
-                                            </span>
-                                        </div>
-                                        <Button
-                                            action={() => {
-                                                Swal.fire({
-                                                    title: '¿Deseas eliminar el elemento del pedido?',
-                                                    icon: 'warning',
-                                                    showCancelButton: true,
-                                                    reverseButtons: true,
-                                                    cancelButtonColor:
-                                                        '#006ce7',
-                                                    cancelButtonText:
-                                                        'No, cancelar',
-                                                    confirmButtonColor:
-                                                        '#fb2c36',
-                                                    confirmButtonText:
-                                                        'Sí, eliminar',
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) {
-                                                        dispatch(
-                                                            removeProduct(
-                                                                item.product.id
-                                                            )
-                                                        );
-                                                    }
-                                                });
-                                            }}
-                                            icon={
-                                                <Trash2Icon className="h-4 w-4 px-0 text-red-500" />
-                                            }
-                                            variant="plain-danger"
-                                            label=""
-                                            className="!px-0 hover:bg-red-100 lg:mx-2"
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-
-                        {cartProducts.length > 0 && (
-                            <tr>
-                                <td className="px-4 py-2 whitespace-nowrap text-gray-400">
-                                    Resumen
-                                </td>
-                                <td
-                                    colSpan={2}
-                                    className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
-                                >
-                                    <span className="font-semibold">
-                                        $
-                                        {cartProducts
-                                            .reduce(
-                                                (acc, item) =>
-                                                    acc +
-                                                    Number(item.product.price) *
-                                                        item.quantity,
-                                                0
-                                            )
-                                            .toLocaleString()}
-                                    </span>
-                                </td>
-                            </tr>
-                        )}
-                        {orderMode === 'domicilio' &&
-                            cartProducts.length > 0 && (
-                                <tr>
-                                    <td className="px-4 py-2 whitespace-nowrap text-gray-400">
-                                        Costo de envío
-                                    </td>
-                                    <td
-                                        colSpan={2}
-                                        className="px-4 py-2 text-right whitespace-nowrap text-gray-700"
-                                    >
-                                        <span className="font-semibold">
-                                            $1000
-                                        </span>
-                                    </td>
-                                </tr>
-                            )}
-                        {cartProducts.length > 0 && (
-                            <tr>
-                                <td className="px-4 py-2 whitespace-nowrap text-gray-800">
-                                    Total
-                                </td>
-                                <td
-                                    colSpan={2}
-                                    className="px-4 py-2 text-right font-bold whitespace-nowrap text-gray-700"
-                                >
-                                    <span>
-                                        $
-                                        {(
-                                            cartProducts.reduce(
-                                                (acc, item) =>
-                                                    acc +
-                                                    Number(item.product.price) *
-                                                        item.quantity,
-                                                0
-                                            ) +
-                                            (orderMode === 'domicilio'
-                                                ? 1000
-                                                : 0)
-                                        ).toLocaleString()}
-                                    </span>
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-                {cartProducts.length <= 0 && (
-                    <div className="flex h-24 w-full flex-col items-center justify-center rounded-e-lg py-2 text-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 23 24"
-                            className="h-24 text-gray-300"
-                        >
-                            <path
-                                fill="currentColor"
-                                d="M18.06 23h1.66c.84 0 1.53-.65 1.63-1.47L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26c1.44 1.42 2.43 2.89 2.43 5.29zM1 22v-1h15.03v1c0 .54-.45 1-1.03 1H2c-.55 0-1-.46-1-1m15.03-7C16.03 7 1 7 1 15zM1 17h15v2H1z"
-                            ></path>
-                        </svg>
-
-                        <p className="text-sm">Pedido vacío</p>
-                    </div>
-                )}
-            </div>
-            <div className="flex w-full justify-center">
-                {cartProducts.length > 0 && (
+            {cartProducts.length > 0 ? (
+                <div className="flex w-full justify-center">
                     <Button
                         label="Finalizar compra"
-                        action={() => {
-                            console.log({
-                                pedido: cartProducts,
-                                modo: orderMode,
-                                ammount: (
-                                    cartProducts.reduce(
-                                        (acc, item) =>
-                                            acc +
-                                            Number(item.product.price) *
-                                                item.quantity,
-                                        0
-                                    ) + (orderMode === 'domicilio' ? 1000 : 0)
-                                ).toLocaleString(),
-                            });
-                            dispatch(emptyCart());
-                        }}
+                        action={handleCheckout}
+                        disabled={isLoading}
                     />
-                )}
-            </div>
+                </div>
+            ) : null}
         </div>
     );
 };

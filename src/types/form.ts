@@ -1,45 +1,51 @@
-import { ButtonProps } from "../components/buttons/Button";
+import { ButtonProps } from '../components/buttons/Button';
 
 export interface FormsInputs {
-    name?: string,
-    last_name?: string,
-    email?: string,
-    password?: string,
-    password2?: string,
-    dni?: string,
-    cell_phone?: string,
-    address?: string,
-    age?: string,
-    gender_type?: string,
-    two_factor_enabled?: boolean,
-    role_id?: boolean,
+    name?: string;
+    last_name?: string;
+    email?: string;
+    password?: string;
+    password2?: string;
+    dni?: string;
+    cell_phone?: string;
+    address?: string;
+    age?: string;
+    gender_type?: string;
+    two_factor_enabled?: boolean;
+    role_id?: boolean;
     cuil?: string;
     cuit?: string;
     name_bussines?: string;
     cell_phone_bussines?: string;
     address_bussines?: string;
+    phone?: string;
+    fullname?: string;
+    destination_address?: string;
 }
 
 export interface ObjectErrorsMessages {
-    name?: string,
-    last_name?: string,
-    email?: string,
-    password?: string,
-    password2?: string,
-    dni?: string,
-    cell_phone?: string,
-    cell_phone_secondary?: string,
-    address?: string,
-    age?: string,
-    gender_type?: string,
-    two_factor_enabled?: string,
-    role_id?: string,
+    name?: string;
+    last_name?: string;
+    email?: string;
+    password?: string;
+    password2?: string;
+    dni?: string;
+    cell_phone?: string;
+    cell_phone_secondary?: string;
+    address?: string;
+    age?: string;
+    gender_type?: string;
+    two_factor_enabled?: string;
+    role_id?: string;
     cuil?: string;
     cuit?: string;
     name_bussines?: string;
     cell_phone_bussines?: string;
     address_bussines?: string;
     hasErrors?: boolean;
+    phone?: string;
+    fullname?: string;
+    destination_address?: string;
 }
 
 export type FiledsForm =
@@ -61,6 +67,9 @@ export type FiledsForm =
     | 'name_bussines'
     | 'cell_phone_bussines'
     | 'address_bussines'
+    | 'phone'
+    | 'fullname'
+    | 'destination_address';
 
 export interface FormNewPassword {
     old_password: string;
@@ -78,4 +87,4 @@ export interface ObjectPasswordChecks {
     pass_new_old: boolean;
 }
 
-export type ActionButton = ButtonProps
+export type ActionButton = ButtonProps;

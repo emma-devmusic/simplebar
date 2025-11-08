@@ -2,25 +2,24 @@ import { RootState, useAppSelector } from '../../redux/store';
 import Product from './Product';
 
 const ProductsSection = () => {
-    const { products, filteredProducts } = useAppSelector((state:RootState) => state.products);
+    const { products, filteredProducts } = useAppSelector(
+        (state: RootState) => state.products
+    );
     return (
         <div className="flex h-full w-full flex-col gap-2 py-2">
             {products && filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
                     <div
-                        id={`${item.subCategory.id}`}
+                        id={`products-subcat-${item.subCategory.id}`}
                         key={item.subCategory.id}
                         className="w-full"
                     >
-                        <p className="text-lg font-bold pl-2">
+                        <p className="pl-2 text-lg font-bold">
                             {item.subCategory.name}
                         </p>
                         <div className="flex w-full flex-wrap">
                             {item.products.map((prod, index) => (
-                                <Product
-                                    product={prod}
-                                    key={index}
-                                />
+                                <Product product={prod} key={index} />
                             ))}
                         </div>
                     </div>
@@ -42,7 +41,7 @@ const ProductsSection = () => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default ProductsSection
+export default ProductsSection;

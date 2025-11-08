@@ -5,18 +5,20 @@ import { ProductVariation } from '../../types/product';
 import Slider from 'react-slick';
 import ProductModalContent from './ProductModalContent';
 import { setVariationSelected } from '../../redux/slices/productSlice';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const ProductModal = () => {
-    const { selectedProduct, variationSelected } = useAppSelector((state) => state.products);
-    const dispatch = useAppDispatch()
+    const { selectedProduct, variationSelected } = useAppSelector(
+        (state) => state.products
+    );
+    const dispatch = useAppDispatch();
     const {
         modal: { modalFor },
     } = useAppSelector((state) => state.ui);
     const slider = useRef<Slider | null>(null);
 
-    var settings = {
+    const settings = {
         dots: true,
         infinite:
             selectedProduct && selectedProduct?.product_variations?.length > 1
@@ -47,20 +49,28 @@ export const ProductModal = () => {
                                 productVariation: ProductVariation,
                                 index: number
                             ) => {
-                                 return (
-                                <ProductModalContent
-                                    key={index}
-                                    productVariation={productVariation}
-                                />
-                            )}
+                                return (
+                                    <ProductModalContent
+                                        key={index}
+                                        productVariation={productVariation}
+                                    />
+                                );
+                            }
                         )}
                 </Slider>
-            ) : (selectedProduct && (
-                <ProductModalContent
-                    productVariation={selectedProduct.product_variations[variationSelected]}
-                />
-            ))}
-            {selectedProduct && modalFor === 'add_product' &&
+            ) : (
+                selectedProduct && (
+                    <ProductModalContent
+                        productVariation={
+                            selectedProduct.product_variations[
+                                variationSelected
+                            ]
+                        }
+                    />
+                )
+            )}
+            {selectedProduct &&
+                modalFor === 'add_product' &&
                 selectedProduct?.product_variations?.length > 1 && (
                     <button
                         className="absolute top-1/2 -left-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pr-1 text-white hover:bg-black/75"
@@ -72,7 +82,8 @@ export const ProductModal = () => {
                     </button>
                 )}
 
-            {selectedProduct && modalFor === 'add_product' &&
+            {selectedProduct &&
+                modalFor === 'add_product' &&
                 selectedProduct?.product_variations?.length > 1 && (
                     <button
                         className="absolute top-1/2 -right-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pl-1 text-white hover:bg-black/75"

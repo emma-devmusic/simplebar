@@ -15,22 +15,33 @@ import FilterSection from './modules/FilterSection';
 import ProductsSection from './modules/ProductsSection';
 
 export const Dash = () => {
-
     const { tenant_path, branch_path } = useParams();
     const { categories } = useAppSelector((state) => state.categories);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [value, handleInputChange] = useForm({ search: '' });
     const [searchParams] = useSearchParams();
-    
+
     useEffect(() => {
-        dispatch(get_products({path: `${tenant_path}/${branch_path}?limit=50`, setIsLoading,}));
-        dispatch(getCategories({path: `${tenant_path}/${branch_path}`, setIsLoading,}));
+        dispatch(
+            get_products({
+                path: `${tenant_path}/${branch_path}?limit=50`,
+                setIsLoading,
+            })
+        );
+        dispatch(
+            getCategories({
+                path: `${tenant_path}/${branch_path}`,
+                setIsLoading,
+            })
+        );
         if (branch_path) localStorage.setItem('branch_path', branch_path);
     }, [tenant_path, branch_path]);
-    
+
     useEffect(() => {
-        const selectedCategory = categories.find((item) => item.id === Number(searchParams.get('category')))
+        const selectedCategory = categories.find(
+            (item) => item.id === Number(searchParams.get('category'))
+        );
         if (selectedCategory) {
             dispatch(
                 setFilteredProducts({
@@ -39,10 +50,12 @@ export const Dash = () => {
                 })
             );
         } else {
-            dispatch(setAllFilteredProducts({
-                filterText: value.search,
-                categories
-            }))
+            dispatch(
+                setAllFilteredProducts({
+                    filterText: value.search,
+                    categories,
+                })
+            );
         }
     }, [value.search, searchParams, categories]);
 
@@ -57,7 +70,7 @@ export const Dash = () => {
     return (
         <div className="flex w-full flex-col lg:flex-row lg:gap-2">
             {categories.length === 0 ? (
-                <div className="flex h-48 w-full flex-col items-center justify-center gap-2 px-4 pt-2 lg:w-4/2">
+                <div className="flex h-48 w-full flex-col items-center justify-center gap-2 px-4 pt-2 lg:w-[66%]">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={'4rem'}
@@ -72,12 +85,15 @@ export const Dash = () => {
                     <p>No se encontraron categorias</p>
                 </div>
             ) : (
-                <div className="relative flex w-full flex-col shadow-sm lg:w-4/2">
-                    <FilterSection inputValue={value.search} handleInputChange={handleInputChange}/>
+                <div className="relative flex w-full flex-col shadow-sm lg:w-[66%]">
+                    <FilterSection
+                        inputValue={value.search}
+                        handleInputChange={handleInputChange}
+                    />
                     <ProductsSection />
                 </div>
             )}
-            <div className="relative hidden w-full flex-col gap-2 px-4 lg:flex">
+            <div className="relative hidden w-full flex-col gap-2 px-4 lg:flex lg:w-[33%]">
                 <div className="sticky top-0">
                     <LayoutView title="Mi pedido">
                         <Cart />

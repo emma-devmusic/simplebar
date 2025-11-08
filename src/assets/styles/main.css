@@ -11,11 +11,11 @@
     --color-background-hover: rgb(245 245 245);
 
     --animate-slide-right: 'fadeRightIn 0.3s ease-in-out'
-    --animate-fade-in: 'fadeIn 0.3s ease-out'
-    
+        --animate-fade-in: 'fadeIn 0.3s ease-out'
 
-    /* Font families */
-    --font-sans: 'Georgia', sans-serif;
+
+        /* Font families */
+        --font-sans: 'Georgia', sans-serif;
     --font-pixel: 'PixelOperatorMono', monospace;
 }
 
@@ -24,6 +24,7 @@
         opacity: 0;
         transform: translateX(-100%);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
@@ -35,6 +36,7 @@
         opacity: 0;
         transform: scale(.95);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -126,4 +128,8 @@ html {
     html {
         font-family: "Sora";
     }
+}
+
+.scroll-target {
+    scroll-margin-top: calc(var(--sticky-height, 0px) + 8px);
 }
