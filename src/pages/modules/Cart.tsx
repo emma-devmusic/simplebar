@@ -19,6 +19,7 @@ import { Button, Input } from '../../components';
 import { executeApiCall } from '../../services/executeApiCall';
 import { fetchData } from '../../services/fetchData';
 import { OrderCreate } from '../../types/orders';
+import { useParams } from 'react-router-dom';
 
 const initialState = {
     fullname: '',
@@ -31,6 +32,7 @@ const Cart = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
     const { products } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
+    const { tenant_path, branch_path } = useParams();
 
     const [isLoading, setIsLoading] = useState(false);
     const [orderMode, setOrderMode] = useState<'delivery' | 'pickup'>(
@@ -121,10 +123,15 @@ const Cart = () => {
             await executeApiCall(
                 setIsLoading,
                 () =>
-                    fetchData(`/sls/manage-sales/orders`, 'POST', orderPayload),
+                    fetchData(
+                        `/pub-sls/orders/${tenant_path}/${branch_path}`,
+                        'POST',
+                        orderPayload
+                    ),
                 dispatch,
                 () => {
                     reset(initialState);
+                    setFlag(false);
                     dispatch(emptyCart());
                 },
                 '¡Pedido realizado con éxito!'
