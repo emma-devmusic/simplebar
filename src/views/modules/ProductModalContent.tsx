@@ -18,7 +18,9 @@ const ProductModalContent = ({
     productVariation,
 }: ProductModalContentProps) => {
     const { cartProducts } = useAppSelector((state) => state.cart);
-    const { imagePath, setImagePath, imageError } = useValidateImage({ initialPath: '' });
+    const { imagePath, setImagePath, imageError } = useValidateImage({
+        initialPath: '',
+    });
     const dispatch = useAppDispatch();
     const [quantity, setQuantity] = useState<number>(0);
     const { selectedProduct, variationSelected } = useAppSelector(
@@ -78,42 +80,40 @@ const ProductModalContent = ({
                     variationSelected
                 ]?.productImages.some((img) => img.main_image)
             ) {
-                const imagePath =
-                    (selectedProduct.product_variations[
-                        variationSelected
-                    ]?.productImages.find((img) => img.main_image)
-                        ?.url_image as string);
+                const imagePath = selectedProduct.product_variations[
+                    variationSelected
+                ]?.productImages.find((img) => img.main_image)
+                    ?.url_image as string;
                 setImagePath(imagePath);
             } else {
-                const imagePath = 
+                const imagePath =
                     selectedProduct.product_variations[variationSelected]
-                        ?.productImages[0]?.url_image
+                        ?.productImages[0]?.url_image;
                 setImagePath(imagePath);
             }
         }
     }, [variationSelected]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (selectedProduct) {
             if (
                 selectedProduct.product_variations[
                     variationSelected
                 ]?.productImages.some((img) => img.main_image)
             ) {
-                const imagePath =
-                    (selectedProduct.product_variations[
-                        variationSelected
-                    ]?.productImages.find((img) => img.main_image)
-                        ?.url_image as string);
+                const imagePath = selectedProduct.product_variations[
+                    variationSelected
+                ]?.productImages.find((img) => img.main_image)
+                    ?.url_image as string;
                 setImagePath(imagePath);
             } else {
-                const imagePath = 
+                const imagePath =
                     selectedProduct.product_variations[variationSelected]
-                        ?.productImages[0]?.url_image
+                        ?.productImages[0]?.url_image;
                 setImagePath(imagePath);
             }
         }
-    },[])
+    }, []);
 
     return (
         <div className="flex min-h-full w-full flex-col items-center justify-between gap-4 gap-y-3 p-2.5">
@@ -138,11 +138,9 @@ const ProductModalContent = ({
                 </div>
             )}
             <div className="flex w-full flex-col gap-y-2">
-                <div className="flex w-full items-center justify-between">
-                    <p className="text-2xl font-bold">
-                        {productVariation.name}
-                    </p>
-                    <p className="text-lg font-bold text-gray-700">
+                <div className="w-full">
+                    <p className="text-xl font-bold">{productVariation.name}</p>
+                    <p className="font-bold text-primary">
                         ${productVariation.price.toLocaleString()}
                     </p>
                 </div>
@@ -157,9 +155,9 @@ const ProductModalContent = ({
                             handleQuantity(quantity - 1);
                         }}
                         label=""
-                        className="!disabled:border !w-6 rounded-e-none"
+                        className="!disabled:border !w-8 rounded-e-none"
                         disabled={quantity <= 0}
-                        icon={<Minus className="w-4" />}
+                        icon={<Minus className="w-5" strokeWidth={4} />}
                         variant="primary"
                     />
                     <input
@@ -170,13 +168,13 @@ const ProductModalContent = ({
                             setQuantity(Number(e.target.value));
                         }}
                         name=""
-                        className="!rounded-0 !rounded-x-none !w-10 border border-x-0 border-primary px-2 text-right !shadow-none focus:!rounded-none focus:border-2 focus:border-x-0 focus:border-primary focus:outline-0"
+                        className="!rounded-0 !rounded-x-none !w-10 border border-x-0 border-primary px-2 pt-1 text-right !shadow-none focus:!rounded-none focus:border-2 focus:border-x-0 focus:border-primary focus:outline-0 md:!w-16"
                     />
                     <Button
                         action={() => handleQuantity(quantity + 1)}
                         label=""
-                        className="!w-6 rounded-s-none"
-                        icon={<Plus className="w-4" />}
+                        className="!w-8 rounded-s-none"
+                        icon={<Plus className="w-5" strokeWidth={4} />}
                         variant="primary"
                     />
                 </div>
@@ -202,7 +200,7 @@ const ProductModalContent = ({
                         ) && quantity === 0
                     }
                     type="button"
-                    className="!px-1 min-[325px]:!px-4.5"
+                    className="!px-1 !py-2 min-[325px]:!px-2.5"
                 />
             </div>
         </div>
