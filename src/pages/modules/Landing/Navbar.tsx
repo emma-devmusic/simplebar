@@ -1,6 +1,5 @@
 import { Logo } from '../../../components';
 import { Menu } from 'lucide-react';
-import { ThemeToggle } from '../../../components/theme/ThemeToggle';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
