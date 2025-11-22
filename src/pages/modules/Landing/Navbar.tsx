@@ -1,10 +1,14 @@
-import logo from '../../../assets/img/simplebar.png';
+import { Logo } from '../../../components';
 import { Menu } from 'lucide-react';
 import { ThemeToggle } from '../../../components/theme/ThemeToggle';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+
+    const [onDarkTheme, setOnDarkTheme] = useState(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -14,6 +18,15 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleChange = (e: MediaQueryListEvent) => {
+            setOnDarkTheme(e.matches);
+        };
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, [onDarkTheme]);
 
     const handleSmoothScroll = (
         e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -44,11 +57,7 @@ const Navbar = () => {
                     href="#"
                     className="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-100"
                 >
-                    <img
-                        src={logo}
-                        alt="Simplebar Logo"
-                        className="h-8 lg:h-10"
-                    />
+                    <Logo />
                 </a>
                 <nav className="hidden items-center gap-6 text-sm md:flex">
                     <a
@@ -81,7 +90,7 @@ const Navbar = () => {
                     </a>
                 </nav>
                 <div className="hidden items-center gap-3 md:flex">
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                     <a
                         href="#"
                         className="rounded-md border border-neutral-300 px-4 py-2 text-sm text-neutral-700 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500"
