@@ -1,48 +1,69 @@
-import { TestimonialProps, testimonials } from "../../../common/definitions/constants";
-import { Avatar, Card } from "../../../components";
-
+import { motion } from 'framer-motion';
 
 export const Testimonials = () => {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <section
-      id="testimonials"
-      className="container"
-    >
-      <h2 className="text-3xl md:text-4xl font-bold">
-        Discover Why
-        <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {" "}
-          People Love{" "}
-        </span>
-        This Landing Page
-      </h2>
-
-      <p className="text-xl text-gray-500 pt-4 pb-8">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non unde error
-        facere hic reiciendis illo
-      </p>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
-        {testimonials.map(
-          ({ image, name, userName, comment }: TestimonialProps) => (
-            <Card
-              key={userName}
-              className="rounded-lg border bg-card border-gray-200 text-card-foreground shadow-sm max-w-md md:break-inside-avoid overflow-hidden"
+    <section id="testimonios" className="py-20 border-t border-neutral-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.h2 
+          className="text-3xl font-semibold text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Lo que dicen <span className="text-primary">nuestros clientes</span>
+        </motion.h2>
+        <motion.div 
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+            {/* Cards */}
+            <motion.figure 
+              className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 bg-white/80 dark:bg-neutral-900/60 backdrop-blur shadow-sm dark:shadow-none"
+              variants={cardVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card.Header className="flex space-y-1.5 items-center gap-4 pb-2 border-b-0">
-                <Avatar className="relative flex shrink-0 overflow-hidden rounded-full" img={image}>
-                </Avatar>
-
-                <div className="flex flex-col">
-                  <p className="text-lg font-semibold leading-none tracking-tight text-black">{name}</p>
-                  <p className="text-sm text-gray-500 pt-1">{userName}</p>
-                </div>
-              </Card.Header>
-
-              <Card.Body className="pt-0 text-gray-700">{comment}</Card.Body>
-            </Card>
-          )
-        )}
+              <blockquote className="text-neutral-700 dark:text-neutral-200">"Reducimos demoras en salón y delivery en un 22%."</blockquote>
+              <figcaption className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">— Bar La Esquina</figcaption>
+            </motion.figure>
+            <motion.figure 
+              className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 bg-white/80 dark:bg-neutral-900/60 backdrop-blur shadow-sm dark:shadow-none"
+              variants={cardVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <blockquote className="text-neutral-700 dark:text-neutral-200">"El menú QR con stock en tiempo real nos salvó los fines de semana."</blockquote>
+              <figcaption className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">— Pizzería Centro</figcaption>
+            </motion.figure>
+            <motion.figure 
+              className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 bg-white/80 dark:bg-neutral-900/60 backdrop-blur shadow-sm dark:shadow-none"
+              variants={cardVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <blockquote className="text-neutral-700 dark:text-neutral-200">"Reportes claros para decidir compras y turnos."</blockquote>
+              <figcaption className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">— Café Del Sol</figcaption>
+            </motion.figure>
+        </motion.div>
       </div>
     </section>
   );

@@ -66,14 +66,14 @@ export const Input = ({
             <div className={`w-full ${customClass}`}>
                 <label
                     htmlFor={inputId}
-                    className={`relative block rounded-md border border-gray-200 shadow-xs transition-all focus-within:border-primary focus-within:ring-1 focus-within:ring-primary ${inputClass}`}
+                    className={`relative block rounded-md border border-gray-200 dark:border-neutral-700 shadow-xs transition-all focus-within:border-primary focus-within:ring-1 focus-within:ring-primary bg-white dark:bg-neutral-900 ${inputClass}`}
                 >
                     <input
                         aria-label={`Cuadro de entrada para colocar ${label}`}
                         id={id}
                         type={type}
                         name={name}
-                        className={`peer w-full border-none bg-transparent ${sizeClass[size]} placeholder-transparent focus:border-transparent focus:ring-0 focus:outline-hidden ${inputClass}`}
+                        className={`peer w-full border-none bg-transparent dark:bg-transparent ${sizeClass[size]} placeholder-transparent focus:border-transparent focus:ring-0 focus:outline-hidden text-gray-700 dark:text-neutral-100 ${inputClass}`}
                         value={value}
                         onChange={onChange}
                         placeholder={placeholder}
@@ -81,7 +81,7 @@ export const Input = ({
                         {...rest}
                     />
                     <span
-                        className={`pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 rounded-md bg-white p-0.5 px-1 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs ${labelClass}`}
+                        className={`pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 rounded-md bg-white dark:bg-neutral-900 p-0.5 px-1 text-xs text-gray-700 dark:text-neutral-300 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs ${labelClass}`}
                     >
                         {label}
                     </span>
@@ -102,7 +102,7 @@ export const Input = ({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className={`block text-sm ${isCheckbox ? 'hover:cursor-pointer hover:underline' : 'font-medium text-gray-700'} ${labelClass}`}
+                    className={`block text-sm ${isCheckbox ? 'hover:cursor-pointer hover:underline' : 'font-medium text-gray-700 dark:text-neutral-100'} ${labelClass}`}
                 >
                     {label}
                 </label>
@@ -113,7 +113,7 @@ export const Input = ({
                     aria-label={`Cuadro de entrada para colocar ${label}`}
                     type={type}
                     name={name}
-                    className={`${sizeClass[size]}  ${!isCheckbox ? 'w-full' : 'hover:cursor-pointer'} rounded-md border-1 border-gray-200 bg-white text-sm text-gray-700 shadow-sm transition-all focus:outline-2 focus:outline-primary ${inputClass} ${!icon ? '' : iconPosition === 'left' ? 'pl-10' : 'pr-10'}`}
+                    className={`${sizeClass[size]}  ${!isCheckbox ? 'w-full' : 'hover:cursor-pointer'} rounded-md border-1 border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-sm text-gray-700 dark:text-neutral-100 shadow-sm transition-all focus:outline-2 focus:outline-primary ${inputClass} ${!icon ? '' : iconPosition === 'left' ? 'pl-10' : 'pr-10'}`}
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
@@ -127,12 +127,12 @@ export const Input = ({
                     {icon &&
                         type !== 'checkbox' &&
                         cloneElement(icon, {
-                            className: `h-5 text-gray-400 ${icon.props.className || ''} `,
+                            className: `h-5 text-gray-400 dark:text-neutral-400 ${icon.props.className || ''} `,
                         })}
                 </div>
             </div>
             {errorMsg && (
-                <div className="m-0 mt-1 flex items-center gap-1 p-0 text-[13px] text-red-600">
+                <div className="m-0 mt-1 flex items-center gap-1 p-0 text-[13px] text-red-600 dark:text-red-400">
                     <OctagonAlert className="h-3.5 w-3.5 min-w-3.5 self-baseline" />
                     <p className="[line-height:14px]">{errorMsg}</p>
                 </div>

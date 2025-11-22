@@ -1,120 +1,154 @@
-import bgHero from '../../../assets/img/bg-hero.jpg';
-import { ImageAnimated } from '../../../components/imageAnimated/ImageAnimated';
+import dashboardDesktop from '../../../assets/img/dashboard-0.png';
+import dashboardMobile from '../../../assets/img/dashboard-1.png';
 import { motion } from 'framer-motion';
-import { ReactTyped } from 'react-typed';
 
 export const Hero = () => {
     return (
         <section
             id="hero"
-            className={`flex w-screen justify-center overflow-hidden bg-cover bg-bottom bg-no-repeat px-10 pb-10`}
-            style={{ backgroundImage: `url(${bgHero})` }}
+            className="relative overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100"
         >
-            <div className="flex h-screen max-h-[50rem] max-w-[80rem] items-center justify-center gap-10 2xl:h-[75vh]">
-                <motion.div
-                    className="flex min-h-full max-w-xl flex-col items-center justify-center px-4 text-center"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                >
-                    <h1
-                        className={
-                            '!font-base !mb-5 !text-3xl leading-normal font-bold text-white sm:!text-4xl md:text-3xl md:leading-normal lg:!text-[54px]'
-                        }
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(14,111,255,0.1),transparent_60%)] dark:bg-[radial-gradient(60%_60%_at_50%_0%,rgba(14,111,255,0.15),transparent_60%)]"></div>
+            <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
+                <div className="grid items-center gap-12 lg:grid-cols-2">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: {},
+                            visible: {
+                                transition: {
+                                    staggerChildren: 0.2,
+                                },
+                            },
+                        }}
                     >
-                        <span className="me-4 inline bg-gradient-to-r from-[#F596D3] to-[#D247BF] bg-clip-text text-transparent">
-                            Simplebar
-                        </span>
-                        te facilita el manejo de tu{' '}
-                        <h2 className="inline">
-                            <span
-                                className="mb-4 inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] bg-clip-text font-semibold text-transparent"
-                                aria-live="polite"
-                                role="status"
-                            >
-                                <ReactTyped
-                                    strings={[
-                                        'Negocio',
-                                        'Bar',
-                                        'Restaurante',
-                                        'Local',
-                                    ]}
-                                    backSpeed={35}
-                                    typeSpeed={50}
-                                    startDelay={500}
-                                    contentType="text"
-                                    shuffle={false}
-                                    backDelay={1000}
-                                    loop
-                                    smartBackspace
-                                    cursorChar={'|'}
-                                />
-                            </span>
-                        </h2>
-                    </h1>
-                    <p className="mx-auto max-w-xl !text-lg text-slate-500 dark:text-white/60">
-                        Encargate sólo de llevar tu local gastronómico, nosotros
-                        nos encargamos del resto.
-                    </p>
-                    <form
-                        role="form"
-                        aria-label="Formulario de suscripción"
-                        className="relative my-5 w-full max-w-sm rounded-full bg-[#0f172A]"
-                    >
-                        <label htmlFor="email" className="sr-only">
-                            Ingresá tu email
-                        </label>
-                        <input
-                            id="email"
-                            className="form-input h-12 w-full rounded-full border-none bg-slate-50 pr-12 pl-4 focus:ring-0 focus:outline-none"
-                            type="email"
-                            placeholder="Ingresá tu email"
-                            name="email"
-                            required
-                            aria-required="true"
-                        />
-                        <button
-                            type="submit"
-                            className="absolute top-1/2 right-0 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#ef4444] text-primary"
-                            aria-label="Enviar formulario"
-                            title="Enviar formulario"
+                        <motion.span
+                            className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { duration: 0.6 },
+                                },
+                            }}
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                                role="img"
-                                className="iconify iconify--akar-icons fs-3 -translate-x-[1px] text-white"
-                                focusable="false"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
+                            Nuevo · Gestión integral
+                        </motion.span>
+                        <motion.h1
+                            className="text-4xl leading-tight font-semibold sm:text-5xl"
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { duration: 0.8 },
+                                },
+                            }}
+                        >
+                            Gestión <span className="text-primary">simple</span>{' '}
+                            para bares y restaurantes
+                        </motion.h1>
+                        <motion.p
+                            className="mt-4 max-w-xl text-neutral-600 dark:text-neutral-300"
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { duration: 0.6 },
+                                },
+                            }}
+                        >
+                            Unificá{' '}
+                            <strong>
+                                POS, Menú QR, Reservas, Delivery y Reportes
+                            </strong>{' '}
+                            en un solo sistema. Interfaz intuitiva, soporte en
+                            español y onboarding en minutos.
+                        </motion.p>
+                        <motion.div
+                            className="mt-8 flex flex-wrap gap-3"
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { duration: 0.6 },
+                                },
+                            }}
+                        >
+                            <motion.a
+                                href="#cta"
+                                className="rounded-md bg-primary px-5 py-3 font-medium text-neutral-900 hover:brightness-110"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="m9.474 16l9.181 3.284a1.1 1.1 0 0 0 1.462-.887L21.99 4.239c.114-.862-.779-1.505-1.567-1.13L2.624 11.605c-.88.42-.814 1.69.106 2.017l2.44.868l1.33.467M13 17.26l-1.99 3.326c-.65.808-1.959.351-1.959-.683V17.24a2 2 0 0 1 .53-1.356l3.871-4.2"
-                                ></path>
-                            </svg>
-                        </button>
-                    </form>
-                    <p className="text-base text-slate-300">
-                        ¿Necesitás ayuda? Contactános
-                    </p>
-                </motion.div>
-                <motion.div
-                    className="hidden w-full max-w-[80rem] lg:block lg:max-w-md"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, ease: 'easeOut' }}
-                >
-                    <ImageAnimated
-                        src="src/assets/img/hero-charts.png"
-                        alt="Hero charts"
-                    />
-                </motion.div>
+                                Probar gratis 14 días
+                            </motion.a>
+                            <motion.a
+                                href="#demo"
+                                className="rounded-md border border-neutral-300 px-5 py-3 hover:border-neutral-400 dark:border-neutral-700 dark:hover:border-neutral-500"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Solicitar demo
+                            </motion.a>
+                        </motion.div>
+                        <motion.p
+                            className="mt-3 text-xs text-neutral-500 dark:text-neutral-400"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: {
+                                    opacity: 1,
+                                    transition: { duration: 0.8, delay: 0.2 },
+                                },
+                            }}
+                        >
+                            Sin tarjeta · Cancelás cuando quieras
+                        </motion.p>
+                    </motion.div>
+
+                    {/* Mockup / Placeholder */}
+                    <motion.div
+                        className="relative"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                            duration: 1,
+                            delay: 0.3,
+                            ease: 'easeOut',
+                        }}
+                    >
+                        <div className="rounded-2xl border border-neutral-300 bg-white/60 p-4 shadow-xl backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/60">
+                            <div className="aspect-[16/9] overflow-hidden rounded-lg border border-neutral-300 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+                                {/* Dashboard placeholder */}
+                                <img
+                                    src={dashboardDesktop}
+                                    alt=""
+                                    className="aspect-video w-full h-full object-cover"
+                                />
+                            </div>
+                            {/* phone */}
+                            <div className="absolute -right-4 -bottom-6 w-40 rotate-6">
+                                <div className="rounded-2xl border border-neutral-300 bg-white p-3 shadow-2xl dark:border-neutral-800 dark:bg-neutral-900">
+                                    <div className="aspect-[9/19] rounded-xl border border-neutral-300 bg-neutral-200/70 dark:border-neutral-800 dark:bg-neutral-800/70 overflow-hidden">
+                                        <img
+                                            src={dashboardMobile}
+                                            alt=""
+                                            className="h-full w-full"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            {/* badge */}
+                            <div className="absolute -top-3 -left-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white shadow dark:text-neutral-100">
+                                Demo UI
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
