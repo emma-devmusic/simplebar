@@ -7,7 +7,7 @@ export const ModalHeader = ({close}: {close: () => void;}) => {
     const { modal: { typeMsg, modalTitle } } = useAppSelector(state => state.ui)
 
     return (
-        <div className='flex justify-between items-center p-2 px-4 border-b border-gray-200'>
+        <div className='flex justify-between items-center p-2 px-4 border-b border-gray-200' id='modal-header'>
             <div className='text-lg font-medium text-gray-800'>
                 {
                     !typeMsg && modalTitle

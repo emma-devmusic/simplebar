@@ -55,6 +55,7 @@ const Cart = () => {
 
     useEffect(() => {
         const cart_state_json = localStorage.getItem('cart_state');
+        console.log(cart_state_json)
         if (cart_state_json) {
             try {
                 const cart_state = JSON.parse(cart_state_json);
