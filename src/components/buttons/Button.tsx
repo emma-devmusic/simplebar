@@ -5,7 +5,7 @@ import { Spinner } from '../shared/Spinner';
 export interface ButtonProps {
     id?: string;
     label: string;
-    action?: (e: unknown) => void;
+    action: (e: unknown) => void;
     type?: 'button' | 'submit' | 'reset';
     className?: string; // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="
     variant?:

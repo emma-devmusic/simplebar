@@ -37,7 +37,7 @@ export const DynamicForm = ({ values, shouldShowErrors, requiredFields, updateAc
   useEffect(() => {
     if (updateActions) updateActions([
       {
-        action: handleSave,
+        action: handleSave as (e:unknown) => void,
         label: 'Guardar',
         type: 'submit',
         disabled: flag && errorMsg.hasErrors,
@@ -74,7 +74,7 @@ export const DynamicForm = ({ values, shouldShowErrors, requiredFields, updateAc
         {
           showSubmit &&
           <Button
-            action={handleSave}
+            action={handleSave as (e: unknown) => void}
             label="Guardar"
             type="submit"
             disabled={flag && errorMsg.hasErrors}
