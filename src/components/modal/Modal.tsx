@@ -16,7 +16,7 @@ export const Modal = () => {
 
     return (
         <OffsetCanvas className="!backdrop-blur-md">
-            <div className="animate-fade-in flex max-h-[95vh] w-96 max-w-[95vw] flex-col rounded-lg bg-white shadow-2xl transition-all dark:bg-neutral-900 lg:w-128 lg:max-w-128" id='modal-content'>
+            <div className="animate-fade-in flex max-h-[95vh] w-96 max-w-[95vw] flex-col rounded-lg bg-white shadow-2xl transition-all dark:bg-neutral-900 lg:w-128 lg:max-w-128 dark:border-[1px] dark:border-neutral-800" id='modal-content'>
                 <ModalHeader close={() => dispatch(uiCloseModal())} />
                 
                     <div className="h-full overflow-y-auto p-4" id='modal-body'>

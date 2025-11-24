@@ -105,7 +105,7 @@ export const Button = ({
         <button
             id={id}
             type={type || 'button'}
-            className={`shrink-0 rounded border px-4.5 py-2.5 text-sm font-medium transition-all hover:cursor-pointer ${sizeClass[size]} ${buttonVariants[variant]} focus:ring-1 ${className} flex items-center justify-center gap-1 active:translate-y-[1px] disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:active:translate-y-[0px]`}
+            className={`shrink-0 rounded border px-4.5 py-2.5 text-sm font-medium transition-all hover:cursor-pointer ${sizeClass[size]} ${buttonVariants[variant]} focus:ring-1 ${className} flex items-center justify-center gap-1 active:translate-y-[1px] disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:active:translate-y-[0px] disabled:dark:bg-neutral-800 disabled:dark:border-neutral-700`}
             onClick={action}
             disabled={isDisabled}
             title={title}

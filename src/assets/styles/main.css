@@ -57,6 +57,20 @@ html {
     scroll-behavior: smooth;
 }
 
+* {
+    /* Scrollbar variables and basic cross-browser settings */
+    --scrollbar-size: 8px;
+    --scrollbar-thumb: rgba(0,0,0,0.35);
+    --scrollbar-thumb-hover: rgba(0,0,0,0.6);
+    --scrollbar-track: transparent;
+    --scrollbar-radius: 999px;
+    --scrollbar-border: 2px solid transparent;
+
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+
+}
+
 
 
 
@@ -177,4 +191,15 @@ html {
         width: 6px;
         height: 6px;
     }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

@@ -82,12 +82,12 @@ const Product = ({ product }: ProductProps) => {
                 addProductToCart(product);
             }}
         >
-            <Card className="w-full rounded-lg">
-                <Card.Body className="rounded-lg bg-white !p-0 shadow-md">
+            <Card className="w-full rounded-lg dark:bg-neutral-900 dark:border-[1px] dark:border-neutral-800">
+                <Card.Body className="rounded-lg bg-white !p-0 dark:bg-neutral-900">
                     <div className="flex h-28 min-h-28 w-full gap-2 rounded-lg md:flex-row lg:h-32 lg:min-h-32">
-                        <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-4 py-1.5 text-gray-600">
+                        <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-3 py-2 text-gray-600 dark:text-gray-300">
                             <div className="flex w-full flex-col items-start gap-1 lg:gap-1.5">
-                                <p ref={nameRef} className="line-clamp-2 text-base/5 font-semibold lg:text-base/5">
+                                <p ref={nameRef} className="line-clamp-2 text-base/5 font-semibold lg:text-base/5 dark:text-white">
                                     {product.product_variations[0].name}
                                 </p>
                                 <p
@@ -103,7 +103,7 @@ const Product = ({ product }: ProductProps) => {
                                 </p>
                             </div>
                             <div className="flex w-full justify-between">
-                                <p className="text-right text-sm font-bold text-gray-700">
+                                <p className="text-right text-sm font-bold text-gray-700 dark:text-gray-200">
                                     $
                                     {product.product_variations[0].price.toLocaleString()}
                                 </p>
@@ -123,7 +123,7 @@ const Product = ({ product }: ProductProps) => {
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 23 24"
-                                    className="h-16 text-gray-300 lg:h-24 xl:max-h-20"
+                                    className="h-16 text-gray-300 lg:h-24 xl:max-h-20 dark:text-neutral-700"
                                 >
                                     <path
                                         fill="currentColor"

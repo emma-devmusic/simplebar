@@ -66,13 +66,13 @@ const SubCategorySelector = () => {
     }, [categories, products, searchParams]);
 
     return (
-        <div className="flex min-h-8 items-end justify-start gap-1 overflow-x-auto bg-gray-50 px-1">
+        <div className="no-scrollbar flex min-h-8 items-end justify-start gap-1 overflow-x-auto bg-gray-50 px-1 dark:border-[1px] dark:border-t-0 dark:border-b-0 dark:border-neutral-800 dark:bg-neutral-950">
             {subcategories.map((sub_cat) => (
                 <div
                     id={`subcat-${sub_cat.id}`}
                     onClick={() => handleSubCategoryClick(`${sub_cat.id}`)}
                     key={sub_cat.id}
-                    className={`flex h-6 cursor-pointer items-center rounded-t-2xl bg-slate-400 px-4`}
+                    className={`flex h-6 cursor-pointer items-center rounded-t-2xl bg-slate-400 px-4 dark:bg-slate-700`}
                 >
                     <p
                         className={`text-sm font-semibold text-nowrap text-white`}

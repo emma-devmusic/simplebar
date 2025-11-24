@@ -7,8 +7,8 @@ export const ModalHeader = ({close}: {close: () => void;}) => {
     const { modal: { typeMsg, modalTitle } } = useAppSelector(state => state.ui)
 
     return (
-        <div className='flex justify-between items-center p-2 px-4 border-b border-gray-200' id='modal-header'>
-            <div className='text-lg font-medium text-gray-800'>
+        <div className='flex justify-between items-center p-2 px-4 border-b border-gray-200 dark:border-neutral-800' id='modal-header'>
+            <div className='text-lg font-medium text-gray-800 dark:text-white'>
                 {
                     !typeMsg && modalTitle
                 }
@@ -29,7 +29,7 @@ export const ModalHeader = ({close}: {close: () => void;}) => {
                 }
             </div>
             <div
-                className='p-3 cursor-pointer text-sm hover:bg-background-hover rounded-2xl'
+                className='p-3 cursor-pointer text-sm hover:bg-background-hover rounded-2xl dark:hover:bg-neutral-800'
                 onClick={close}
             >
                 <X/>

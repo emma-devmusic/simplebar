@@ -12,13 +12,13 @@ const CategorySelector = () => {
     };
 
     return (
-        <div className="flex min-h-10 items-start justify-start gap-1 overflow-x-auto overflow-y-hidden bg-gray-50 px-1">
+        <div className="no-scrollbar flex min-h-10 items-start justify-start gap-1 overflow-x-auto overflow-y-hidden bg-gray-50 px-1 dark:border-[1px] dark:border-b-0 dark:border-neutral-800 dark:bg-neutral-950">
             <div
                 id={`all`}
                 onClick={() => {
                     setSearchParams('');
                 }}
-                className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${searchParams.get('category') ? 'bg-sky-200' : 'h-9 items-center bg-sky-300 md:h-10'} transition-all duration-300`}
+                className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${searchParams.get('category') ? 'bg-sky-200 dark:bg-sky-900' : 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700'} transition-all duration-300`}
             >
                 <p className={`text-lg font-semibold text-nowrap text-white`}>
                     Todos
@@ -30,7 +30,7 @@ const CategorySelector = () => {
                         id={`cat-${category.id}`}
                         onClick={() => handleCategoryClick(`${category.id}`)}
                         key={category.id}
-                        className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${String(category.id) === String(searchParams.get('category')) ? 'h-9 items-center bg-sky-300 md:h-10' : 'bg-sky-200'} transition-all duration-300`}
+                        className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${String(category.id) === String(searchParams.get('category')) ? 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700' : 'bg-sky-200 dark:bg-sky-900'} transition-all duration-300`}
                     >
                         <p
                             className={`text-lg font-semibold text-nowrap text-white`}
