@@ -144,21 +144,22 @@ const ProductModalContent = ({
                         ${productVariation.price.toLocaleString()}
                     </p>
                 </div>
-                <p className="self-start justify-self-start">
+                <p className="self-start justify-self-start text-sm">
                     {productVariation.description}
                 </p>
             </div>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between mt-1">
                 <div className="flex">
                     <Button
                         action={() => {
                             handleQuantity(quantity - 1);
                         }}
                         label=""
-                        className="!disabled:border !w-8 rounded-e-none"
+                        className="!disabled:border !w-7 rounded-e-none"
                         disabled={quantity <= 0}
                         icon={<Minus className="w-5" strokeWidth={4} />}
                         variant="primary"
+                        size='sm'
                     />
                     <input
                         type="number"
@@ -168,14 +169,15 @@ const ProductModalContent = ({
                             setQuantity(Number(e.target.value));
                         }}
                         name=""
-                        className="!rounded-0 !rounded-x-none !w-10 border border-x-0 border-primary px-2 pt-1 text-right !shadow-none focus:!rounded-none focus:border-2 focus:border-x-0 focus:border-primary focus:outline-0 md:!w-16"
+                        className="!rounded-0 !rounded-x-none !w-10 border border-x-0 border-primary px-2 pt-0.5 text-right text-sm !shadow-none focus:!rounded-none focus:border-2 focus:border-x-0 focus:border-primary focus:outline-0 md:!w-12"
                     />
                     <Button
                         action={() => handleQuantity(quantity + 1)}
                         label=""
-                        className="!w-8 rounded-s-none"
+                        className="!w-7 rounded-s-none"
                         icon={<Plus className="w-5" strokeWidth={4} />}
                         variant="primary"
+                        size='sm'
                     />
                 </div>
                 <Button
@@ -200,6 +202,7 @@ const ProductModalContent = ({
                         ) && quantity === 0
                     }
                     type="button"
+                    size='sm'
                     className="!px-1 !py-2 min-[325px]:!px-2.5"
                 />
             </div>

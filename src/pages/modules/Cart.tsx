@@ -55,7 +55,6 @@ const Cart = () => {
 
     useEffect(() => {
         const cart_state_json = localStorage.getItem('cart_state');
-        console.log(cart_state_json)
         if (cart_state_json) {
             try {
                 const cart_state = JSON.parse(cart_state_json);
@@ -94,7 +93,6 @@ const Cart = () => {
 
     const handleCheckout = async () => {
         setFlag(true);
-        console.log('Error Messages:', errorMsg);
         if (errorMsg.hasErrors) return;
 
         try {
@@ -202,7 +200,7 @@ const Cart = () => {
             {cartProducts.length > 0 ? (
                 <div className="flex w-full justify-center">
                     <Button
-                        label="Finalizar compra"
+                        label="Realizar pedido"
                         action={handleCheckout}
                         disabled={isLoading}
                     />

@@ -29,7 +29,7 @@ export const CartItem = ({ item, onEdit, onRemove }: CartItemProps) => {
 
     return (
         <tr>
-            <td className="min-w-2/3 px-4 text-gray-800">
+            <td className="min-w-2/3 px-4 text-gray-800 py-2">
                 <div className="relative flex flex-col items-start justify-end">
                     <span
                         onClick={() => onEdit(item)}
@@ -40,8 +40,8 @@ export const CartItem = ({ item, onEdit, onRemove }: CartItemProps) => {
                     <span className="">{item.product.name}</span>
                 </div>
             </td>
-            <td className="flex h-12 w-full items-center justify-end text-center whitespace-nowrap text-gray-700">
-                <div className="flex items-baseline justify-center gap-2">
+            <td className="flex w-full items-center !h-full justify-end whitespace-nowrap text-gray-700 gap-2 px-2 py-2">
+                <div className="flex flex-col-reverse items-end">
                     <span className="text-xs text-gray-700">
                         (${Number(item.product.price).toLocaleString()} x{' '}
                         {item.quantity})

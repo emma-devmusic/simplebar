@@ -14,7 +14,7 @@ export const CartSummary = ({ orderMode }: CartSummaryProps) => {
     return (
         <>
             <tr>
-                <td className="px-4 py-2 whitespace-nowrap text-gray-400">
+                <td className="px-4 py-2 whitespace-nowrap text-gray-500">
                     Resumen
                 </td>
                 <td
@@ -28,7 +28,7 @@ export const CartSummary = ({ orderMode }: CartSummaryProps) => {
             </tr>
             {orderMode === 'delivery' && (
                 <tr>
-                    <td className="px-4 py-2 whitespace-nowrap text-gray-400">
+                    <td className="px-4 py-2 whitespace-nowrap text-gray-500 ">
                         Costo de envío
                     </td>
                     <td

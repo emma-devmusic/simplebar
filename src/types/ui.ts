@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import { ButtonProps } from "../components/buttons/Button";
 
+export type Size = 'sm' | 'md' | 'lg';
+
 export interface ModalMsg {
     typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';
     msg?: null | string | ReactElement;
