@@ -27,7 +27,7 @@ export const Dash = () => {
         if (products.length === 0 && branch_path && tenant_path) {
             dispatch(
                 get_products({
-                    path: `${tenant_path}/${branch_path}?limit=50`,
+                    path: `${tenant_path}/${branch_path}?limit=100`,
                     setIsLoading,
                 })
             );
