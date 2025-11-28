@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
-    emptyCart,
+    clearCurrentCart,
     ProductCart,
     removeProduct,
-    setCart,
+    loadAllCarts,
 } from '../../redux/slices/cartSlice';
 import { uiModal } from '../../redux/slices/uiSlice';
 import {
@@ -34,6 +34,11 @@ const Cart = () => {
     const dispatch = useAppDispatch();
     const { tenant_path, branch_path } = useParams();
 
+    const currentCart = useMemo(() => {
+        if (!tenant_path || !branch_path) return [];
+        return cartProducts[`${tenant_path}_${branch_path}`] || [];
+    }, [cartProducts, tenant_path, branch_path]);
+
     const [isLoading, setIsLoading] = useState(false);
     const [orderMode, setOrderMode] = useState<'delivery' | 'pickup'>(
         'delivery'
@@ -58,7 +63,7 @@ const Cart = () => {
         if (cart_state_json) {
             try {
                 const cart_state = JSON.parse(cart_state_json);
-                dispatch(setCart(cart_state));
+                dispatch(loadAllCarts(cart_state));
             } catch (error) {
                 console.error('Invalid JSON in localStorage:', error);
             }
@@ -88,12 +93,14 @@ const Cart = () => {
     };
 
     const handleRemoveProduct = (productId: number) => {
-        dispatch(removeProduct(productId));
+        if (!tenant_path || !branch_path) return;
+        dispatch(removeProduct({ tenant_path, branch_path, productId }));
     };
 
     const handleCheckout = async () => {
         setFlag(true);
         if (errorMsg.hasErrors) return;
+        if (!tenant_path || !branch_path) return;
 
         try {
             const orderPayload: OrderCreate = {
@@ -103,7 +110,7 @@ const Cart = () => {
                     phone: values.phone,
                     email: values.email || undefined,
                 },
-                items: cartProducts.map((item) => ({
+                items: currentCart.map((item) => ({
                     product_variation_id: item.product.id,
                     name: item.product.name,
                     unit_price: item.product.price,
@@ -131,7 +138,7 @@ const Cart = () => {
                 () => {
                     reset(initialState);
                     setFlag(false);
-                    dispatch(emptyCart());
+                    dispatch(clearCurrentCart({ tenant_path, branch_path }));
                 },
                 '¡Pedido realizado con éxito!'
             );
@@ -193,11 +200,12 @@ const Cart = () => {
             />
             <CartTable
                 orderMode={orderMode}
+                currentCart={currentCart}
                 onEditProduct={handleEditProduct}
                 onRemoveProduct={handleRemoveProduct}
             />
 
-            {cartProducts.length > 0 ? (
+            {currentCart.length > 0 ? (
                 <div className="flex w-full justify-center">
                     <Button
                         label="Realizar pedido"

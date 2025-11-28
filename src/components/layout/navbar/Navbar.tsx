@@ -3,10 +3,13 @@ import logoDark from '../../../assets/img/isologo-ding-white.png';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { uiModal } from '../../../redux/slices/uiSlice';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 export const Navbar = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
     const { tenant_name } = useAppSelector((state) => state.tenant);
+    const { tenant_path, branch_path } = useParams();
     const dispatch = useAppDispatch();
 
     const [onDarkTheme, setOnDarkTheme] = useState(
@@ -21,6 +24,11 @@ export const Navbar = () => {
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
+
+    const currentCart = useMemo(() => {
+        if (!tenant_path || !branch_path) return [];
+        return cartProducts[`${tenant_path}_${branch_path}`] || [];
+    }, [cartProducts, tenant_path, branch_path]);
 
     return (
         <header
@@ -46,7 +54,7 @@ export const Navbar = () => {
                         </div>
                     </div>
 
-                    {cartProducts.length > 0 && (
+                    {currentCart.length > 0 && (
                         <div
                             className="relative flex items-center gap-4 p-2 lg:hidden"
                             onClick={() => {
@@ -70,7 +78,7 @@ export const Navbar = () => {
                                 ></path>
                             </svg>
                             <span className="absolute top-0 right-0 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-danger text-xs font-bold text-white">
-                                {cartProducts.length}
+                                {currentCart.length}
                             </span>
                         </div>
                     )}
