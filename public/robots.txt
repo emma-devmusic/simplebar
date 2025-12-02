@@ -1,0 +1,12 @@
+# Robots.txt para SimpleBar
+# https://simplebar.ding.com.ar
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://simplebar.ding.com.ar/sitemap.xml
+
+# Bloquear rutas internas/privadas si las hubiera
+# Disallow: /admin/
+# Disallow: /api/

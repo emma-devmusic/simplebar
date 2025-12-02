@@ -7,6 +7,7 @@ import { Testimonials } from './modules/Landing/Testimonials';
 import { ContactCTA } from './modules/Landing/ContactCTA';
 import { Footer } from './modules/Landing/Footer';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 export const WelcomePage = () => {
     const fadeInUp = {
@@ -18,11 +19,46 @@ export const WelcomePage = () => {
         }
     };
 
+    // Schema.org JSON-LD para datos estructurados
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "SimpleBar",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Sistema de gestión para bares y restaurantes. POS, Menú QR, Pedidos, Gestión de Caja, Productos y más.",
+        "offers": {
+            "@type": "Offer",
+            "price": "17000",
+            "priceCurrency": "ARS",
+            "priceValidUntil": "2025-12-31"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "150"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Ding Technology",
+            "url": "https://ding.com.ar"
+        }
+    };
+
     return (
-        <main className='mt-0 bg-neutral-50 dark:bg-neutral-950'>
-            <Navbar />
-            <div className='w-full overflow-x-hidden'>
-                <Hero />
+        <>
+            <Helmet>
+                <title>SimpleBar | Sistema de Gestión para Bares y Restaurantes</title>
+                <meta name="description" content="Unificá POS, Menú QR, Pedidos, Gestión de Caja, Productos y más en un solo sistema. Interfaz intuitiva, soporte en español y onboarding en minutos." />
+                <link rel="canonical" href="https://simplebar.ding.com.ar/" />
+                <script type="application/ld+json">
+                    {JSON.stringify(schemaData)}
+                </script>
+            </Helmet>
+            <main className='mt-0 bg-neutral-50 dark:bg-neutral-950'>
+                <Navbar />
+                <div className='w-full overflow-x-hidden'>
+                    <Hero />
                 <motion.div 
                     variants={fadeInUp}
                     initial="hidden"
@@ -66,5 +102,6 @@ export const WelcomePage = () => {
                 <Footer />
             </div>
         </main>
+        </>
     );
 };

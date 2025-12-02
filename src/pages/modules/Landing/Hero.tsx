@@ -1,13 +1,37 @@
 import dashboardDesktop from '../../../assets/img/dashboard-0.png';
 import dashboardMobile from '../../../assets/img/dashboard-1.png';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { FloatingElements } from '../../../components/animations/FloatingElements';
+
+const features = [
+    'POS',
+    'Multi sucursales',
+    'Menú QR',
+    'Pedidos a través del Menú QR',
+    'Gestión de Usuarios',
+    'Gestión de Pedidos',
+    'Gestión de Caja',
+    'Gestión de Productos',
+    'Gestión de Categorías',
+];
 
 export const Hero = () => {
+    const [currentFeature, setCurrentFeature] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentFeature((prev) => (prev + 1) % features.length);
+        }, 2500);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section
             id="hero"
             className="relative overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100"
         >
+            <FloatingElements count={5}/>
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(14,111,255,0.1),transparent_60%)] dark:bg-[radial-gradient(60%_60%_at_50%_0%,rgba(14,111,255,0.15),transparent_60%)]"></div>
             <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
                 <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -51,7 +75,7 @@ export const Hero = () => {
                             para bares y restaurantes
                         </motion.h1>
                         <motion.p
-                            className="mt-4 max-w-xl text-neutral-600 dark:text-neutral-300"
+                            className="mt-4 max-w-xl text-neutral-600 dark:text-neutral-300 leading-relaxed md:text-lg"
                             variants={{
                                 hidden: { opacity: 0, y: 20 },
                                 visible: {
@@ -61,15 +85,44 @@ export const Hero = () => {
                                 },
                             }}
                         >
+                            Tomá pedidos desde el Menú QR y compartí el link de
+                            tu bar para recibir órdenes desde cualquier lugar.{' '}
                             Unificá{' '}
                             <strong>
-                                POS, Menú QR, Reservas, Delivery y Reportes
+                                POS, Menú QR, Pedidos, Usuarios, Caja, Productos y más
                             </strong>{' '}
                             en un solo sistema. Interfaz intuitiva, soporte en
                             español y onboarding en minutos.
                         </motion.p>
+                        
+                        {/* Features animadas */}
                         <motion.div
-                            className="mt-8 flex flex-wrap gap-3"
+                            className="h-12 overflow-hidden flex items-center justify-center"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: {
+                                    opacity: 1,
+                                    transition: { duration: 0.6, delay: 0.3 },
+                                },
+                            }}
+                        >
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={currentFeature}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="inline-flex items-center gap-2 text-lg lg:text-2xl font-semibold text-orange-500 border border-orange-500 rounded-md px-3 py-1"
+                                >
+                                    <span className="h-2 w-2 rounded-full bg-orange-500 animate-pulse hidden lg:block" />
+                                    {features[currentFeature]}
+                                </motion.span>
+                            </AnimatePresence>
+                        </motion.div>
+
+                        <motion.div
+                            className="mt-10 flex flex-wrap gap-3"
                             variants={{
                                 hidden: { opacity: 0, y: 20 },
                                 visible: {

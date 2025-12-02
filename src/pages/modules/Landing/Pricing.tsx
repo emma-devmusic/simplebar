@@ -15,9 +15,9 @@ const pricingPlans: PricingPlan[] = [
     buttonVariant: "outline"
   },
   {
-    title: "Pro",
+    title: "Plan Único",
     description: "Para restaurantes con salón y delivery.",
-    price: 29900,
+    price: 17000,
     features: [
       "Todo del Básico",
       "Reservas & Gestión de sala",

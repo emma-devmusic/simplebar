@@ -42,7 +42,7 @@ export const PricingCard = ({
 
   return (
     <div className={`${cardClasses} ${className}`}>
-      {isRecommended && <RecommendedBadge />}
+      {isRecommended && <RecommendedBadge text="Por tiempo limitado" />}
       <h3 className={`${isRecommended ? 'mt-2' : ''} font-semibold text-neutral-900 dark:text-neutral-100`}>{title}</h3>
       <p className={`mt-2 text-sm ${textClasses}`}>{description}</p>
       <PriceDisplay
