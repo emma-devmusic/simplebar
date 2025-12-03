@@ -3,7 +3,7 @@ import { Hero } from './modules/Landing/Hero';
 import { Features } from './modules/Landing/Features';
 import { Dashboard } from './modules/Landing/Dashboard';
 import { Pricing } from './modules/Landing/Pricing';
-import { Testimonials } from './modules/Landing/Testimonials';
+// import { Testimonials } from './modules/Landing/Testimonials';
 import { ContactCTA } from './modules/Landing/ContactCTA';
 import { Footer } from './modules/Landing/Footer';
 import { motion } from 'framer-motion';
@@ -84,14 +84,14 @@ export const WelcomePage = () => {
                 >
                     <Pricing />
                 </motion.div>
-                <motion.div 
+                {/* <motion.div 
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
                 >
                     <Testimonials />
-                </motion.div>
+                </motion.div> */}
                 <motion.div 
                     variants={fadeInUp}
                     initial="hidden"

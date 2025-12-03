@@ -91,7 +91,7 @@ const Navbar = () => {
                 <div className="hidden items-center gap-3 md:flex">
                     {/* <ThemeToggle /> */}
                     <a
-                        href="#"
+                        href="https://admin.simplebar.com/login"
                         className="rounded-md border border-neutral-300 px-4 py-2 text-sm text-neutral-700 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500"
                     >
                         Ingresar
