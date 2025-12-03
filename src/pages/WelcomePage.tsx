@@ -8,6 +8,7 @@ import { ContactCTA } from './modules/Landing/ContactCTA';
 import { Footer } from './modules/Landing/Footer';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { Modal } from '../components/modal/Modal';
 
 export const WelcomePage = () => {
     const fadeInUp = {
@@ -102,6 +103,7 @@ export const WelcomePage = () => {
                 <Footer />
             </div>
         </main>
+        <Modal />
         </>
     );
 };

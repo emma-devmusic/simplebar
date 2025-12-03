@@ -29,7 +29,7 @@ export const ModalHeader = ({close}: {close: () => void;}) => {
                 }
             </div>
             <div
-                className='p-3 cursor-pointer text-sm hover:bg-background-hover rounded-2xl dark:hover:bg-neutral-800'
+                className='p-3 cursor-pointer text-sm hover:bg-background-hover rounded-2xl dark:hover:bg-neutral-800 dark:text-white'
                 onClick={close}
             >
                 <X/>
