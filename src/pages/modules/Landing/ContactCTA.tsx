@@ -1,18 +1,115 @@
 import { useForm } from '../../../hooks/useForm';
 import { Input } from '../../../components/form/Input';
 import { Button } from '../../../components';
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../../redux/store';
+import { uiModal } from '../../../redux/slices/uiSlice';
+import { formValidate } from '../../../common/helpers';
+import { FormsInputs, ObjectErrorsMessages } from '../../../types/form';
+
+// URL del Google Apps Script Web App (la configuraremos después)
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
+
+const initialState = {
+    nombre: '',
+    email: '',
+    tel: '',
+    ciudad: '',
+};
+
 export const ContactCTA = () => {
-    const [formValues, handleInputChange] = useForm({
-        nombre: '',
-        email: '',
-        tel: '',
-        ciudad: '',
-    });
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            // Aquí puedes enviar los datos, mostrar un mensaje, etc.
-            console.log("Datos enviados:", formValues);
-        };
+    const [formValues, handleInputChange, reset] = useForm(initialState);
+    const [isLoading, setIsLoading] = useState(false);
+    const [flag, setFlag] = useState<boolean>(false);
+    const [errorMsg, setErrorMsg] = useState({} as ObjectErrorsMessages);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        // Mapear los campos del formulario a los campos esperados por formValidate
+        const mappedValues = {
+            fullname: formValues.nombre,
+            email: formValues.email,
+            phone: formValues.tel,
+            address: formValues.ciudad,
+        } as FormsInputs;
+
+        const msgs = formValidate(mappedValues, [
+            'fullname',
+            'email',
+            'phone',
+            'address',
+        ]);
+
+        // Re-mapear los errores a los nombres originales, preservando hasErrors
+        setErrorMsg({
+            fullname: msgs.fullname,
+            email: msgs.email,
+            phone: msgs.phone,
+            address: msgs.address,
+            hasErrors: msgs.hasErrors,
+        } as ObjectErrorsMessages);
+    }, [formValues]);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setFlag(true);
+
+        // Validar que no haya errores
+        if (errorMsg.hasErrors) {
+            dispatch(
+                uiModal({
+                    modalFor: 'message',
+                    typeMsg: 'error',
+                    msg: 'Por favor completá todos los campos correctamente',
+                })
+            );
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Google Apps Script requiere no-cors
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nombre: formValues.nombre,
+                    email: formValues.email,
+                    telefono: formValues.tel,
+                    ciudad: formValues.ciudad,
+                    fecha: new Date().toISOString(),
+                }),
+            });
+
+            // Con no-cors no podemos leer la respuesta, asumimos éxito si no hay error
+            dispatch(
+                uiModal({
+                    modalFor: 'message',
+                    typeMsg: 'success',
+                    msg: '¡Recibimos tu solicitud correctamente! Nuestro equipo se pondrá en contacto con vos en las próximas horas para ayudarte a comenzar.',
+                    msgTitle: '¡Gracias por confiar en SimpleBar!',
+                })
+            );
+
+            reset(initialState);
+            setFlag(false);
+        } catch (error) {
+            console.error('Error al enviar formulario:', error);
+            dispatch(
+                uiModal({
+                    modalFor: 'message',
+                    typeMsg: 'error',
+                    msg: 'Hubo un error al enviar el formulario. Intentá nuevamente.',
+                    msgTitle: 'Error',
+                })
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
     return (
         <section
             id="cta"
@@ -50,14 +147,15 @@ export const ContactCTA = () => {
                     <Input
                         id="nombre"
                         name="nombre"
-                        label="Nombre"
+                        label="Nombre y Apellido"
                         type="text"
                         placeholder="Tu nombre"
                         className="w-full"
-                        // inputClass="rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 outline-none focus:border-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
-                        // labelClass="mb-1 block text-sm text-neutral-700 dark:text-neutral-300"
                         value={formValues.nombre}
                         onChange={handleInputChange}
+                        errorMsg={flag ? errorMsg.fullname : ''}
+                        required
+                        disabled={isLoading}
                     />
                     <div className="grid gap-4 sm:grid-cols-2">
                         <Input
@@ -67,10 +165,11 @@ export const ContactCTA = () => {
                             type="email"
                             placeholder="tu@correo.com"
                             className="w-full"
-                            // inputClass="rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 outline-none focus:border-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
-                            // labelClass="mb-1 block text-sm text-neutral-700 dark:text-neutral-300"
                             value={formValues.email}
                             onChange={handleInputChange}
+                            errorMsg={flag ? errorMsg.email : ''}
+                            required
+                            disabled={isLoading}
                         />
                         <Input
                             id="tel"
@@ -79,10 +178,11 @@ export const ContactCTA = () => {
                             type="tel"
                             placeholder="+54 9 ..."
                             className="w-full"
-                            // inputClass="rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 outline-none focus:border-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
-                            // labelClass="mb-1 block text-sm text-neutral-700 dark:text-neutral-300"
                             value={formValues.tel}
                             onChange={handleInputChange}
+                            errorMsg={flag ? errorMsg.phone : ''}
+                            required
+                            disabled={isLoading}
                         />
                     </div>
                     <Input
@@ -92,18 +192,18 @@ export const ContactCTA = () => {
                         type="text"
                         placeholder="Resistencia, Chaco"
                         className="w-full"
-                        // inputClass="rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 outline-none focus:border-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
-                        // labelClass="mb-1 block text-sm text-neutral-700 dark:text-neutral-300"
                         value={formValues.ciudad}
                         onChange={handleInputChange}
+                        errorMsg={flag ? errorMsg.address : ''}
+                        required
+                        disabled={isLoading}
                     />
-                    {/* <button className="mt-2 w-full rounded-md bg-primary px-4 py-3 font-medium text-neutral-900 hover:brightness-110 dark:text-neutral-900">
-                        Crear mi cuenta
-                    </button> */}
                     <Button
-                        label="Crear mi cuenta"
+                        label={isLoading ? 'Enviando...' : 'Crear mi cuenta'}
                         type="submit"
                         action={() => {}}
+                        isLoading={isLoading}
+                        disabled={isLoading}
                     />
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
                         Al continuar aceptás nuestros Términos y Política de

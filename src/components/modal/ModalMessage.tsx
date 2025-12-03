@@ -25,23 +25,23 @@ export const ModalMessage = ({
 }: ModalProps) => {
     return (
         <div className="my-3 flex h-full w-full flex-col items-center gap-8">
-            {typeMsg === 'error' && <X className="text-red-400" size={60} />}
+            {typeMsg === 'error' && <X className="text-red-500 dark:text-red-400" size={60} />}
             {typeMsg === 'info' && (
-                <InfoIcon className="text-blue-500" size={60} />
+                <InfoIcon className="text-blue-500 dark:text-blue-400" size={60} />
             )}
             {typeMsg === 'success' && (
-                <CheckCheck className="text-green-500" size={50} />
+                <CheckCheck className="text-green-600 dark:text-green-400" size={50} />
             )}
             {typeMsg === 'warning' && (
-                <AlertTriangle className="text-yellow-500" size={60} />
+                <AlertTriangle className="text-yellow-600 dark:text-yellow-400" size={60} />
             )}
-            <div className="mb-2 flex flex-col gap-2 text-gray-600">
+            <div className="mb-2 flex flex-col gap-2 text-gray-700 dark:text-gray-200">
                 {title && (
-                    <h3 className="text-center text-3xl font-medium">
+                    <h3 className="text-center text-3xl font-medium text-neutral-900 dark:text-neutral-100">
                         {title}
                     </h3>
                 )}
-                <p className="max-w-[450px] text-center text-lg mx-auto">{msg}</p>
+                <p className="max-w-[450px] text-center text-lg mx-auto text-neutral-600 dark:text-neutral-300">{msg}</p>
             </div>
             {actions && (
                 <div className="flex gap-4">
