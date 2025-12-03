@@ -28,12 +28,12 @@ export const Dashboard = () => {
                         </li>
                     </ul> */}
                     <div className="mt-8 flex gap-3">
-                        <a
+                        {/* <a
                             href="#demo"
                             className="rounded-md border border-neutral-700 px-5 py-3 hover:border-neutral-500"
                         >
                             Ver demo
-                        </a>
+                        </a> */}
                         <a
                             href="#cta"
                             className="rounded-md bg-primary px-5 py-3 font-medium text-white hover:brightness-110 dark:text-neutral-900"
