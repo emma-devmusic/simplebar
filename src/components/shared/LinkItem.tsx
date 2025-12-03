@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+// Use namespace import to be compatible with various module formats during SSR prerender
+import * as routerPkg from "react-router-dom";
+const { Link } = routerPkg;
 import { SidebarLinks } from "../../common/definitions/constants";
 import { ReactNode } from "react";
 

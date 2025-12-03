@@ -1,4 +1,5 @@
-import { Logo } from '../../../components';
+// Import Logo directly to avoid pulling the full components barrel during SSR prerender
+import { Logo } from '../../../components/Logo';
 import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 

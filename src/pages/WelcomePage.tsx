@@ -7,7 +7,9 @@ import { Pricing } from './modules/Landing/Pricing';
 import { ContactCTA } from './modules/Landing/ContactCTA';
 import { Footer } from './modules/Landing/Footer';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+// Import Helmet via namespace to be compatible across ESM/CJS
+import * as helmetPkg from 'react-helmet-async';
+const { Helmet } = helmetPkg;
 import { Modal } from '../components/modal/Modal';
 
 export const WelcomePage = () => {

@@ -1,9 +1,10 @@
-import { Logo } from "../../../components";
+// Import Logo directly to avoid pulling the full components barrel during SSR prerender
+import { Logo } from "../../../components/Logo";
 
 export const Footer = () => {
     return (
         <footer className="border-t border-neutral-200 bg-white py-10 dark:border-neutral-900 dark:bg-neutral-950">
-            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:items-start sm:px-6 lg:px-8">
+            <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-6 px-4 sm:flex-row sm:items-start sm:px-6 lg:px-8">
                 {/* Logo y Copyright */}
                 <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:items-start">
                     <div className="flex items-center gap-2">
