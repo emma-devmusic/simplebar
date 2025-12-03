@@ -140,14 +140,14 @@ export const Hero = () => {
                             >
                                 Probar gratis 14 días
                             </motion.a>
-                            <motion.a
+                            {/* <motion.a
                                 href="#demo"
                                 className="rounded-md border border-neutral-300 px-5 py-3 hover:border-neutral-400 dark:border-neutral-700 dark:hover:border-neutral-500"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 Solicitar demo
-                            </motion.a>
+                            </motion.a> */}
                         </motion.div>
                         <motion.p
                             className="mt-3 text-xs text-neutral-500 dark:text-neutral-400"
