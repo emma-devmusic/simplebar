@@ -1,5 +1,4 @@
 // Import Logo directly to avoid pulling the full components barrel during SSR prerender
-import { Link } from 'react-router-dom';
 import { Logo } from '../../../components/Logo';
 
 export const Footer = () => {
@@ -31,18 +30,18 @@ export const Footer = () => {
                 {/* Links y Redes Sociales */}
                 <div className="flex w-full flex-col items-start gap-4 sm:w-auto sm:items-end">
                     <nav className="flex gap-6 text-sm text-neutral-500 dark:text-neutral-400">
-                        <Link
-                            to="/privacy-policy"
+                        <a
+                            href="/privacy-policy"
                             className="hover:text-neutral-800 dark:hover:text-neutral-200"
                         >
                             Privacidad
-                        </Link>
-                        <Link
-                            to="/terms-and-conditions"
+                        </a>
+                        <a
+                            href="/terms-and-conditions"
                             className="hover:text-neutral-800 dark:hover:text-neutral-200"
                         >
                             Términos
-                        </Link>
+                        </a>
                     </nav>
                     <div className="flex gap-3">
                         <a

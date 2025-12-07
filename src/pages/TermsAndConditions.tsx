@@ -1,6 +1,5 @@
 import { Logo } from '../components/Logo';
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { Footer } from './modules/Landing/Footer';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -36,20 +35,20 @@ export const TermsAndConditions = () => {
                     role="banner"
                 >
                     <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                        <Link
-                            to="/"
+                        <a
+                            href="/"
                             className="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-100"
                         >
                             <Logo />
-                        </Link>
-                        <Link
-                            to="/"
+                        </a>
+                        <a
+                            href="/"
                             className="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
                             aria-label="Volver a la página de inicio"
                         >
                             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                             Volver al inicio
-                        </Link>
+                        </a>
                     </div>
                 </header>
 
@@ -195,12 +194,12 @@ export const TermsAndConditions = () => {
                                 <p className="text-neutral-700 dark:text-neutral-300">
                                     El manejo de sus datos personales se rige
                                     por nuestra{' '}
-                                    <Link
-                                        to="/privacy-policy"
+                                    <a
+                                        href="/privacy-policy"
                                         className="font-medium text-primary hover:underline"
                                     >
                                         Política de Privacidad
-                                    </Link>
+                                    </a>
                                     . Nos comprometemos a proteger su
                                     información y utilizarla únicamente para
                                     brindarle el mejor servicio posible.
