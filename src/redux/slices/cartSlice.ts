@@ -31,12 +31,12 @@ const cartSlice = createSlice({
             const { tenant_path, branch_path, products } = action.payload;
             state.cartProducts[`${tenant_path}_${branch_path}`] = products;
             localStorage.setItem(
-                'cart_state',
+                'cart_state_v2',
                 JSON.stringify(state.cartProducts)
             );
         },
         emptyCart(state) {
-            localStorage.removeItem('cart_state');
+            localStorage.removeItem('cart_state_v2');
             state.cartProducts = {};
         },
         clearCurrentCart(
@@ -49,7 +49,7 @@ const cartSlice = createSlice({
             const { tenant_path, branch_path } = action.payload;
             delete state.cartProducts[`${tenant_path}_${branch_path}`];
             localStorage.setItem(
-                'cart_state',
+                'cart_state_v2',
                 JSON.stringify(state.cartProducts)
             );
         },
@@ -88,7 +88,7 @@ const cartSlice = createSlice({
                 });
             }
             localStorage.setItem(
-                'cart_state',
+                'cart_state_v2',
                 JSON.stringify(state.cartProducts)
             );
         },
@@ -108,7 +108,7 @@ const cartSlice = createSlice({
                         (item) => item.product.id !== productId
                     );
                 localStorage.setItem(
-                    'cart_state',
+                    'cart_state_v2',
                     JSON.stringify(state.cartProducts)
                 );
             }

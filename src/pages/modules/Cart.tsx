@@ -4,7 +4,6 @@ import {
     clearCurrentCart,
     ProductCart,
     removeProduct,
-    loadAllCarts,
 } from '../../redux/slices/cartSlice';
 import { uiModal } from '../../redux/slices/uiSlice';
 import {
@@ -57,18 +56,6 @@ const Cart = () => {
         );
         setErrorMsg(msgs);
     }, [values, orderMode]);
-
-    useEffect(() => {
-        const cart_state_json = localStorage.getItem('cart_state');
-        if (cart_state_json) {
-            try {
-                const cart_state = JSON.parse(cart_state_json);
-                dispatch(loadAllCarts(cart_state));
-            } catch (error) {
-                console.error('Invalid JSON in localStorage:', error);
-            }
-        }
-    }, [dispatch]);
 
     const handleEditProduct = (cartProduct: ProductCart) => {
         const productIndex = products.findIndex((prod) =>

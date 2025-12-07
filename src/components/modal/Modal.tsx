@@ -5,6 +5,7 @@ import { ProductModal } from '../../views/modules/ProductModal';
 import Cart from '../../pages/modules/Cart';
 import OffsetCanvas from '../offser-canvas/OffsetCanvas';
 import { ModalMessage } from './ModalMessage';
+import { useViewportHeight } from '../../hooks/useViewportHeight';
 
 export const Modal = () => {
     const {
@@ -12,13 +13,17 @@ export const Modal = () => {
     } = useAppSelector((state) => state.ui);
     const dispatch = useAppDispatch();
 
+    // Ajusta la variable CSS --vh para reflejar el alto real del viewport en móviles
+    useViewportHeight();
+
     if (!modalOpen) return null;
 
     return (
         <OffsetCanvas className="!backdrop-blur-md">
             <div
-                className="animate-fade-in flex max-h-[95vh] w-96 max-w-[95vw] flex-col rounded-lg bg-white shadow-2xl transition-all lg:w-128 lg:max-w-128 dark:border-[1px] dark:border-neutral-800 dark:bg-neutral-900"
+                className="animate-fade-in flex w-96 max-w-[95vw] flex-col rounded-lg bg-white shadow-2xl transition-all lg:w-128 lg:max-w-128 dark:border-[1px] dark:border-neutral-800 dark:bg-neutral-900"
                 id="modal-content"
+                style={{ maxHeight: 'calc(var(--vh, 1vh) * 95)' }}
             >
                 <ModalHeader close={() => dispatch(uiCloseModal())} />
 
