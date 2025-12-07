@@ -1,17 +1,49 @@
-import { Logo } from '../../Logo';
+import logo from '../../../assets/img/isologo-ding-degraded.png';
+import logoDark from '../../../assets/img/isologo-ding-white.png';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { uiModal } from '../../../redux/slices/uiSlice';
+import { useEffect, useState } from 'react';
 
 export const Navbar = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
+    const { tenant_name } = useAppSelector((state) => state.tenant);
     const dispatch = useAppDispatch();
 
+    const [onDarkTheme, setOnDarkTheme] = useState(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+    );
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleChange = (e: MediaQueryListEvent) => {
+            setOnDarkTheme(e.matches);
+        };
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, []);
+
     return (
-        <header className="bg-white shadow-md dark:bg-neutral-950 dark:shadow-neutral-800" id='navbar'>
-            <div className="mx-auto flex h-13 md:h-16 items-center px-4 sm:px-6 lg:px-8">
+        <header
+            className="bg-white shadow-md dark:bg-neutral-950 dark:shadow-neutral-800"
+            id="navbar"
+        >
+            <div className="mx-auto flex h-13 items-center px-4 sm:px-6 md:h-16 lg:px-8">
                 <div className="flex w-full items-center justify-between gap-4">
-                    <div>
-                        <Logo className="h-7 lg:h-10" />
+                    <div className="flex items-center gap-1.5">
+                        <img
+                            src={onDarkTheme ? logoDark : logo}
+                            alt="Simplebar Logo"
+                            className="h-7 lg:h-10"
+                        />
+                        <div className="mb-2 flex flex-col leading-1">
+                            <p className="overflow-x-hidden text-lg font-medium text-nowrap md:text-xl lg:text-[24px]">
+                                {tenant_name || 'Simplebar'}
+                            </p>
+                            <p className="text-[12px]">
+                                Simple
+                                <span className="dark:text-primary">Bar</span>
+                            </p>
+                        </div>
                     </div>
 
                     {cartProducts.length > 0 && (

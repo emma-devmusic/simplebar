@@ -13,10 +13,12 @@ import {
 import { useParams, useSearchParams } from 'react-router-dom';
 import FilterSection from './modules/FilterSection';
 import ProductsSection from './modules/ProductsSection';
+import { getTenantName } from '../redux/slices/tenantSlice';
 
 export const Dash = () => {
     const { tenant_path, branch_path } = useParams();
     const { categories } = useAppSelector((state) => state.categories);
+    const { tenant_name } = useAppSelector((state) => state.tenant);
     const { products } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,6 +38,15 @@ export const Dash = () => {
             dispatch(
                 getCategories({
                     path: `${tenant_path}/${branch_path}`,
+                    setIsLoading,
+                })
+            );
+        }
+        if (!tenant_name && branch_path && tenant_path) {
+            dispatch(
+                getTenantName({
+                    tenant: tenant_path,
+                    branch: branch_path,
                     setIsLoading,
                 })
             );
