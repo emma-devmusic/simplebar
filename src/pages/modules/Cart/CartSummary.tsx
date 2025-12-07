@@ -1,12 +1,12 @@
-import { useAppSelector } from '../../../redux/store';
+import { ProductCart } from '../../../redux/slices/cartSlice';
 
 interface CartSummaryProps {
     orderMode: 'delivery' | 'pickup';
+    currentCart: ProductCart[];
 }
 
-export const CartSummary = ({ orderMode }: CartSummaryProps) => {
-    const { cartProducts } = useAppSelector((state) => state.cart);
-    const total = cartProducts.reduce(
+export const CartSummary = ({ orderMode, currentCart }: CartSummaryProps) => {
+    const total = currentCart.reduce(
         (acc, item) => acc + Number(item.product.price) * item.quantity,
         0
     );

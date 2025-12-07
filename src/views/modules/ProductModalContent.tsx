@@ -2,13 +2,14 @@ import { Button } from '../../components';
 import { ProductVariation } from '../../types/product';
 import { Minus, Plus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
     addOrUpdateProduct,
     removeProduct,
 } from '../../redux/slices/cartSlice';
 import { uiCloseModal } from '../../redux/slices/uiSlice';
 import useValidateImage from '../../hooks/useValidateImage';
+import { useParams } from 'react-router-dom';
 
 interface ProductModalContentProps {
     productVariation: ProductVariation;
@@ -18,6 +19,13 @@ const ProductModalContent = ({
     productVariation,
 }: ProductModalContentProps) => {
     const { cartProducts } = useAppSelector((state) => state.cart);
+    const { tenant_path, branch_path } = useParams();
+
+    const currentCart = useMemo(() => {
+        if (!tenant_path || !branch_path) return [];
+        return cartProducts[`${tenant_path}_${branch_path}`] || [];
+    }, [cartProducts, tenant_path, branch_path]);
+
     const { imagePath, setImagePath, imageError } = useValidateImage({
         initialPath: '',
     });
@@ -28,22 +36,33 @@ const ProductModalContent = ({
     );
 
     const handleAddProduct = (productVariation: ProductVariation) => {
-        {
-            if (
-                cartProducts.some(
-                    (item) => productVariation?.id === item.product.id
-                ) &&
-                quantity === 0 &&
-                selectedProduct
-            ) {
-                dispatch(removeProduct(productVariation.id));
-            } else {
-                dispatch(
-                    addOrUpdateProduct({ product: productVariation, quantity })
-                );
-            }
-            dispatch(uiCloseModal());
+        if (!tenant_path || !branch_path) return;
+
+        if (
+            currentCart.some(
+                (item) => productVariation?.id === item.product.id
+            ) &&
+            quantity === 0 &&
+            selectedProduct
+        ) {
+            dispatch(
+                removeProduct({
+                    tenant_path,
+                    branch_path,
+                    productId: productVariation.id,
+                })
+            );
+        } else {
+            dispatch(
+                addOrUpdateProduct({
+                    tenant_path,
+                    branch_path,
+                    product: productVariation,
+                    quantity,
+                })
+            );
         }
+        dispatch(uiCloseModal());
     };
 
     const handleQuantity = (quantity: number) => {
@@ -56,14 +75,14 @@ const ProductModalContent = ({
 
     useEffect(() => {
         if (
-            cartProducts.some(
+            currentCart.some(
                 (item) =>
                     item.product.id ===
                     selectedProduct?.product_variations[variationSelected]?.id
             )
         ) {
             setQuantity(
-                cartProducts.find(
+                currentCart.find(
                     (item) =>
                         item.product.id ===
                         selectedProduct?.product_variations[variationSelected]
@@ -148,7 +167,7 @@ const ProductModalContent = ({
                     {productVariation.description}
                 </p>
             </div>
-            <div className="flex w-full justify-between mt-1">
+            <div className="mt-1 flex w-full justify-between">
                 <div className="flex">
                     <Button
                         action={() => {
@@ -159,7 +178,7 @@ const ProductModalContent = ({
                         disabled={quantity <= 0}
                         icon={<Minus className="w-5" strokeWidth={4} />}
                         variant="primary"
-                        size='sm'
+                        size="sm"
                     />
                     <input
                         type="number"
@@ -177,17 +196,17 @@ const ProductModalContent = ({
                         className="!w-7 rounded-s-none"
                         icon={<Plus className="w-5" strokeWidth={4} />}
                         variant="primary"
-                        size='sm'
+                        size="sm"
                     />
                 </div>
                 <Button
                     action={() => handleAddProduct(productVariation)}
                     label={
-                        (cartProducts.some(
+                        (currentCart.some(
                             (item) => productVariation.id === item.product.id
                         ) &&
                             quantity === 0) ||
-                        cartProducts.some(
+                        currentCart.some(
                             (item) =>
                                 productVariation.id === item.product.id &&
                                 quantity !== item.quantity
@@ -197,12 +216,12 @@ const ProductModalContent = ({
                     }
                     variant="primary"
                     disabled={
-                        !cartProducts.some(
+                        !currentCart.some(
                             (item) => productVariation.id === item.product.id
                         ) && quantity === 0
                     }
                     type="button"
-                    size='sm'
+                    size="sm"
                     className="!px-1 !py-2 min-[325px]:!px-2.5"
                 />
             </div>
