@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://simplebar.ding.com.ar/</loc>
+        <loc>https://simplebar.net/</loc>
         <lastmod>2025-12-02</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://simplebar.ding.com.ar/#features</loc>
+        <loc>https://simplebar.net/#features</loc>
         <lastmod>2025-12-02</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://simplebar.ding.com.ar/#precios</loc>
+        <loc>https://simplebar.net/#precios</loc>
         <lastmod>2025-12-02</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://simplebar.ding.com.ar/#cta</loc>
+        <loc>https://simplebar.net/#cta</loc>
         <lastmod>2025-12-02</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>

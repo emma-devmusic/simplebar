@@ -5,16 +5,16 @@ import { Logo } from '../../../components/Logo';
 export const Footer = () => {
     return (
         <footer className="border-t border-neutral-200 bg-white py-10 dark:border-neutral-900 dark:bg-neutral-950">
-            <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-6 px-4 sm:flex-row sm:items-start sm:px-6 lg:px-8">
+            <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-8 px-4 sm:flex-row sm:items-start sm:px-6 lg:px-8">
                 {/* Logo y Copyright */}
-                <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:items-start">
-                    <div className="flex items-center gap-2">
+                <div className="flex w-full items-center justify-between sm:flex-col sm:items-start gap-3">
+                    <div className="flex items-center gap">
+                        <Logo className="h-5" />
                         <span className="text-sm text-neutral-500 dark:text-neutral-400">
                             © {new Date().getFullYear()}
                         </span>
-                        <Logo className="h-5" />
                     </div>
-                    <p className="mt-3 text-xs text-neutral-400 dark:text-neutral-500">
+                    <p className="sm:mt-3 text-xs text-neutral-400 dark:text-neutral-500">
                         Powered by{' '}
                         <a
                             href="https://ding.com.ar"
@@ -27,8 +27,9 @@ export const Footer = () => {
                     </p>
                 </div>
 
+                <hr className='w-full border-neutral-200 dark:border-neutral-700 sm:hidden'/>
                 {/* Links y Redes Sociales */}
-                <div className="flex w-full flex-col items-center gap-4 sm:w-auto sm:items-end">
+                <div className="flex w-full flex-col items-start gap-4 sm:w-auto sm:items-end">
                     <nav className="flex gap-6 text-sm text-neutral-500 dark:text-neutral-400">
                         <Link
                             to="/privacy-policy"
