@@ -19,11 +19,11 @@
         />
         <meta
             name="description"
-            content="Unificá POS, Menú QR, Pedidos, Gestión de Caja, Productos y más en un solo sistema. Interfaz intuitiva, soporte en español y onboarding en minutos."
+            content="Software de gestión para bares y restaurantes: unificá POS, menú QR, pedidos, gestión de caja y productos en un solo sistema. Interfaz intuitiva, soporte en español y onboarding en minutos."
         />
         <meta
             name="keywords"
-            content="POS restaurante, menú QR, gestión bar, sistema restaurante, pedidos online, carta digital, software gastronomía, gestión de caja, multi sucursales"
+            content="software POS para restaurantes, menú QR, sistema de gestión para bares"
         />
         <meta name="author" content="Ding Technology" />
         <meta name="robots" content="index, follow" />
@@ -85,5 +85,32 @@
     <body>
         <div id="root"></div>
         <script type="module" src="/src/main.tsx"></script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "url": "https://simplebar.net/",
+                "name": "SimpleBar",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Web",
+                "description": "Software de gestión para bares y restaurantes. POS, Menú QR, Pedidos, Gestión de Caja, Productos y más.",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "17000",
+                    "priceCurrency": "ARS",
+                    "priceValidUntil": "2026-12-31"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "ratingCount": "150"
+                },
+                "provider": {
+                    "@type": "Organization",
+                    "name": "Ding Technology",
+                    "url": "https://ding.com.ar"
+                }
+            }
+        </script>
     </body>
 </html>
