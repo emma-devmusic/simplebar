@@ -53,7 +53,7 @@ export const WelcomePage = () => {
             <Helmet>
                 <title>SimpleBar | Sistema de Gestión para Bares y Restaurantes</title>
                 <meta name="description" content="Unificá POS, Menú QR, Pedidos, Gestión de Caja, Productos y más en un solo sistema. Interfaz intuitiva, soporte en español y onboarding en minutos." />
-                <link rel="canonical" href="https://simplebar.ding.com.ar/" />
+                <link rel="canonical" href="https://simplebar.net/" />
                 <script type="application/ld+json">
                     {JSON.stringify(schemaData)}
                 </script>
