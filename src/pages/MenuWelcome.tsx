@@ -3,6 +3,7 @@ import logo from '../assets/img/isologo-ding-degraded.png';
 import { Navbar } from '../components/layout';
 import { Modal } from '../components/modal/Modal';
 import { useEffect, useState } from 'react';
+import { Drawer } from '../components';
 
 export const MenuWelcome = () => {
     const { tenant_path, branch_path } = useParams();
@@ -44,7 +45,7 @@ export const MenuWelcome = () => {
                 style={{ height: `calc(100vh - ${navbarHeight}px)` }}
             >
                 <div className="w-full overflow-y-auto">
-                    <div className="mx-auto flex h-full w-full flex-col justify-between sm:max-w-[480px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px]">
+                    <div className="mx-auto flex h-full w-full flex-col justify-between xl:max-w-[1280px] 2xl:max-w-[1536px]">
                         <Outlet />
 
                         <footer className="mt-2 flex w-full items-center justify-center gap-2 place-self-end py-2 text-sm text-gray-700 xl:text-base 2xl:text-lg dark:text-gray-400">
@@ -70,6 +71,7 @@ export const MenuWelcome = () => {
             </div>
 
             <Modal />
+            <Drawer />
         </div>
     );
 };

@@ -2,23 +2,21 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { useEffect, useState, useMemo } from 'react';
 import {
     clearCurrentCart,
-    ProductCart,
     removeProduct,
+    addOrUpdateProduct,
 } from '../../redux/slices/cartSlice';
-import { uiModal } from '../../redux/slices/uiSlice';
-import {
-    setSelectedProduct,
-    setVariationSelected,
-} from '../../redux/slices/productSlice';
 import { OrderModeSelector, CartTable } from './Cart/index';
 import { useForm } from '../../hooks/useForm';
 import { formValidate } from '../../common/helpers';
 import { FormsInputs, ObjectErrorsMessages } from '../../types/form';
 import { Button, Input } from '../../components';
-import { executeApiCall } from '../../services/executeApiCall';
-import { fetchData } from '../../services/fetchData';
-import { OrderCreate } from '../../types/orders';
+import { OrderCreate, OrderType } from '../../types/orders';
 import { useParams } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Trash2Icon } from 'lucide-react';
+import Swal from 'sweetalert2';
+import { ProductVariation } from '../../types/product';
+import { create_order } from '../../redux/slices/orderSlice';
 
 const initialState = {
     fullname: '',
@@ -29,9 +27,9 @@ const initialState = {
 
 const Cart = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
-    const { products } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
     const { tenant_path, branch_path } = useParams();
+    const { currentPOS } = useAppSelector((state) => state.point_of_sales);
 
     const currentCart = useMemo(() => {
         if (!tenant_path || !branch_path) return [];
@@ -39,8 +37,8 @@ const Cart = () => {
     }, [cartProducts, tenant_path, branch_path]);
 
     const [isLoading, setIsLoading] = useState(false);
-    const [orderMode, setOrderMode] = useState<'delivery' | 'pickup'>(
-        'delivery'
+    const [orderMode, setOrderMode] = useState<OrderType>(
+        currentPOS ? 'local' : 'delivery'
     );
     const [flag, setFlag] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState({} as ObjectErrorsMessages);
@@ -50,33 +48,47 @@ const Cart = () => {
     useEffect(() => {
         const msgs = formValidate(
             values as FormsInputs,
-            orderMode === 'delivery'
-                ? ['fullname', 'phone', 'destination_address']
-                : ['fullname', 'phone']
+            orderMode === 'local'
+                ? []
+                : orderMode === 'delivery'
+                  ? ['fullname', 'phone', 'destination_address']
+                  : ['fullname', 'phone']
         );
         setErrorMsg(msgs);
     }, [values, orderMode]);
 
-    const handleEditProduct = (cartProduct: ProductCart) => {
-        const productIndex = products.findIndex((prod) =>
-            prod.product_variations.some(
-                (item) => item.id === cartProduct.product.id
-            )
+    const handleIncrementProduct = (productId: number) => {
+        if (!tenant_path || !branch_path) return;
+        const cartProduct = currentCart.find(
+            (item) => item.product.id === productId
         );
-        const variationIndex = products[
-            productIndex
-        ].product_variations.findIndex(
-            (item) => item.id === cartProduct.product.id
-        );
+        if (!cartProduct) return;
 
-        dispatch(setVariationSelected(variationIndex));
         dispatch(
-            uiModal({
-                modalFor: 'edit_product',
-                modalTitle: cartProduct.product.name,
+            addOrUpdateProduct({
+                tenant_path,
+                branch_path,
+                product: cartProduct.product as ProductVariation,
+                quantity: cartProduct.quantity + 1,
             })
         );
-        dispatch(setSelectedProduct(products[productIndex]));
+    };
+
+    const handleDecrementProduct = (productId: number) => {
+        if (!tenant_path || !branch_path) return;
+        const cartProduct = currentCart.find(
+            (item) => item.product.id === productId
+        );
+        if (!cartProduct || cartProduct.quantity <= 1) return;
+
+        dispatch(
+            addOrUpdateProduct({
+                tenant_path,
+                branch_path,
+                product: cartProduct.product as ProductVariation,
+                quantity: cartProduct.quantity - 1,
+            })
+        );
     };
 
     const handleRemoveProduct = (productId: number) => {
@@ -92,11 +104,6 @@ const Cart = () => {
         try {
             const orderPayload: OrderCreate = {
                 type: orderMode,
-                customer: {
-                    fullname: values.fullname,
-                    phone: values.phone,
-                    email: values.email || undefined,
-                },
                 items: currentCart.map((item) => ({
                     product_variation_id: item.product.id,
                     name: item.product.name,
@@ -104,6 +111,13 @@ const Cart = () => {
                     quantity: item.quantity,
                 })),
             };
+            if (values.fullname) {
+                orderPayload['customer'] = {
+                    fullname: values.fullname,
+                    phone: values.phone,
+                    email: values.email || undefined,
+                };
+            }
             if (orderMode === 'delivery') {
                 orderPayload['shipment'] = {
                     destination_address: {
@@ -112,48 +126,68 @@ const Cart = () => {
                     shipping_cost: 0,
                 };
             }
+            if (orderMode === 'local' && currentPOS) {
+                orderPayload['point_of_sales'] = [currentPOS];
+            }
 
-            await executeApiCall(
-                setIsLoading,
-                () =>
-                    fetchData(
-                        `/pub-sls/orders/${tenant_path}/${branch_path}`,
-                        'POST',
-                        orderPayload
-                    ),
-                dispatch,
-                () => {
-                    reset(initialState);
-                    setFlag(false);
-                    dispatch(clearCurrentCart({ tenant_path, branch_path }));
-                },
-                '¡Pedido realizado con éxito!'
+            dispatch(
+                create_order({
+                    order: orderPayload,
+                    tenant_path,
+                    branch_path,
+                    setIsLoading,
+                    onSuccess: () => {
+                        reset(initialState);
+                    },
+                })
             );
         } catch (error) {
             console.error('Error al finalizar la compra:', error);
         }
     };
 
+    const handleClearCart = () => {
+        if (!tenant_path || !branch_path) return;
+        Swal.fire({
+            title: '¿Deseas vaciar el carrito?',
+            icon: 'warning',
+            showCancelButton: true,
+            reverseButtons: true,
+            cancelButtonColor: '#006ce7',
+            cancelButtonText: 'No, cancelar',
+            confirmButtonColor: '#fb2c36',
+            confirmButtonText: 'Sí, eliminar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(clearCurrentCart({ tenant_path, branch_path }));
+            }
+        });
+    };
+
     return (
         <div className="flex w-full flex-col gap-4">
-            <OrderModeSelector
-                orderMode={orderMode}
-                setOrderMode={setOrderMode}
-            />
+            {orderMode !== 'local' && (
+                <OrderModeSelector
+                    orderMode={orderMode}
+                    setOrderMode={setOrderMode}
+                />
+            )}
             <Input
                 disabled={isLoading}
-                label="Nombre"
+                label={orderMode === 'local' ? 'Nombre (opcional)' : 'Nombre'}
                 placeholder="Juan..."
                 name="fullname"
                 type="text"
                 value={values?.fullname}
                 onChange={handleInputChange}
                 errorMsg={flag ? errorMsg.fullname : ''}
-                required
+                required={orderMode === 'local' ? false : true}
             />
             <Input
                 disabled={isLoading}
-                label="Teléfono"
+                label={
+                    orderMode === 'local' ? 'Teléfono (opcional)' : 'Teléfono'
+                }
                 placeholder="3624000000"
                 name="phone"
                 type="text"
@@ -162,19 +196,29 @@ const Cart = () => {
                 errorMsg={flag ? errorMsg.phone : ''}
                 required={values.fullname && values.email ? true : false}
             />
-            {orderMode === 'delivery' && (
-                <Input
-                    disabled={isLoading}
-                    label="Dirección del envío"
-                    placeholder="Av. Sarmiento 123"
-                    name="destination_address"
-                    type="text"
-                    value={values.destination_address}
-                    onChange={handleInputChange}
-                    errorMsg={flag ? errorMsg.destination_address : ''}
-                    required
-                />
-            )}
+            <AnimatePresence mode="wait">
+                {orderMode === 'delivery' && (
+                    <motion.div
+                        key="destination-address"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <Input
+                            disabled={isLoading}
+                            label="Dirección del envío"
+                            placeholder="Av. Sarmiento 123"
+                            name="destination_address"
+                            type="text"
+                            value={values.destination_address}
+                            onChange={handleInputChange}
+                            errorMsg={flag ? errorMsg.destination_address : ''}
+                            required
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <Input
                 disabled={isLoading}
                 label="Correo electrónico (opcional)"
@@ -185,11 +229,26 @@ const Cart = () => {
                 errorMsg={flag ? errorMsg.email : ''}
                 onChange={handleInputChange}
             />
+            {currentCart.length > 0 ? (
+                <div className="flex justify-end">
+                    <Button
+                        icon={<Trash2Icon className="h-4 w-4" />}
+                        iconPosition="right"
+                        className="text-xs text-red-500"
+                        label="Vaciar carrito"
+                        variant="plain-danger"
+                        action={handleClearCart}
+                    />
+                </div>
+            ) : null}
             <CartTable
                 orderMode={orderMode}
                 currentCart={currentCart}
-                onEditProduct={handleEditProduct}
+                onIncrementProduct={handleIncrementProduct}
+                onDecrementProduct={handleDecrementProduct}
                 onRemoveProduct={handleRemoveProduct}
+                title="Productos"
+                showSummary
             />
 
             {currentCart.length > 0 ? (

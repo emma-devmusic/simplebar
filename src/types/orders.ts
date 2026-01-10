@@ -112,7 +112,7 @@ export interface OrderCreate {
 // Interfaz de la request
 
 export interface UpdateOrderInterface {
-    id: number;
+    id?: number;
     status?: OrderStatus; // default: pendiente
     point_of_sales?: number[]; // required si type es local
     payment?: Payment;
@@ -123,6 +123,7 @@ export interface UpdateOrderInterface {
     customer_name?: string;
     discount?: number;
     notes?: string;
+    order_number: number;
 }
 
 export interface UpdatePaymentInterface {
@@ -134,6 +135,7 @@ export interface UpdatePaymentInterface {
     discount?: number;
     notes?: string;
     partial_amount?: number;
+    quantity?: number;
 }
 
 /************************************ Busqueda de ordenes ************************************/
@@ -165,6 +167,7 @@ export interface OrderItemDataSearchResponse {
     updated_at: Date; // YYYY-MM-DD HH:mm:SS
     discount?: number | null;
     notes?: string;
+    preparation_time?: number;
 }
 
 export interface Meta {
@@ -182,6 +185,7 @@ export interface PaginatedOrder {
 
 export interface NewOrderDataReponse {
     id: number;
+    order_number: number;
 }
 
 /**** Filtrado de ordenes ****/
@@ -225,18 +229,20 @@ export interface GetOrderPayload extends DingPayload {
 
 export interface GetOrderByIdPayload extends DingPayload {
     path: string;
-    id: number;
+    order_number: number;
+    navigate: NavigateFunction;
 }
 
 export interface NewOrderPayload extends DingPayload {
     order: OrderCreate;
-    path: string;
-    navigate: NavigateFunction;
+    tenant_path: string;
+    branch_path: string;
 }
 
 export interface UpdateOrderPayload extends DingPayload {
     order: UpdateOrderInterface;
     path: string;
+    navigate: NavigateFunction;
 }
 
 export interface CreatePaymentPayload extends DingPayload {

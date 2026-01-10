@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import { ButtonProps } from "../components/buttons/Button";
+import { ReactElement } from 'react';
+import { ButtonProps } from '../components/buttons/Button';
 
 export type Size = 'sm' | 'md' | 'lg';
 
@@ -52,7 +52,8 @@ export type ModalFor =
     | 'action'
     | 'add_product'
     | 'edit_product'
-    | 'cart';
+    | 'cart'
+    | 'edit_cart';
 
 export type ModalTypeMessage =
     | 'error'
@@ -61,4 +62,48 @@ export type ModalTypeMessage =
     | 'warning'
     | 'spinner';
 
-export type ActionButton = ButtonProps
+export type ActionButton = ButtonProps;
+
+export type DrawerFor = 'message' | 'action' | 'edit_cart' | 'cart';
+
+export interface DrawerMsg {
+    typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';
+    msg?: null | string | ReactElement;
+}
+
+export type DrawerSize = Size | 'full';
+
+export interface Drawer {
+    className?: string;
+    drawerFor: DrawerFor | null;
+    drawerOpen: boolean;
+    drawerTitle?: string;
+    typeMsg?: null | ModalTypeMessage;
+    msg?: string;
+    orientation?: 'left' | 'right' | 'bottom' | 'top';
+    size?: DrawerSize;
+    msgTitle?: string;
+    drawerActions: ActionButton[];
+    hasCancelButton: boolean;
+    onAccept?: null | (() => void);
+    onClose?: null | (() => void);
+    onCancel?: null | (() => void);
+    data?: unknown;
+}
+
+export interface DrawerPayload {
+    className?: string;
+    drawerFor: DrawerFor;
+    drawerTitle?: string;
+    typeMsg?: ModalTypeMessage;
+    msg?: string;
+    orientation?: 'left' | 'right' | 'bottom' | 'top';
+    size?: DrawerSize;
+    msgTitle?: string;
+    drawerActions?: ActionButton[];
+    hasCancelButton?: boolean;
+    data?: unknown;
+    onAccept?: null | (() => void);
+    onClose?: null | (() => void);
+    onCancel?: null | (() => void);
+}

@@ -6,6 +6,7 @@ import {
     MenuWelcome,
     TermsAndConditions,
     PrivacyPolicy,
+    OrderEdit,
 } from './pages';
 
 export const router = createBrowserRouter([
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: ':branch_path',
                 element: <Dash />,
+            },
+            {
+                path: ':branch_path/order/:order_number',
+                element: <OrderEdit />,
             },
         ],
     },

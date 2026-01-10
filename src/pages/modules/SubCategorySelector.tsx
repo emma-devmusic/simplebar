@@ -65,6 +65,8 @@ const SubCategorySelector = () => {
         }
     }, [categories, products, searchParams]);
 
+    if (!searchParams.get('category')) return null;
+
     return (
         <div className="no-scrollbar flex min-h-8 items-end justify-start gap-1 overflow-x-auto bg-gray-50 px-1 dark:border-[1px] dark:border-t-0 dark:border-b-0 dark:border-neutral-800 dark:bg-neutral-950">
             {subcategories.map((sub_cat) => (

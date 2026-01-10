@@ -1,7 +1,6 @@
-import { Spinner } from '../components';
+import { Button, Spinner } from '../components';
 import { useForm } from '../hooks/useForm';
 import { useEffect, useState } from 'react';
-import Cart from './modules/Cart';
 import { LayoutView } from '../components/layout';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { getCategories } from '../redux/slices/categorySlice';
@@ -10,17 +9,20 @@ import {
     setAllFilteredProducts,
     setFilteredProducts,
 } from '../redux/slices/productSlice';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FilterSection from './modules/FilterSection';
 import ProductsSection from './modules/ProductsSection';
 import { getTenantName } from '../redux/slices/tenantSlice';
+import OrderEditCart from './modules/OrderEditCart';
 
-export const Dash = () => {
+export const OrderEdit = () => {
     const { tenant_path, branch_path } = useParams();
     const { categories } = useAppSelector((state) => state.categories);
     const { tenant_name } = useAppSelector((state) => state.tenant);
     const { products } = useAppSelector((state) => state.products);
+    const { currentOrder } = useAppSelector((state) => state.order);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [value, handleInputChange] = useForm({ search: '' });
     const [searchParams] = useSearchParams();
@@ -53,7 +55,14 @@ export const Dash = () => {
             );
         }
         if (branch_path) localStorage.setItem('branch_path', branch_path);
-    }, [branch_path, tenant_path]);
+    }, [
+        branch_path,
+        tenant_path,
+        products.length,
+        categories.length,
+        tenant_name,
+        dispatch,
+    ]);
 
     useEffect(() => {
         const selectedCategory = categories.find(
@@ -74,12 +83,31 @@ export const Dash = () => {
                 })
             );
         }
-    }, [value.search, searchParams, categories, products]);
+    }, [value.search, searchParams, categories, products, dispatch]);
 
     if (isLoading) {
         return (
             <div className="flex min-h-48 w-full flex-row items-center justify-center">
                 <Spinner />
+            </div>
+        );
+    }
+
+    if (!currentOrder) {
+        return (
+            <div className="flex min-h-48 w-full flex-col items-center justify-center gap-2">
+                <p>Hubo un error al cargar la orden</p>
+                <Button
+                    label="Volver"
+                    action={() =>
+                        tenant_path && branch_path
+                            ? navigate(
+                                  `/${tenant_path}/${branch_path}${currentPOS ? `?table=${currentPOS}` : ''}`
+                              )
+                            : navigate('/')
+                    }
+                    size="sm"
+                />
             </div>
         );
     }
@@ -108,19 +136,16 @@ export const Dash = () => {
                     <FilterSection
                         inputValue={value.search}
                         handleInputChange={handleInputChange}
+                        hideOrderSearch={true}
                     />
                     <ProductsSection />
                 </div>
             )}
             <div className="hidden w-full flex-col gap-2 lg:flex lg:w-[33%]">
                 <LayoutView
-                    title={
-                        currentPOS
-                            ? `Mi pedido (mesa ${currentPOS})`
-                            : 'Mi pedido'
-                    }
+                    title={`Editar Orden #${currentOrder?.order_number}`}
                 >
-                    <Cart />
+                    <OrderEditCart />
                 </LayoutView>
             </div>
         </div>

@@ -1,66 +1,93 @@
 import { Button } from '../../../components';
-import { Trash2Icon } from 'lucide-react';
-import { ProductCart } from '../../../redux/slices/cartSlice';
+import { Trash2Icon, Minus, Plus } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { CartItem as CartItemType } from '../../../types/cart';
 
 interface CartItemProps {
-    item: ProductCart;
-    onEdit: (cartProduct: ProductCart) => void;
-    onRemove: (productId: number) => void;
+    item: CartItemType;
+    onIncrement?: (productId: number) => void;
+    onDecrement?: (productId: number) => void;
+    onRemove?: (productId: number) => void;
 }
 
-export const CartItem = ({ item, onEdit, onRemove }: CartItemProps) => {
+export const CartItem = ({
+    item,
+    onIncrement,
+    onDecrement,
+    onRemove,
+}: CartItemProps) => {
     const handleRemove = () => {
-        Swal.fire({
-            title: '¿Deseas eliminar el elemento del pedido?',
-            icon: 'warning',
-            showCancelButton: true,
-            reverseButtons: true,
-            cancelButtonColor: '#006ce7',
-            cancelButtonText: 'No, cancelar',
-            confirmButtonColor: '#fb2c36',
-            confirmButtonText: 'Sí, eliminar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                onRemove(item.product.id);
-            }
-        });
+        if (onRemove) {
+            Swal.fire({
+                title: '¿Deseas eliminar el elemento del pedido?',
+                icon: 'warning',
+                showCancelButton: true,
+                reverseButtons: true,
+                cancelButtonColor: '#006ce7',
+                cancelButtonText: 'No, cancelar',
+                confirmButtonColor: '#fb2c36',
+                confirmButtonText: 'Sí, eliminar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    onRemove(item.product.id);
+                }
+            });
+        }
     };
 
     return (
-        <tr>
-            <td className="min-w-2/3 px-4 text-gray-800 py-2 dark:text-gray-200">
-                <div className="relative flex flex-col items-start justify-end">
-                    <span
-                        onClick={() => onEdit(item)}
-                        className="cursor-pointer text-xs text-primary underline dark:text-blue-400"
-                    >
-                        Editar
-                    </span>
-                    <span className="">{item.product.name}</span>
-                </div>
-            </td>
-            <td className="flex w-full items-center !h-full justify-end whitespace-nowrap text-gray-700 gap-2 px-2 py-2 dark:text-gray-300">
-                <div className="flex flex-col-reverse items-end">
-                    <span className="text-xs text-gray-700 dark:text-gray-400">
+        <div
+            id="item-container"
+            className="flex min-h-[40px] w-full items-center justify-between gap-4 text-gray-800 dark:text-gray-200"
+        >
+            <div className="flex items-center gap-2">
+                {onRemove && (
+                    <Button
+                        action={handleRemove}
+                        icon={
+                            <Trash2Icon className="h-4 w-4 px-0 text-red-500" />
+                        }
+                        variant="plain-danger"
+                        label=""
+                        className="!px-0 hover:bg-red-100 dark:hover:bg-red-900/20"
+                    />
+                )}
+                <p className="leading-tight">
+                    {item.product.name}{' '}
+                    <span className="text-[10px] whitespace-nowrap text-gray-700 dark:text-gray-400">
                         (${Number(item.product.price).toLocaleString()} x{' '}
                         {item.quantity})
                     </span>
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">
-                        $
-                        {(
-                            Number(item.product.price) * item.quantity
-                        ).toLocaleString()}
-                    </span>
-                </div>
-                <Button
-                    action={handleRemove}
-                    icon={<Trash2Icon className="h-4 w-4 px-0 text-red-500" />}
-                    variant="plain-danger"
-                    label=""
-                    className="!px-0 hover:bg-red-100 lg:mx-2 dark:hover:bg-red-900/20"
-                />
-            </td>
-        </tr>
+                </p>
+            </div>
+            <div className="flex items-center gap-2">
+                {onIncrement && onDecrement ? (
+                    <>
+                        <Button
+                            action={() => onDecrement(item.product.id)}
+                            icon={
+                                <Minus
+                                    className={`h-3 w-3 ${item.quantity <= 1 ? 'text-neutral-400' : ''}`}
+                                />
+                            }
+                            variant="plain-primary"
+                            label=""
+                            disabled={item.quantity <= 1}
+                            className="!border-none !bg-transparent !px-1 !py-1"
+                        />
+                        <span className="text-center text-sm font-medium">
+                            {item.quantity}
+                        </span>
+                        <Button
+                            action={() => onIncrement(item.product.id)}
+                            icon={<Plus className="h-3 w-3" />}
+                            variant="plain-primary"
+                            label=""
+                            className="!border-none !bg-transparent !px-1 !py-1"
+                        />
+                    </>
+                ) : null}
+            </div>
+        </div>
     );
 };

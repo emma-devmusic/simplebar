@@ -7,7 +7,7 @@ const ProductsSection = () => {
         (state: RootState) => state.products
     );
     return (
-        <div className="flex h-full w-full flex-col gap-2 py-2 dark:border-[1px] dark:border-neutral-800">
+        <div className="flex h-full w-full flex-col gap-2 py-2">
             {products && filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
                     <div

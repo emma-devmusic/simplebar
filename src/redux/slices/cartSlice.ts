@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductVariation } from '../../types/product';
-
-export interface ProductCart {
-    product: ProductVariation;
-    quantity: number;
-}
+import { CartItem } from '../../types/cart';
 
 interface CartSlice {
     cartProducts: {
-        [key: string]: ProductCart[];
+        [key: string]: CartItem[];
     };
 }
 
@@ -25,7 +21,7 @@ const cartSlice = createSlice({
             action: PayloadAction<{
                 tenant_path: string;
                 branch_path: string;
-                products: ProductCart[];
+                products: CartItem[];
             }>
         ) {
             const { tenant_path, branch_path, products } = action.payload;
@@ -55,7 +51,7 @@ const cartSlice = createSlice({
         },
         loadAllCarts(
             state,
-            action: PayloadAction<{ [key: string]: ProductCart[] }>
+            action: PayloadAction<{ [key: string]: CartItem[] }>
         ) {
             state.cartProducts = action.payload;
         },

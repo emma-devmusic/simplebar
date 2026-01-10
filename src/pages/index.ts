@@ -4,3 +4,4 @@ export * from './Dash';
 export * from './MenuWelcome';
 export * from './TermsAndConditions';
 export * from './PrivacyPolicy';
+export * from './OrderEdit';

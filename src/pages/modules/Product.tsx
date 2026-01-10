@@ -1,6 +1,8 @@
-import { Copy } from 'lucide-react';
-import { Card } from '../../components';
-import { setSelectedProduct, setVariationSelected } from '../../redux/slices/productSlice';
+import { Badge, Card } from '../../components';
+import {
+    setSelectedProduct,
+    setVariationSelected,
+} from '../../redux/slices/productSlice';
 import { uiModal } from '../../redux/slices/uiSlice';
 import { useAppDispatch } from '../../redux/store';
 import { Product as ProductType } from '../../types/product';
@@ -56,7 +58,7 @@ const Product = ({ product }: ProductProps) => {
                     window.getComputedStyle(nameRef.current).lineHeight
                 );
                 const nameHeight = nameRef.current.offsetHeight;
-    
+
                 if (nameHeight > lineHeight) {
                     setDescriptionClamp(2);
                 } else {
@@ -64,11 +66,11 @@ const Product = ({ product }: ProductProps) => {
                 }
             }
         };
-    
+
         updateClamp();
-    
+
         window.addEventListener('resize', updateClamp);
-    
+
         return () => {
             window.removeEventListener('resize', updateClamp);
         };
@@ -82,22 +84,25 @@ const Product = ({ product }: ProductProps) => {
                 addProductToCart(product);
             }}
         >
-            <Card className="w-full rounded-lg dark:bg-neutral-900 dark:border-[1px] dark:border-neutral-800">
-                <Card.Body className="rounded-lg bg-white !p-0 dark:bg-neutral-900">
-                    <div className="flex h-28 min-h-28 w-full gap-2 rounded-lg md:flex-row lg:h-32 lg:min-h-32">
-                        <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-3 py-2 text-gray-600 dark:text-gray-300">
-                            <div className="flex w-full flex-col items-start gap-1 lg:gap-1.5">
-                                <p ref={nameRef} className="line-clamp-2 text-base/5 font-semibold lg:text-base/5 dark:text-white">
+            <Card className="w-full rounded-lg dark:border-[1px] dark:border-neutral-800 dark:bg-neutral-900">
+                <Card.Body className="rounded-lg bg-white !p-0 dark:bg-neutral-800">
+                    <div className="flex h-32 min-h-32 w-full gap-3 rounded-lg md:flex-row lg:h-36 lg:min-h-36">
+                        <div className="flex w-3/5 flex-col items-start justify-between rounded-b-xl px-3 py-2.5 text-gray-600 dark:text-gray-300">
+                            <div className="flex w-full flex-col items-start gap-1.5">
+                                <p
+                                    ref={nameRef}
+                                    className="line-clamp-2 text-base/5 font-semibold lg:text-base/5 dark:text-white"
+                                >
                                     {product.product_variations[0].name}
                                 </p>
                                 <p
                                     className={`${
                                         descriptionClamp === 2
-                                          ? 'line-clamp-2'
-                                          : descriptionClamp === 3
-                                          ? 'line-clamp-3'
-                                          : ''
-                                      } w-full overflow-hidden text-xs/3 lg:text-sm/5`}
+                                            ? 'line-clamp-2'
+                                            : descriptionClamp === 3
+                                              ? 'line-clamp-3'
+                                              : ''
+                                    } w-full overflow-hidden text-xs/3 lg:text-sm/5`}
                                 >
                                     {product.product_variations[0].description}
                                 </p>
@@ -108,7 +113,11 @@ const Product = ({ product }: ProductProps) => {
                                     {product.product_variations[0].price.toLocaleString()}
                                 </p>
                                 {product.product_variations.length > 1 && (
-                                    <Copy className="h-5" />
+                                    <Badge
+                                        text="Variantes"
+                                        variant="solid"
+                                        color="blue"
+                                    />
                                 )}
                             </div>
                         </div>

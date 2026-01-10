@@ -1,8 +1,9 @@
 import { Button } from '../../../components';
+import { OrderType } from '../../../types/orders';
 
 interface OrderModeSelectorProps {
-    orderMode: 'delivery' | 'pickup';
-    setOrderMode: React.Dispatch<React.SetStateAction<'delivery' | 'pickup'>>;
+    orderMode: OrderType;
+    setOrderMode: React.Dispatch<React.SetStateAction<OrderType>>;
 }
 
 export const OrderModeSelector = ({
