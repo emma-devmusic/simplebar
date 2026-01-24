@@ -19,6 +19,7 @@ export const categoriesMiddleware = (state: MiddlewareAPI) => {
                 state.dispatch,
                 (response: ResponseApiDing<DataCategorySearchResponse>) => {
                     state.dispatch(setCategories(response.data.items));
+                    payload.onSuccess?.()
                 },
             );
         }

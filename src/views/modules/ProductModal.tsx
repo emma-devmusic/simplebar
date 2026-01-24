@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ProductVariation } from '../../types/product';
@@ -12,6 +12,7 @@ export const ProductModal = () => {
     const { selectedProduct, variationSelected } = useAppSelector(
         (state) => state.products
     );
+    const [isImageTransitioning, setIsImageTransitioning] = useState(false);
     const dispatch = useAppDispatch();
     const {
         modal: { modalFor },
@@ -28,7 +29,15 @@ export const ProductModal = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
+        beforeChange: (_current: number, next: number) => {
+            dispatch(setVariationSelected(next));
+        },
     };
+
+    const shouldShowArrows =
+        selectedProduct &&
+        modalFor === 'add_product' &&
+        selectedProduct?.product_variations?.length > 1;
 
     return (
         <div
@@ -39,9 +48,6 @@ export const ProductModal = () => {
                     className="min-h-80 w-full"
                     ref={slider}
                     {...settings}
-                    afterChange={(number: number) => {
-                        dispatch(setVariationSelected(number));
-                    }}
                 >
                     {selectedProduct &&
                         selectedProduct.product_variations.map(
@@ -53,6 +59,8 @@ export const ProductModal = () => {
                                     <ProductModalContent
                                         key={index}
                                         productVariation={productVariation}
+                                        isImageTransitioning={isImageTransitioning}
+                                        setIsImageTransitioning={setIsImageTransitioning}
                                     />
                                 );
                             }
@@ -69,31 +77,29 @@ export const ProductModal = () => {
                     />
                 )
             )}
-            {selectedProduct &&
-                modalFor === 'add_product' &&
-                selectedProduct?.product_variations?.length > 1 && (
-                    <button
-                        className="absolute top-1/2 -left-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pr-1 text-white hover:bg-black/75"
-                        onClick={() => {
-                            slider.current?.slickPrev();
-                        }}
-                    >
-                        <ChevronLeft />
-                    </button>
-                )}
+            {shouldShowArrows && (
+                <button
+                    className="absolute top-1/2 -left-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pr-1 text-white hover:bg-black/75"
+                    onClick={() => {
+                        slider.current?.slickPrev();
+                        setIsImageTransitioning(true);
+                    }}
+                >
+                    <ChevronLeft />
+                </button>
+            )}
 
-            {selectedProduct &&
-                modalFor === 'add_product' &&
-                selectedProduct?.product_variations?.length > 1 && (
-                    <button
-                        className="absolute top-1/2 -right-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pl-1 text-white hover:bg-black/75"
-                        onClick={() => {
-                            slider.current?.slickNext();
-                        }}
-                    >
-                        <ChevronRight />
-                    </button>
-                )}
+            {shouldShowArrows && (
+                <button
+                    className="absolute top-1/2 -right-1.5 -translate-y-1/1 transform cursor-pointer rounded-full bg-black/50 p-0.5 pl-1 text-white hover:bg-black/75"
+                    onClick={() => {
+                        slider.current?.slickNext();
+                        setIsImageTransitioning(true);
+                    }}
+                >
+                    <ChevronRight />
+                </button>
+            )}
         </div>
     );
 };

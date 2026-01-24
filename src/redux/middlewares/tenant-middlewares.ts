@@ -22,6 +22,7 @@ export const tenantMiddleware = (state: MiddlewareAPI) => {
                 state.dispatch,
                 (response: ResponseApiDing<DataTenantSearchResponse>) => {
                     state.dispatch(setTenantName(response.data.tenant_name));
+                    payload.onSuccess?.();
                 }
             );
         }

@@ -8,20 +8,7 @@ export interface ButtonProps {
     action: (e: unknown) => void;
     type?: 'button' | 'submit' | 'reset';
     className?: string; // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="my-class"  // Optional prop to add additional styles to the button. Example: className="
-    variant?:
-        | 'primary'
-        | 'secondary'
-        | 'danger'
-        | 'primary-outline'
-        | 'danger-outline'
-        | 'secondary-outline'
-        | 'plain'
-        | 'plain-primary'
-        | 'plain-danger'
-        | 'plain-success'
-        | 'success'
-        | 'success-outline'
-        | 'plain-secondary';
+    variant?: keyof ButtonVariants;
     disabled?: boolean; // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable the button. Example: disabled={true}  // Optional prop to disable
     icon?: React.ReactNode; // Optional prop to add an icon to the button. Example: icon={<Icon />}  // Optional prop to add an icon to the button. Example: icon={<Icon />}  // Optional prop to add an icon to the button. Example: icon={<Icon />}  // Optional prop to add an icon to the button. Example: icon={<Icon />}  // Optional prop to add an icon to the button. Example: icon={<Icon />}  // Optional
     iconPosition?: 'left' | 'right';
@@ -31,12 +18,14 @@ export interface ButtonProps {
     isLoading?: boolean;
     hideIfUnauthorized?: boolean;
     tooltip?: string; // Texto opcional para mostrar un tooltip personalizado al hacer hover
+    tooltipPosition?: 'top' | 'bottom' | 'left' | 'right'; // Dirección del tooltip
 }
 
 type ButtonVariants = {
     primary: string;
     secondary: string;
     danger: string;
+    disabled: string;
     ['primary-outline']: string;
     ['secondary-outline']: string;
     ['danger-outline']: string;
@@ -64,6 +53,7 @@ export const Button = ({
     title,
     isLoading = false,
     tooltip,
+    tooltipPosition = 'top',
 }: ButtonProps) => {
 
 
@@ -74,7 +64,8 @@ export const Button = ({
             'border-green-600 bg-green-600 text-white hover:bg-green-700 active:text-green-600 active:!text-gray-100',
         primary:
             'border-primary bg-primary text-white hover:bg-primary-hover active:text-primary active:!text-gray-100',
-        secondary: 'bg-white text-primary',
+        secondary: 'bg-white dark:bg-gray-800 text-primary',
+        disabled: 'bg-gray-200 border-gray-200 text-gray-400 dark:bg-neutral-800 dark:border-neutral-700 dark:text-gray-500',
         danger: 'border-danger bg-danger text-white hover:bg-danger-hover hover:border-danger-hover active:bg-red-700',
         plain: 'bg-transparent border-transparent hover:bg-gray-100 !p-1 focus:!ring-0 focus:outline-none',
         ['success-outline']:
@@ -123,10 +114,30 @@ export const Button = ({
 
     if (!tooltip) return buttonElement;
 
+    // Tooltip position classes
+    let tooltipClass = '';
+    switch (tooltipPosition) {
+        case 'top':
+        default:
+            tooltipClass = 'bottom-full left-1/2 mb-2 -translate-x-1/2';
+            break;
+        case 'bottom':
+            tooltipClass = 'top-full left-1/2 mt-2 -translate-x-1/2';
+            break;
+        case 'left':
+            tooltipClass = 'right-full top-1/2 mr-2 -translate-y-1/2';
+            break;
+        case 'right':
+            tooltipClass = 'left-full top-1/2 ml-2 -translate-y-1/2';
+            break;
+    }
+
     return (
         <div className="group relative inline-block">
             {buttonElement}
-            <span className="absolute bottom-full left-1/2 z-50 mb-2 hidden -translate-x-1/2 transform rounded bg-gray-800 px-2 py-1 text-xs whitespace-nowrap text-white group-hover:block">
+            <span
+                className={`absolute z-50 hidden whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white group-hover:block ${tooltipClass}`}
+            >
                 {tooltip}
             </span>
         </div>

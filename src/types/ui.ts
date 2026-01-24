@@ -53,7 +53,8 @@ export type ModalFor =
     | 'add_product'
     | 'edit_product'
     | 'cart'
-    | 'edit_cart';
+    | 'edit_cart'
+    | 'search_order';
 
 export type ModalTypeMessage =
     | 'error'
@@ -64,7 +65,7 @@ export type ModalTypeMessage =
 
 export type ActionButton = ButtonProps;
 
-export type DrawerFor = 'message' | 'action' | 'edit_cart' | 'cart';
+export type DrawerFor = 'message' | 'action' | 'edit_cart' | 'cart' | 'search_order';
 
 export interface DrawerMsg {
     typeMsg?: null | 'error' | 'info' | 'success' | 'warning' | 'spinner';

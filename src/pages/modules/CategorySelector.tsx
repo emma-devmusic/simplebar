@@ -21,7 +21,7 @@ const CategorySelector = () => {
                     searchParams.delete('category');
                     setSearchParams(searchParams);
                 }}
-                className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${searchParams.get('category') ? 'bg-sky-200 dark:bg-sky-900' : 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700'} transition-all duration-300`}
+                className={`flex h-8 w-auto cursor-pointer rounded-b-xl px-4 shadow-sm ${searchParams.get('category') ? 'bg-sky-200 dark:bg-sky-900' : 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700'} transition-all duration-300`}
             >
                 <p className={`text-lg font-semibold text-nowrap text-white`}>
                     Todos
@@ -33,7 +33,7 @@ const CategorySelector = () => {
                         id={`cat-${category.id}`}
                         onClick={() => handleCategoryClick(`${category.id}`)}
                         key={category.id}
-                        className={`flex h-8 w-auto cursor-pointer rounded-b-3xl px-4 shadow-sm ${String(category.id) === String(searchParams.get('category')) ? 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700' : 'bg-sky-200 dark:bg-sky-900'} transition-all duration-300`}
+                        className={`flex h-8 w-auto cursor-pointer rounded-b-xl px-4 shadow-sm ${String(category.id) === String(searchParams.get('category')) ? 'h-9 items-center bg-sky-300 md:h-10 dark:bg-sky-700' : 'bg-sky-200 dark:bg-sky-900'} transition-all duration-300`}
                     >
                         <p
                             className={`text-lg font-semibold text-nowrap text-white`}

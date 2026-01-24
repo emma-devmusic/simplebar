@@ -7,6 +7,7 @@ import { DrawerFooter } from './DrawerFooter';
 import { AnimatePresence, motion } from 'framer-motion';
 import Cart from '../../pages/modules/Cart';
 import OrderEditCart from '../../pages/modules/OrderEditCart';
+import { OrderSearch } from '../shared/OrderSearch';
 
 export const Drawer = () => {
     const drawerRef = useRef<HTMLDivElement>(null);
@@ -121,7 +122,7 @@ export const Drawer = () => {
                                     onCancel?.();
                                 }}
                             />
-                            <div className="p-4">
+                            <div className="p-4 bg-white dark:bg-neutral-900">
                                 {drawerFor === 'message' && (
                                     <DrawerMessage
                                         msg={msg || ''}
@@ -145,6 +146,7 @@ export const Drawer = () => {
                                 )}
                                 {drawerFor === 'cart' && <Cart />}
                                 {drawerFor === 'edit_cart' && <OrderEditCart />}
+                                {drawerFor === 'search_order' && <OrderSearch closeAction="drawer" />}
                             </div>
                             {drawerFor !== 'action' && actions().length > 0 && (
                                 <DrawerFooter actions={actions()} />

@@ -3,27 +3,30 @@ import { ProductVariation } from '../../types/product';
 import { Minus, Plus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { useEffect, useState, useMemo } from 'react';
+import { addOrUpdateProduct } from '../../redux/slices/cartSlice';
 import {
-    addOrUpdateProduct,
-    removeProduct,
-} from '../../redux/slices/cartSlice';
-import { addNewProduct, removeNewProduct } from '../../redux/slices/orderSlice';
+    addNewProduct,
+} from '../../redux/slices/orderSlice';
 import { uiCloseModal } from '../../redux/slices/uiSlice';
 import useValidateImage from '../../hooks/useValidateImage';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     findProductInList,
     getMainImage,
     isProductInList,
-    isProductWithSameQuantity,
 } from '../../common/helpers/products';
+import Swal from 'sweetalert2';
 
 interface ProductModalContentProps {
     productVariation: ProductVariation;
+    isImageTransitioning?: boolean;
+    setIsImageTransitioning?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ProductModalContent = ({
     productVariation,
+    isImageTransitioning,
+    setIsImageTransitioning,
 }: ProductModalContentProps) => {
     const { cartProducts } = useAppSelector((state) => state.cart);
     const { currentOrder, newProducts } = useAppSelector(
@@ -33,6 +36,7 @@ const ProductModalContent = ({
         (state) => state.products
     );
     const { tenant_path, branch_path } = useParams();
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const currentCart = useMemo(() => {
@@ -47,39 +51,69 @@ const ProductModalContent = ({
 
     const activeList = currentOrder ? newProducts : currentCart;
 
+    const isOrderDeliveryOrPickup =
+        currentOrder &&
+        (currentOrder.type === 'delivery' || currentOrder.type === 'pickup');
+
     const handleAddProduct = (productVariation: ProductVariation) => {
-        const shouldRemove =
-            isProductInList(activeList, productVariation.id) && quantity === 0;
+        // Mostrar alerta si la orden es delivery o pickup
+        if (isOrderDeliveryOrPickup) {
+            Swal.fire({
+                title: 'No se pueden agregar productos',
+                text: `Tu orden es ${currentOrder.type === 'pickup' ? 'para Retiro en Local' : 'de tipo Delivery'}. Debes quitar la orden seleccionada antes de agregar un producto al carrito`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#006ce7',
+                confirmButtonText: 'Quitar Orden',
+                cancelButtonColor: '#6b7280',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate(`/${tenant_path}/${branch_path}`);
+                    Swal.fire({
+                        title: 'Orden quitada',
+                        text: 'Ahora puedes agregar productos al carrito',
+                        icon: 'success',
+                        confirmButtonColor: '#006ce7',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            });
+            return;
+        }
+
+        // Calcular nueva cantidad (sumar a la existente si ya está en la lista)
+        const existingProduct = findProductInList(
+            activeList,
+            productVariation.id
+        );
+        const newQuantity = existingProduct
+            ? existingProduct.quantity + quantity
+            : quantity;
 
         if (currentOrder) {
-            if (shouldRemove) {
-                dispatch(removeNewProduct(productVariation.id));
-            } else {
-                dispatch(
-                    addNewProduct({ product: productVariation, quantity })
-                );
-            }
+            // Para órdenes en edición
+            dispatch(
+                addNewProduct({
+                    product: productVariation,
+                    quantity: newQuantity,
+                })
+            );
         } else {
+            // Para carrito normal
             if (!tenant_path || !branch_path) return;
-            if (shouldRemove) {
-                dispatch(
-                    removeProduct({
-                        tenant_path,
-                        branch_path,
-                        productId: productVariation.id,
-                    })
-                );
-            } else {
-                dispatch(
-                    addOrUpdateProduct({
-                        tenant_path,
-                        branch_path,
-                        product: productVariation,
-                        quantity,
-                    })
-                );
-            }
+            dispatch(
+                addOrUpdateProduct({
+                    tenant_path,
+                    branch_path,
+                    product: productVariation,
+                    quantity: newQuantity,
+                })
+            );
         }
+
         dispatch(uiCloseModal());
     };
 
@@ -87,64 +121,46 @@ const ProductModalContent = ({
         setQuantity(newQuantity <= 0 ? 0 : newQuantity);
     };
 
-    const isRemovingProduct =
-        isProductInList(activeList, productVariation.id) && quantity === 0;
-    const hasQuantityChanged =
-        isProductInList(activeList, productVariation.id) &&
-        !isProductWithSameQuantity(activeList, productVariation.id, quantity);
-    const buttonLabel =
-        isRemovingProduct || hasQuantityChanged
-            ? 'Guardar cambios'
-            : 'Agregar producto';
-
-    const isButtonDisabled =
-        isProductWithSameQuantity(activeList, productVariation.id, quantity) ||
-        (!isProductInList(activeList, productVariation.id) && quantity === 0);
+    const isInCart = isProductInList(activeList, productVariation.id);
+    const buttonLabel = isInCart ? 'Agregar más' : 'Agregar producto';
+    const isButtonDisabled = quantity === 0;
 
     useEffect(() => {
         const currentVariation =
             selectedProduct?.product_variations[variationSelected];
-        const itemInList = findProductInList(
-            activeList,
-            currentVariation?.id ?? 0
-        );
-
-        setQuantity(itemInList?.quantity ?? 1);
 
         if (currentVariation) {
+            // Siempre iniciar en 1, independientemente de si está en el carrito
+            setQuantity(1);
             setImagePath(getMainImage(currentVariation));
+            setIsImageTransitioning?.(false);
         }
     }, [
         variationSelected,
-        currentOrder,
-        newProducts,
-        currentCart,
+        selectedProduct?.product_variations,
         selectedProduct,
         setImagePath,
-        activeList,
+        setIsImageTransitioning,
     ]);
 
     useEffect(() => {
-        const currentVariation =
-            selectedProduct?.product_variations[variationSelected];
-        if (currentVariation) {
-            setImagePath(getMainImage(currentVariation));
-        }
-    }, []);
+
+    },[ currentOrder ]);
 
     return (
         <div className="flex min-h-full w-full flex-col items-center justify-between gap-4 gap-y-3 p-2.5">
-            {imagePath && !imageError ? (
+            {imagePath && !imageError && !isImageTransitioning ? (
                 <img
                     src={imagePath}
                     className="h-42 self-center justify-self-center rounded-lg"
                     alt={productVariation.name}
+                    onLoadCapture={() => setIsImageTransitioning?.(false)}
                 />
             ) : (
                 <div className="flex h-42 w-full flex-col items-center justify-center rounded-e-lg">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-42 text-gray-300"
+                        className="h-42 text-gray-300 dark:text-gray-600"
                         viewBox="0 0 24 24"
                     >
                         <path
@@ -152,7 +168,11 @@ const ProductModalContent = ({
                             d="M18.06 23h1.66c.84 0 1.53-.65 1.63-1.47L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26c1.44 1.42 2.43 2.89 2.43 5.29zM1 22v-1h15.03v1c0 .54-.45 1-1.03 1H2c-.55 0-1-.46-1-1m15.03-7C16.03 7 1 7 1 15zM1 17h15v2H1z"
                         />
                     </svg>
-                    <p className="text-sm">Imagen no disponible</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {isImageTransitioning
+                            ? 'Cargando...'
+                            : 'Imagen no disponible'}
+                    </p>
                 </div>
             )}
 
@@ -198,7 +218,7 @@ const ProductModalContent = ({
                 <Button
                     action={() => handleAddProduct(productVariation)}
                     label={buttonLabel}
-                    variant="primary"
+                    variant={isOrderDeliveryOrPickup ? 'disabled' : 'primary'}
                     disabled={isButtonDisabled}
                     type="button"
                     size="sm"

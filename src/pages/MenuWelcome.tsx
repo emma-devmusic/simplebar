@@ -1,5 +1,5 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import logo from '../assets/img/isologo-ding-degraded.png';
+import { MenuFooter } from '../components/layout/MenuFooter';
 import { Navbar } from '../components/layout';
 import { Modal } from '../components/modal/Modal';
 import { useEffect, useState } from 'react';
@@ -48,24 +48,7 @@ export const MenuWelcome = () => {
                     <div className="mx-auto flex h-full w-full flex-col justify-between xl:max-w-[1280px] 2xl:max-w-[1536px]">
                         <Outlet />
 
-                        <footer className="mt-2 flex w-full items-center justify-center gap-2 place-self-end py-2 text-sm text-gray-700 xl:text-base 2xl:text-lg dark:text-gray-400">
-                            <img
-                                alt="Foto de perfil"
-                                src={logo}
-                                className="size-3.5 rounded-full object-cover lg:size-5 xl:size-6 2xl:size-7"
-                            />
-                            <p>
-                                Powered by{' '}
-                                <a
-                                    href="https://ding.com.ar"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 hover:underline"
-                                >
-                                    Ding
-                                </a>{' '}
-                            </p>
-                        </footer>
+                        <MenuFooter />
                     </div>
                 </div>
             </div>

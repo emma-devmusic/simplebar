@@ -6,6 +6,9 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { useMemo } from 'react';
 import { setCurrentPOS } from '../../../redux/slices/pointOfSalesSlice';
 import { NavbarCart } from './components/NavbarCart';
+import { uiModal } from '../../../redux/slices/uiSlice';
+import { Button } from '../../buttons/Button';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
 export const Navbar = () => {
     const { cartProducts } = useAppSelector((state) => state.cart);
@@ -16,6 +19,7 @@ export const Navbar = () => {
     const { tenant_path, branch_path } = useParams();
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 
     const [onDarkTheme, setOnDarkTheme] = useState(
         window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -44,7 +48,7 @@ export const Navbar = () => {
 
     return (
         <header
-            className="bg-white shadow-md dark:bg-neutral-950 dark:shadow-neutral-800"
+            className="bg-white py-1 shadow-md dark:bg-neutral-950 dark:shadow-neutral-800"
             id="navbar"
         >
             <div className="mx-auto flex h-13 items-center px-4 sm:px-6 md:h-16 lg:px-8">
@@ -65,11 +69,29 @@ export const Navbar = () => {
                             </p>
                         </div>
                     </div>
-                    <NavbarCart
-                        currentCart={currentCart}
-                        currentOrder={currentOrder}
-                        newProducts={newProducts}
-                    />
+                    <div className="flex justify-center gap-2">
+                        {isDesktop && (
+                            <Button
+                                label="Tengo una orden"
+                                action={() => {
+                                    dispatch(
+                                        uiModal({
+                                            modalFor: 'search_order',
+                                            modalTitle: 'Buscar mi orden',
+                                        })
+                                    );
+                                }}
+                                variant="primary-outline"
+                                tooltip="Selecciona para colocar tu número de orden y agregar más productos."
+                                tooltipPosition='left'
+                            />
+                        )}
+                        <NavbarCart
+                            currentCart={currentCart}
+                            currentOrder={currentOrder}
+                            newProducts={newProducts}
+                        />
+                    </div>
                 </div>
             </div>
         </header>

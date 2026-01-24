@@ -19,6 +19,7 @@ const Product = ({ product }: ProductProps) => {
         initialPath: '',
     });
 
+
     const [descriptionClamp, setDescriptionClamp] = useState(3);
     const nameRef = useRef<HTMLParagraphElement>(null);
 
@@ -49,7 +50,7 @@ const Product = ({ product }: ProductProps) => {
                 product.product_variations[0]?.productImages[0]?.url_image
             );
         }
-    }, []);
+    }, [product]);
 
     useEffect(() => {
         const updateClamp = () => {

@@ -14,7 +14,7 @@ export const productsMiddleware = (state: MiddlewareAPI) => {
     return (next: Dispatch) => async (action: any) => {
         next(action);
         if (action.type === 'products/get_products') {
-            const { path, setIsLoading }: GetProductPayload = action.payload;
+            const { path, setIsLoading, onSuccess }: GetProductPayload = action.payload;
             await executeApiCall(
                 setIsLoading,
                 () =>
@@ -22,6 +22,7 @@ export const productsMiddleware = (state: MiddlewareAPI) => {
                 state.dispatch,
                 (response: ResponseApiDing<ProductDataSearchResponse>) => {
                     state.dispatch(set_products(response.data.items));
+                    onSuccess?.();
                 }
             );
         }

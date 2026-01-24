@@ -138,6 +138,7 @@ const Cart = () => {
                     setIsLoading,
                     onSuccess: () => {
                         reset(initialState);
+                        setFlag(false);
                     },
                 })
             );
@@ -229,8 +230,11 @@ const Cart = () => {
                 errorMsg={flag ? errorMsg.email : ''}
                 onChange={handleInputChange}
             />
-            {currentCart.length > 0 ? (
-                <div className="flex justify-end">
+            <div className="mt-2 flex justify-between">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Mi carrito
+                </h2>
+                {currentCart.length > 0 ? (
                     <Button
                         icon={<Trash2Icon className="h-4 w-4" />}
                         iconPosition="right"
@@ -239,8 +243,8 @@ const Cart = () => {
                         variant="plain-danger"
                         action={handleClearCart}
                     />
-                </div>
-            ) : null}
+                ) : null}
+            </div>
             <CartTable
                 orderMode={orderMode}
                 currentCart={currentCart}

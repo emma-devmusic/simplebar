@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GetProductByIdPayload, GetProductPayload, Product } from '../../types/product';
+import {
+    GetProductByIdPayload,
+    GetProductPayload,
+    Product,
+} from '../../types/product';
 import { ItemCategories, SubCategory } from '../../types/categories';
 
 interface SubcategoriesProducts {
@@ -25,11 +29,14 @@ const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        get_products(_state, _action: PayloadAction<GetProductPayload>) { }, //middleware
+        get_products(_state, _action: PayloadAction<GetProductPayload>) {}, //middleware
         set_products(state, action: PayloadAction<Product[]>) {
             state.products = action.payload;
         },
-        get_product_by_id(_state, _action: PayloadAction<GetProductByIdPayload>) { },//middleware
+        get_product_by_id(
+            _state,
+            _action: PayloadAction<GetProductByIdPayload>
+        ) {}, //middleware
         setSelectedProduct(state, action: PayloadAction<Product | null>) {
             state.selectedProduct = action.payload;
         },
@@ -48,12 +55,18 @@ const productsSlice = createSlice({
                         const products = state.products.filter(
                             (prod) =>
                                 prod.sub_category_id === subCategory.id &&
-                                (prod.name.toLowerCase().includes(lowerSearchValue)
-                                    ||
-                                    prod.product_variations.some((prod_var) => prod_var.description.toLowerCase().includes(lowerSearchValue)
-                                        ||
-                                        prod_var.name.toLowerCase().includes(lowerSearchValue))
-                                ) &&
+                                (prod.name
+                                    .toLowerCase()
+                                    .includes(lowerSearchValue) ||
+                                    prod.product_variations.some(
+                                        (prod_var) =>
+                                            prod_var.description
+                                                .toLowerCase()
+                                                .includes(lowerSearchValue) ||
+                                            prod_var.name
+                                                .toLowerCase()
+                                                .includes(lowerSearchValue)
+                                    )) &&
                                 prod.active
                         );
 
@@ -63,41 +76,50 @@ const productsSlice = createSlice({
                         };
                     }
                 );
-            state.filteredProducts = filteredProductsBySubCategory ? filteredProductsBySubCategory?.filter(
-                (subCategory) => subCategory.products.length > 0
-            ) : [];
+            state.filteredProducts = filteredProductsBySubCategory
+                ? filteredProductsBySubCategory?.filter(
+                      (subCategory) => subCategory.products.length > 0
+                  )
+                : [];
         },
         setAllFilteredProducts(
             state,
             action: PayloadAction<{
                 filterText: string;
-                categories: ItemCategories[]
+                categories: ItemCategories[];
             }>
         ) {
             const lowerSearchValue = action.payload.filterText.toLowerCase();
             const { categories } = action.payload;
-        
-            const filteredProductsBySubCategory = categories.flatMap((category) =>
-                category.subcategories?.map((subCategory) => {
-                    const products = state.products.filter(
-                        (prod) =>
-                            prod.sub_category_id === subCategory.id &&
-                            (prod.name.toLowerCase().includes(lowerSearchValue) ||
-                                prod.product_variations.some(
-                                    (prod_var) =>
-                                        prod_var.description.toLowerCase().includes(lowerSearchValue) ||
-                                        prod_var.name.toLowerCase().includes(lowerSearchValue)
-                                )) &&
-                            prod.active
-                    );
-        
-                    return {
-                        subCategory,
-                        products,
-                    };
-                }) || []
+
+            const filteredProductsBySubCategory = categories.flatMap(
+                (category) =>
+                    category.subcategories?.map((subCategory) => {
+                        const products = state.products.filter(
+                            (prod) =>
+                                prod.sub_category_id === subCategory.id &&
+                                (prod.name
+                                    .toLowerCase()
+                                    .includes(lowerSearchValue) ||
+                                    prod.product_variations.some(
+                                        (prod_var) =>
+                                            prod_var.description
+                                                .toLowerCase()
+                                                .includes(lowerSearchValue) ||
+                                            prod_var.name
+                                                .toLowerCase()
+                                                .includes(lowerSearchValue)
+                                    )) &&
+                                prod.active
+                        );
+
+                        return {
+                            subCategory,
+                            products,
+                        };
+                    }) || []
             );
-        
+
             state.filteredProducts = filteredProductsBySubCategory.filter(
                 (subCategory) => subCategory.products.length > 0
             );
@@ -114,7 +136,7 @@ export const {
     setSelectedProduct,
     setFilteredProducts,
     setVariationSelected,
-    setAllFilteredProducts
+    setAllFilteredProducts,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

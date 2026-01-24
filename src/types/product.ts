@@ -78,6 +78,7 @@ export interface CreatedStatus {
 
 export interface DingPayload {
     setIsLoading: Dispatch<SetStateAction<boolean>>
+    onSuccess?: () => void;
 }
 
 export interface GetProductPayload extends DingPayload {

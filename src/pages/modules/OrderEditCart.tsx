@@ -1,8 +1,7 @@
 import { RootState, useAppDispatch, useAppSelector } from '../../redux/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     removeNewProduct,
-    clearCurrentOrder,
     update_order,
     addNewProduct,
 } from '../../redux/slices/orderSlice';
@@ -59,10 +58,10 @@ const OrderEditCart = () => {
         dispatch(removeNewProduct(productId));
     };
 
-    const handleGoBack = () => {
+    const handleUnorder = () => {
         Swal.fire({
-            title: '¿Deseas salir sin guardar?',
-            text: 'Los productos agregados se perderán',
+            title: '¿Deseas quitar la orden seleccionada?',
+            text: 'Los productos agregados sin confirmar se perderán',
             icon: 'warning',
             showCancelButton: true,
             reverseButtons: true,
@@ -72,11 +71,11 @@ const OrderEditCart = () => {
             confirmButtonText: 'Sí, salir',
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(clearCurrentOrder());
-                dispatch(uiCloseDrawer());
+                // Navegar primero para cambiar la URL
                 navigate(
                     `/${tenant_path}/${branch_path}${currentPOS ? `?table=${currentPOS}` : ''}`
                 );
+                dispatch(uiCloseDrawer());
             }
         });
     };
@@ -114,6 +113,8 @@ const OrderEditCart = () => {
         );
     };
 
+    useEffect(() => {}, [currentOrder]);
+
     if (!currentOrder) return null;
 
     const total = (
@@ -127,8 +128,8 @@ const OrderEditCart = () => {
     return (
         <div className="flex w-full flex-col gap-4">
             <Button
-                label="Volver"
-                action={handleGoBack}
+                label="Quitar orden"
+                action={handleUnorder}
                 variant="plain-danger"
                 disabled={isLoading}
                 className="self-end p-0 px-0! py-0!"
@@ -175,10 +176,10 @@ const OrderEditCart = () => {
 
             <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 pt-4 pb-2.5 dark:border-neutral-800 dark:bg-neutral-800">
                 <div className="flex items-center justify-between">
-                    <span className="text-base leading-normal font-bold text-gray-800 dark:text-gray-200">
+                    <span className="text-base leading-normal font-bold text-gray-900 dark:text-gray-200">
                         Total:
                     </span>
-                    <span className="text-base leading-normal font-bold text-gray-800 dark:text-gray-200">
+                    <span className="text-base leading-normal font-bold text-gray-900 dark:text-gray-200">
                         ${total}
                     </span>
                 </div>

@@ -4,6 +4,7 @@ import { ModalHeader } from './ModalHeader';
 import { ProductModal } from '../../views/modules/ProductModal';
 import OffsetCanvas from '../offser-canvas/OffsetCanvas';
 import { ModalMessage } from './ModalMessage';
+import { OrderSearch } from '../shared/OrderSearch';
 import { useViewportHeight } from '../../hooks/useViewportHeight';
 import { motion } from 'framer-motion';
 
@@ -44,6 +45,7 @@ export const Modal = () => {
                             hasCancelButton={false}
                         />
                     )}
+                    {modalFor === 'search_order' && <OrderSearch closeAction="modal" />}
                 </div>
                 <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-10 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-neutral-900 dark:via-neutral-900/50" />
             </motion.div>

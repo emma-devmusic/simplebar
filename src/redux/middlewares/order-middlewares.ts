@@ -22,7 +22,7 @@ export const orderMiddleware = (state: MiddlewareAPI) => {
         next(action);
 
         if (action.type === 'order/get_order_by_id') {
-            const { path, order_number, setIsLoading, navigate } =
+                const { path, order_number, setIsLoading, navigate, onSuccess } =
                 action.payload as GetOrderByIdPayload;
             await executeApiCall(
                 setIsLoading,
@@ -35,7 +35,8 @@ export const orderMiddleware = (state: MiddlewareAPI) => {
                 state.dispatch,
                 (response: ResponseApiDing<OrderItemDataSearchResponse>) => {
                     state.dispatch(setCurrentOrder(response.data));
-                    navigate(`/${path}/order/${order_number}`);
+                    navigate(`/${path}/${order_number}`);
+                    onSuccess?.();
                 }
             );
         }
@@ -81,7 +82,7 @@ export const orderMiddleware = (state: MiddlewareAPI) => {
                         order
                     ),
                 state.dispatch,
-                (_response) => {
+                () => {
                     state.dispatch(clearNewProducts());
                     state.dispatch(
                         get_order_by_id({

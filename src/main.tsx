@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -16,11 +15,9 @@ if (rootElement.innerHTML.trim().length > 0) {
 
 // Now render the full React app with routing
 createRoot(rootElement).render(
-    <StrictMode>
-        <HelmetProvider>
-            <Providers>
-                <RouterProvider router={router} />
-            </Providers>
-        </HelmetProvider>
-    </StrictMode>
+    <HelmetProvider>
+        <Providers>
+            <RouterProvider router={router} />
+        </Providers>
+    </HelmetProvider>
 );
