@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 import * as ReactDOMServer from 'react-dom/server';
+import React from 'react';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,11 +27,25 @@ global.window = {
   addEventListener: () => {},
   removeEventListener: () => {},
   scrollTo: () => {},
+  // Add React to window for SweetAlert2
+  React: React,
 };
 
 global.document = {
   querySelector: () => null,
+  createElement: () => ({}),
+  head: { appendChild: () => {} },
+  body: { appendChild: () => {} },
 };
+
+// Polyfill navigator (using defineProperty as it's read-only)
+Object.defineProperty(global, 'navigator', {
+  value: {
+    userAgent: 'Node.js SSR',
+  },
+  writable: true,
+  configurable: true,
+});
 
 async function prerender() {
   const server = await createServer({
@@ -40,7 +55,9 @@ async function prerender() {
     resolve: {
       alias: {
         // During SSR prerender, alias react-router-dom to a lightweight shim to avoid CJS named export issues
-        'react-router-dom': path.join(rootDir, 'src/prerender/router-ssr-shim.ts')
+        'react-router-dom': path.join(rootDir, 'src/prerender/router-ssr-shim.ts'),
+        // Alias sweetalert2 to prevent React.createElement errors in SSR
+        'sweetalert2': path.join(rootDir, 'src/prerender/sweetalert2-ssr-shim.ts'),
       }
     }
   });

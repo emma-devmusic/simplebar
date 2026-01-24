@@ -28,9 +28,9 @@ const orderSlice = createSlice({
         ) {
             state.currentOrder = action.payload;
         },
-        get_order_by_id(state, payload: PayloadAction<GetOrderByIdPayload>) {},
-        update_order(state, payload: PayloadAction<UpdateOrderPayload>) {},
-        create_order(state, payload: PayloadAction<NewOrderPayload>) {},
+        get_order_by_id(_state, _payload: PayloadAction<GetOrderByIdPayload>) {},
+        update_order(_state, _payload: PayloadAction<UpdateOrderPayload>) {},
+        create_order(_state, _payload: PayloadAction<NewOrderPayload>) {},
         addNewProduct(
             state,
             action: PayloadAction<{
